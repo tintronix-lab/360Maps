@@ -145,6 +145,15 @@
   .planning p { max-width: 40rem; margin: 0 0 1rem; }
   .planning ul:not(.modes) { max-width: 40rem; margin: 0 0 1rem; padding-left: 1.2rem; }
   .planning ul:not(.modes) li { margin-bottom: .45rem; }
+  .feature { display: grid; gap: 1.5rem 2.5rem; align-items: center; margin: 0 0 3rem; }
+  .feature img { width: min(16rem, 72vw); height: auto; justify-self: center; border-radius: 1.8rem; border: 1px solid var(--rule); background: var(--paper-raised); box-shadow: 0 1.2rem 2.5rem rgba(14, 34, 64, 0.18); }
+  .feature h3 { font-family: var(--display); font-size: 1.7rem; line-height: 1.15; margin: 0 0 0.6rem; }
+  .feature p { max-width: 34rem; margin: 0 0 0.8rem; }
+  @media (min-width: 46rem) {
+    .feature { grid-template-columns: 16rem 1fr; }
+    .feature.flip { grid-template-columns: 1fr 16rem; }
+    .feature.flip img { order: 2; }
+  }
 
   /* Sources */
   table { width: 100%; border-collapse: collapse; font-size: 1rem; }
@@ -253,10 +262,6 @@
       <figure><img src="img/farjor-fartyg.jpg" alt="Färjeleder runt Stockholm, en rastplats vid E4 och ett fartyg i skärgården." loading="lazy" width="506" height="1100"><figcaption>Vägfärjor, rastplatser och fartyg</figcaption></figure>
       <figure><img src="img/trafikkamera.jpg" alt="Detaljvy för trafikkameran vid Centralbron med bilden från kameran." loading="lazy" width="506" height="1100"><figcaption>Trafikkameran vid Centralbron</figcaption></figure>
       <figure><img src="img/korlage.jpg" alt="Körläge med varning för vägarbete om 650 meter och trafikljus om 40 meter, 13 kvar på vägen." loading="lazy" width="506" height="1100"><figcaption>Körläget säger vad som kommer härnäst</figcaption></figure>
-      <figure><img src="img/parkeringsregler.jpg" alt="Karta över Vasastan i Stockholm där trottoarkanterna är gröna, röda, orange och grå efter parkeringsreglerna." loading="lazy" width="506" height="1100"><figcaption>Parkeringsregler i Stockholm, kant för kant</figcaption></figure>
-      <figure><img src="img/parkering-har.jpg" alt="Kortet Parkering här: parkering tillåten, 20 kronor i timmen nu, servicetid onsdag 09 till 14 och knappen Påminn mig." loading="lazy" width="506" height="1100"><figcaption>Pris, servicetid och påminnelse där bilen står</figcaption></figure>
-      <figure><img src="img/overraska-mig.jpg" alt="Överraska mig med en dag till fots: parker och en kyrka med klockslag, och val för tid och vad du gillar." loading="lazy" width="506" height="1100"><figcaption>Överraska mig planerar en dag härifrån</figcaption></figure>
-      <figure><img src="img/resekostnad-vinterkoll.jpg" alt="Bilrutt till Arlanda med trängselskatt 30 kronor vid Norrtull och vinterkoll som säger bra vinterväglag." loading="lazy" width="506" height="1100"><figcaption>Vad resan kostar, och vinterkoll längs vägen</figcaption></figure>
     </div>
   </section>
 
@@ -271,21 +276,45 @@
 
   <section id="dag" class="wrap planning">
     <h2>En dag på stan</h2>
-    <p>Överraska mig planerar en dag härifrån: sevärdheter och parker, med lunch och fika på ställen som har öppet. Välj att gå, cykla eller åka kollektivt, och blanda om tills dagen passar. Museer, slott och kyrkor läggs före klockan 17, eftersom appen inte känner deras öppettider.</p>
-    <p>Ska du med en buss eller ett tåg? Tryck på avgången och välj Ta mig dit i tid, så säger appen när du behöver gå.</p>
+    <div class="feature">
+      <img src="img/overraska-mig.jpg" alt="Överraska mig med en dag till fots: parker och en kyrka med klockslag, och val för tid och vad du gillar." loading="lazy" width="506" height="1100">
+      <div>
+        <h3>Överraska mig</h3>
+        <p>Appen planerar en dag härifrån: sevärdheter och parker, med lunch och fika på ställen som har öppet. Välj att gå, cykla eller åka kollektivt, och blanda om tills dagen passar.</p>
+        <p>Museer, slott och kyrkor läggs före klockan 17, eftersom appen inte känner deras öppettider.</p>
+        <p>Ska du med en buss eller ett tåg? Tryck på avgången och välj Ta mig dit i tid, så säger appen när du behöver gå.</p>
+      </div>
+    </div>
   </section>
 
   <section id="plus" class="wrap planning">
     <h2>Gratis och 360Maps Plus</h2>
     <p>Kartan med alla lager, sökning, kollektivtrafik, cykel, gång, Överraska mig och att planera en bilrutt är gratis. Dina tre första resor med vägledning i bilen är också gratis.</p>
-    <p>Med 360Maps Plus får du:</p>
-    <ul>
-      <li><strong>Vägledning i bilen.</strong> Sväng för sväng uppläst, varningar om köer, halka och vägarbeten, och ny väg när trafiken ändras.</li>
-      <li><strong>Vad resan kostar.</strong> Trängselskatt och broavgifter längs bilrutten, räknade för när du passerar, och vad det blir om du åker senare.</li>
-      <li><strong>Vinterkoll.</strong> Is och snö längs vägen, temperaturen där du är när du kommer dit, och SMHI:s varningar. Från 1 november till 30 april.</li>
-      <li><strong>Parkeringsregler i Stockholm.</strong> Var du får stå, vad det kostar, när gatan städas, och en påminnelse innan dess. Enligt stadens föreskrifter; skyltarna på gatan gäller.</li>
-      <li><strong>Din dag i Överraska mig.</strong> Välj hur lång den ska vara och vad du gillar.</li>
-    </ul>
+    <p>Med 360Maps Plus får du vägledning i bilen: sväng för sväng uppläst, varningar om köer, halka och vägarbeten, och ny väg när trafiken ändras. Och det här:</p>
+    <div class="feature flip">
+      <img src="img/resekostnad-vinterkoll.jpg" alt="Bilrutt till Arlanda med trängselskatt 30 kronor vid Norrtull och vinterkoll som säger bra vinterväglag." loading="lazy" width="506" height="1100">
+      <div>
+        <h3>Vad resan kostar, och vinterkoll</h3>
+        <p>Trängselskatt och broavgifter längs bilrutten, räknade för när du passerar, och vad det blir om du åker senare.</p>
+        <p>Från 1 november till 30 april: is och snö längs vägen, temperaturen där du är när du kommer dit, och SMHI:s varningar.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <img src="img/parkeringsregler.jpg" alt="Karta över Vasastan i Stockholm där trottoarkanterna är gröna, röda, orange och grå efter parkeringsreglerna." loading="lazy" width="506" height="1100">
+      <div>
+        <h3>Parkeringsregler i Stockholm</h3>
+        <p>Zooma in, så färgas trottoarkanterna: grönt där du får stå, orange där gatan städas inom ett dygn, rött där det är förbjudet nu och grått där platsen är reserverad.</p>
+        <p>Enligt stadens föreskrifter. Skyltarna på gatan gäller.</p>
+      </div>
+    </div>
+    <div class="feature flip">
+      <img src="img/parkering-har.jpg" alt="Kortet Parkering här: parkering tillåten, 20 kronor i timmen nu, servicetid onsdag 09 till 14 och knappen Påminn mig." loading="lazy" width="506" height="1100">
+      <div>
+        <h3>Där bilen står</h3>
+        <p>Spara var bilen står, så visar appen vad som gäller just där: pris nu, hela taxan och när gatan städas.</p>
+        <p>Påminn mig ger en notis kvällen innan och en timme innan servicetiden börjar.</p>
+      </div>
+    </div>
     <p>Plus finns som en vecka (39 kr, ingen prenumeration), per månad (49 kr), per år (349 kr) eller som engångsköp (599 kr). Priserna gäller i Sverige; App Store visar priset i ditt land. <a href="villkor.html">Villkor</a>.</p>
   </section>
 
