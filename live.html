@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Live position – 360Maps</title>
+<link rel="icon" href="/img/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<!--
+  "Dela live" (docs/superpowers/specs/2026-11-22-live-position-sharing-design.md). Caddy serves this
+  page for /s/{token}. The key is in the #fragment, which browsers never send: the position is
+  decrypted here (AES-GCM, WebCrypto) and nothing about it leaves this page except "Jag är framme".
+-->
+<style>
+  :root { --paper: #F3F6F9; --card: #FFFFFF; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #0B8F82; --teal-bright: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --card: #16263D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; --teal: #10C7B4; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.5; }
+  header, main, footer { width: min(30rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0 0; display: flex; align-items: center; gap: 0.6rem; }
+  header img { width: 2rem; height: 2rem; border-radius: 0.5rem; }
+  header span { font-family: var(--display); font-weight: 700; font-size: 1.4rem; }
+  .card { background: var(--card); border-radius: 1.25rem; padding: 1.5rem 1.25rem; margin-top: 1.25rem; box-shadow: 0 1px 2px rgba(14,34,64,.08); }
+  .live { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--teal); font-weight: 700; font-size: 1rem; }
+  .dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--teal-bright); box-shadow: 0 0 0 0 rgba(16,199,180,.6); animation: pulse 2s infinite; }
+  .over .dot { background: var(--ink-soft); animation: none; }
+  .over .live { color: var(--ink-soft); }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 0.6rem rgba(16,199,180,0); } 100% { box-shadow: 0 0 0 0 rgba(16,199,180,0); } }
+  @media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 9vw, 2.6rem); line-height: 1.05; margin: 0.5rem 0 0.25rem; overflow-wrap: anywhere; }
+  .over h1 { color: var(--ink-soft); }
+  .meta { color: var(--ink-soft); margin: 0; font-size: 1rem; }
+  .distance { font-family: var(--display); font-weight: 600; font-size: 1.6rem; margin: 1rem 0 0; }
+  .actions { display: grid; gap: 0.6rem; margin-top: 1.25rem; }
+  .button { display: block; width: 100%; text-align: center; padding: 0.85rem 1rem; border-radius: 0.9rem; font: inherit; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; }
+  .primary { background: var(--brand); color: #fff; }
+  .secondary { background: transparent; color: var(--brand); box-shadow: inset 0 0 0 2px var(--rule); }
+  .arrived { background: var(--teal); color: #fff; }
+  .button:focus-visible { outline: 3px solid var(--teal-bright); outline-offset: 3px; }
+  .note { color: var(--ink-soft); font-size: 0.95rem; margin: 1rem 0 0; }
+  .ask { margin-top: 1rem; padding: 1rem; border-radius: 0.9rem; background: color-mix(in srgb, var(--teal-bright) 14%, transparent); }
+  .ask p { margin: 0 0 0.6rem; font-weight: 700; }
+  [hidden] { display: none !important; }
+  footer { padding: 1.5rem 0 3rem; color: var(--ink-soft); font-size: 0.95rem; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<header><img src="/img/apple-touch-icon.png" alt="" width="32" height="32"><span>360Maps</span></header>
+<main>
+  <section class="card" id="card" aria-live="polite">
+    <div class="live"><span class="dot" aria-hidden="true"></span><span id="badge"></span></div>
+    <h1 id="place"></h1>
+    <p class="meta" id="meta"></p>
+    <p class="distance" id="distance" hidden></p>
+    <div class="ask" id="ask" hidden>
+      <p id="ask-text"></p>
+      <button class="button arrived" id="ask-yes" type="button"></button>
+    </div>
+    <div class="actions" id="actions" hidden>
+      <a class="button primary" id="apple" href="#" rel="noopener"></a>
+      <a class="button secondary" id="google" href="#" rel="noopener"></a>
+      <a class="button secondary" id="app" href="#" hidden></a>
+      <button class="button secondary" id="near" type="button"></button>
+      <button class="button arrived" id="here" type="button"></button>
+    </div>
+    <p class="note" id="note"></p>
+  </section>
+</main>
+<footer id="footer"></footer>
+<script>
+(() => {
+  const sv = (navigator.language || "").toLowerCase().startsWith("sv");
+  const T = sv ? {
+    title: "Live position – 360Maps", live: "Live", over: "Avslutad", waiting: "Väntar på första positionen…",
+    updated: s => `Uppdaterad för ${s} sedan`, ends: t => `slutar ${t}`, ended: "Delningen är avslutad",
+    arrived: "Din vän är framme", away: d => `${d} härifrån`, apple: "Vägbeskrivning i Apple Kartor",
+    google: "Vägbeskrivning i Google Maps", app: "Öppna i 360Maps", near: "Visa hur långt det är",
+    here: "Jag är framme", moving: "Personen kan röra sig: tryck igen för den senaste platsen.",
+    close: "Ser ut som att du är framme. Avsluta delningen?", closeYes: "Ja, jag är framme",
+    broken: "Länken är inte komplett", brokenMore: "Be om en ny länk.", gone: "Delningen finns inte längre",
+    goneMore: "Den har slutat eller så är länken fel.", offline: "Kan inte nå servern just nu, försöker igen…",
+    noLocation: "Din position är inte tillgänglig.", accuracy: m => `ungefär ±${m}`,
+    footer: 'Positionen är krypterad med en nyckel som bara finns i länken. <a href="/integritet.html">Integritet</a>',
+    position: "Delad position"
+  } : {
+    title: "Live position – 360Maps", live: "Live", over: "Ended", waiting: "Waiting for the first position…",
+    updated: s => `Updated ${s} ago`, ends: t => `ends ${t}`, ended: "Sharing has ended",
+    arrived: "Your friend has arrived", away: d => `${d} from you`, apple: "Directions in Apple Maps",
+    google: "Directions in Google Maps", app: "Open in 360Maps", near: "Show how far it is",
+    here: "I'm here", moving: "The person may be moving: tap again for the latest spot.",
+    close: "Looks like you're there. End sharing?", closeYes: "Yes, I'm here",
+    broken: "This link is incomplete", brokenMore: "Ask for a new one.", gone: "This sharing no longer exists",
+    goneMore: "It has ended, or the link is wrong.", offline: "Can't reach the server right now, trying again…",
+    noLocation: "Your location isn't available.", accuracy: m => `about ±${m}`,
+    footer: 'The position is encrypted with a key that only exists in the link. <a href="/en/privacy.html">Privacy</a>',
+    position: "Shared position"
+  };
+  document.documentElement.lang = sv ? "sv" : "en";
+  document.title = T.title;
+  const $ = id => document.getElementById(id);
+  $("footer").innerHTML = T.footer;
+  $("apple").textContent = T.apple; $("google").textContent = T.google; $("app").textContent = T.app;
+  $("near").textContent = T.near; $("here").textContent = T.here;
+  $("ask-text").textContent = T.close; $("ask-yes").textContent = T.closeYes;
+
+  const token = (location.pathname.match(/^\/s\/([A-Za-z0-9_-]{22})$/) || [])[1];
+  const fromB64 = s => { s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; return Uint8Array.from(atob(s), c => c.charCodeAt(0)); };
+  const fail = (title, more) => { $("card").classList.add("over"); $("badge").textContent = T.over; $("place").textContent = title; $("meta").textContent = more; $("actions").hidden = true; $("note").textContent = ""; };
+
+  let keyBytes;
+  try { keyBytes = location.hash.length > 1 ? fromB64(location.hash.slice(1)) : null; } catch { keyBytes = null; }
+  if (!token || !keyBytes || keyBytes.length !== 32 || !window.crypto || !crypto.subtle) { fail(T.broken, T.brokenMore); return; }
+
+  const metres = (a, b) => { const r = 6371000, k = Math.PI / 180, dLat = (b.lat - a.lat) * k, dLon = (b.lon - a.lon) * k * Math.cos((a.lat + b.lat) / 2 * k); return r * Math.hypot(dLat, dLon); };
+  const fmtDistance = m => m < 1000 ? `${Math.round(m / 10) * 10} m` : `${(m / 1000).toLocaleString(sv ? "sv-SE" : "en-GB", { maximumFractionDigits: 1 })} km`;
+  const fmtAgo = s => s < 60 ? `${Math.max(0, Math.round(s))} s` : `${Math.round(s / 60)} min`;
+  const fmtClock = d => d.toLocaleTimeString(sv ? "sv-SE" : "en-GB", { hour: "2-digit", minute: "2-digit" });
+
+  let key, position = null, state = "live", expires = null, me = null, watching = false, askedClose = false, timer = null;
+  const iOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (iOS) { $("app").hidden = false; $("app").href = `threesixtymaps://live/${token}${location.hash}`; }
+
+  function render() {
+    const over = state !== "live";
+    $("card").classList.toggle("over", over);
+    $("badge").textContent = over ? T.over : T.live;
+    if (!position) {
+      $("place").textContent = over ? T.ended : T.waiting;
+      $("meta").textContent = ""; $("actions").hidden = true; return;
+    }
+    $("place").textContent = position.addr || T.position;
+    const parts = [];
+    if (over) parts.push(state === "arrived" ? T.arrived : T.ended);
+    else {
+      parts.push(T.updated(fmtAgo((Date.now() / 1000) - position.t)));
+      if (expires) parts.push(T.ends(fmtClock(expires)));
+    }
+    $("meta").textContent = parts.join(" · ");
+    $("actions").hidden = over;
+    $("note").textContent = over ? "" : T.moving;
+    const dest = `${position.lat.toFixed(5)},${position.lon.toFixed(5)}`;
+    $("apple").href = `https://maps.apple.com/?daddr=${dest}`;
+    $("google").href = `https://www.google.com/maps/dir/?api=1&destination=${dest}`;
+    if (me && !over) {
+      const d = metres(me, position);
+      $("distance").hidden = false;
+      $("distance").textContent = T.away(fmtDistance(d));
+      $("ask").hidden = !(d < 50 && !askedClose);
+    } else { $("distance").hidden = true; $("ask").hidden = true; }
+  }
+
+  async function refresh() {
+    try {
+      const r = await fetch(`/v1/live/${token}`, { cache: "no-store" });
+      if (r.status === 404) { stop(); fail(T.gone, T.goneMore); return; }
+      if (!r.ok) throw new Error(r.status);
+      const s = await r.json();
+      state = s.state; expires = s.expires ? new Date(s.expires) : null;
+      if (s.box) {
+        const bytes = fromB64(s.box);
+        const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: bytes.slice(0, 12) }, key, bytes.slice(12));
+        position = JSON.parse(new TextDecoder().decode(plain));
+      }
+      if (state !== "live") stop();
+      render();
+    } catch (e) {
+      if (e && e.name === "OperationError") { stop(); fail(T.broken, T.brokenMore); return; }
+      $("note").textContent = T.offline;
+    }
+  }
+
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function start() { if (!timer && state === "live") { refresh(); timer = setInterval(() => { if (document.visibilityState === "visible") refresh(); }, 10000); } }
+
+  async function arrive() {
+    try { const r = await fetch(`/v1/live/${token}/arrived`, { method: "POST" }); if (r.ok) { state = (await r.json()).state; stop(); render(); } } catch {}
+  }
+  $("here").addEventListener("click", arrive);
+  $("ask-yes").addEventListener("click", arrive);
+  $("near").addEventListener("click", () => {
+    if (watching || !navigator.geolocation) return;
+    watching = true; $("near").hidden = true;
+    navigator.geolocation.watchPosition(p => { me = { lat: p.coords.latitude, lon: p.coords.longitude }; render(); },
+      () => { $("distance").hidden = false; $("distance").textContent = T.noLocation; }, { enableHighAccuracy: true, maximumAge: 15000 });
+  });
+  // "Updated 12 s ago" keeps counting between refreshes.
+  setInterval(() => { if (position && state === "live") render(); }, 1000);
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && state === "live") refresh(); });
+
+  crypto.subtle.importKey("raw", keyBytes, "AES-GCM", false, ["decrypt"]).then(k => { key = k; render(); start(); })
+    .catch(() => fail(T.broken, T.brokenMore));
+})();
+</script>
+</body>
+</html>
