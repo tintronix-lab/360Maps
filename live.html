@@ -132,7 +132,8 @@
       $("place").textContent = over ? T.ended : T.waiting;
       $("meta").textContent = ""; $("actions").hidden = true; return;
     }
-    $("place").textContent = position.addr || T.position;
+    // The name the person sharing gave, if any, ahead of where they are.
+    $("place").textContent = position.name ? (position.addr ? `${position.name} · ${position.addr}` : position.name) : (position.addr || T.position);
     const parts = [];
     if (over) parts.push(state === "arrived" ? T.arrived : T.ended);
     else {
