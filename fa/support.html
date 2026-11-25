@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پشتیبانی – 360Maps</title>
+<meta name="description" content="راهنما و تماس برای 360Maps.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .contact { font-size: 1.35rem; margin: 0.5rem 0 0; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+/* right to left */ [dir=rtl] .hero__text { left: auto; right: max(1rem, calc((100% - 72rem) / 2)); } [dir=rtl] .live { right: auto; left: max(1rem, calc((100% - 72rem) / 2)); } [dir=rtl] .live__dot { margin-right: 0; margin-left: 0.35rem; } [dir=rtl] .planning ul:not(.modes) { padding-left: 0; padding-right: 1.2rem; } [dir=rtl] th, [dir=rtl] td { text-align: right; padding: 0.7rem 0 0.7rem 1rem; } @media (max-width: 40rem) { [dir=rtl] .hero__text { right: 0; } [dir=rtl] .live { left: 0.75rem; } }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../support.html" lang="sv">Svenska</option><option value="../en/support.html" lang="en">English</option><option value="../de/support.html" lang="de">Deutsch</option><option value="../nb/support.html" lang="nb">Norsk</option><option value="../da/support.html" lang="da">Dansk</option><option value="../fi/support.html" lang="fi">Suomi</option><option value="../nl/support.html" lang="nl">Nederlands</option><option value="../fr/support.html" lang="fr">Français</option><option value="../es/support.html" lang="es">Español</option><option value="../it/support.html" lang="it">Italiano</option><option value="../pl/support.html" lang="pl">Polski</option><option value="../cs/support.html" lang="cs">Čeština</option><option value="../pt-br/support.html" lang="pt-BR">Português (Brasil)</option><option value="../ro/support.html" lang="ro">Română</option><option value="../hu/support.html" lang="hu">Magyar</option><option value="../tr/support.html" lang="tr">Türkçe</option><option value="../el/support.html" lang="el">Ελληνικά</option><option value="../uk/support.html" lang="uk">Українська</option><option value="../et/support.html" lang="et">Eesti</option><option value="../lv/support.html" lang="lv">Latviešu</option><option value="../lt/support.html" lang="lt">Lietuvių</option><option value="../is/support.html" lang="is">Íslenska</option><option value="../zh-hans/support.html" lang="zh-Hans">简体中文</option><option value="../zh-hant/support.html" lang="zh-Hant">繁體中文</option><option value="../ja/support.html" lang="ja">日本語</option><option value="../ko/support.html" lang="ko">한국어</option><option value="../th/support.html" lang="th">ไทย</option><option value="../fa/support.html" lang="fa" selected>فارسی</option></select></label></header>
+<main>
+  <h1>پشتیبانی</h1>
+  <p class="contact">ایمیل: <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a></p>
+  <p>لطفاً بنویسید چه مدل iPhone و چه نسخه‌ای از iOS دارید، این اتفاق روی نقشه کجا افتاد و تقریباً کی. هر چه زودتر پاسخ می‌دهیم.</p>
+
+  <h2>نقشه همان‌جا که من هستم خالی است</h2>
+  <p>360Maps داده‌های سوئد را نشان می‌دهد. وسیله‌های نقلیهٔ در حال حرکت جایی دیده می‌شوند که شرکت حمل‌ونقل موقعیتشان را آزادانه منتشر می‌کند، امروز در 15 استان.</p>
+
+  <h2>یک لایه نیست یا چیزی نشان نمی‌دهد</h2>
+  <p>روی دکمهٔ لایه‌ها در بالا سمت چپ بزنید و آنچه را می‌خواهید ببینید روشن کنید. اگر منبعی در آن لحظه پاسخ ندهد، برنامه به‌زودی دوباره تلاش می‌کند.</p>
+
+  <h2>جاذبه‌ها</h2>
+  <p>لایهٔ جاذبه‌ها بیش از 300 جای دیدنی در سوئد را نشان می‌دهد. عکس‌ها از Wikimedia Commons و توضیحات از Wikipedia می‌آیند، هر کدام با نام منبعشان روی کارت. روی یک جاذبه بزنید تا بیشتر بخوانید یا سفری به آنجا برنامه‌ریزی کنید.</p>
+
+  <h2>راهنمای صوتی</h2>
+  <p>در سفر با خودرو، دوچرخه یا پیاده، پیچ بعدی با صدا خوانده می‌شود، حتی وقتی صفحه قفل است. دکمهٔ بلندگو در نوار بالای صفحه صدا را خاموش و روشن می‌کند.</p>
+
+  <h2>پارکینگ در مقصد</h2>
+  <p>تعداد جاها و قیمت از OpenStreetMap می‌آید و جاهای خالی از شهرهایی که آن‌ها را آزادانه منتشر می‌کنند. اگر چیزی کم باشد، معمولاً در منبع هم کم است.</p>
+
+  <h2>خانه، محل کار و مقصدهای اخیر</h2>
+  <p>روی یک مقصد در فهرست نگه دارید تا آن را به‌عنوان خانه یا محل کار ذخیره کنید یا حذفش کنید. مقصدهای شما فقط روی گوشی‌تان ذخیره می‌شوند.</p>
+
+  <h2>زبان</h2>
+  <p>برنامه به 28 زبان، از سوئدی و انگلیسی تا ژاپنی، تایلندی و فارسی، صحبت می‌کند و از زبانی که iPhone شما روی آن تنظیم شده پیروی می‌کند. می‌توانید آن را فقط برای 360Maps در «تنظیمات»، 360Maps، «زبان» تغییر دهید.</p>
+
+  <h2>خدمات مکان‌یابی</h2>
+  <p>برنامه برای نشان‌دادن آنچه نزدیک شماست و برنامه‌ریزی سفر از آنجا به موقعیت مکانی شما نیاز دارد. آن را در «تنظیمات»، «حریم خصوصی و امنیت»، «خدمات مکان‌یابی»، 360Maps تغییر می‌دهید. بیشتر در <a href="privacy.html">سیاست حریم خصوصی</a> بخوانید.</p>
+</main>
+<footer><a href="./">بازگشت به صفحهٔ اصلی</a> · <a href="privacy.html">سیاست حریم خصوصی</a></footer>
+</body>
+</html>

@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>360Maps – 即時瑞典</title>
+<meta name="description" content="360Maps 是遊覽瑞典的地圖：必訪景點、即時公車與火車、交通、天氣與停車，支援 28 種語言，適用於 iPhone。以開放資料打造。">
+<link rel="icon" href="../img/favicon.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<meta property="og:title" content="360Maps – 即時瑞典">
+<meta property="og:description" content="景點、公車、火車、交通與降雨，即時呈現在同一張地圖上。">
+<meta property="og:image" content="/img/ikon-512.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root {
+    --paper: #F3F6F9;
+    --paper-raised: #FFFFFF;
+    --ink: #0E2240;
+    --ink-soft: #46586F;
+    --rule: #D5DEE8;
+    --brand: #1F4FFF;
+    --teal: #10C7B4;
+    --bus: #CC1A24;
+    --metro: #0061B3;
+    --train: #7840A1;
+    --tram: #CC5C00;
+    --boat: #00808F;
+    --queue: #F2B705;
+    --queue-heavy: #F28C28;
+    --road: rgba(14, 34, 64, 0.16);
+    --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+    --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0F1B2D;
+      --paper-raised: #16263D;
+      --ink: #EAF0F7;
+      --ink-soft: #A9B8CB;
+      --rule: #2A3C56;
+      --road: rgba(234, 240, 247, 0.16);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  @media (prefers-color-scheme: dark) { a { color: #8FA9FF; } }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  img { max-width: 100%; display: block; }
+
+  .wrap { width: min(72rem, 100% - 2rem); margin-inline: auto; }
+
+  /* Header */
+  .masthead {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.9rem 0;
+  }
+  .brand { display: flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; letter-spacing: 0.01em; }
+  .masthead nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .masthead nav a { color: var(--ink-soft); text-decoration: none; font-size: 1rem; }
+  .masthead nav a:hover { color: var(--ink); text-decoration: underline; }
+
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  /* Hero: the live map is the picture */
+  .hero { position: relative; height: min(86vh, 48rem); min-height: 34rem; overflow: hidden; border-block: 1px solid var(--rule); }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero__text {
+    position: absolute; left: max(1rem, calc((100% - 72rem) / 2)); bottom: 1.5rem;
+    width: min(34rem, calc(100% - 2rem));
+    background: color-mix(in srgb, var(--paper) 94%, transparent);
+    padding: 1.5rem 1.75rem 1.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--rule);
+  }
+  h1 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(2.75rem, 6.5vw, 4.75rem); line-height: 0.95; letter-spacing: -0.005em;
+    margin: 0 0 0.75rem;
+  }
+  .hero__text p { margin: 0 0 1.1rem; color: var(--ink-soft); max-width: 30rem; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.25rem; }
+  .button {
+    display: inline-block; font-family: var(--display); font-weight: 600; font-size: 1.25rem; letter-spacing: 0.01em;
+    background: var(--brand); color: #fff; text-decoration: none;
+    padding: 0.55rem 1.2rem 0.6rem; border-radius: 999px;
+  }
+  .button:hover { background: #1640D9; }
+  .soon { font-size: 1rem; color: var(--ink-soft); }
+  .live {
+    position: absolute; right: max(1rem, calc((100% - 72rem) / 2)); top: 1rem;
+    max-width: min(22rem, calc(100% - 2rem));
+    font-size: 0.95rem; line-height: 1.4; color: var(--ink-soft);
+    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    padding: 0.45rem 0.75rem; border-radius: 0.4rem; border: 1px solid var(--rule);
+  }
+  .live strong { color: var(--ink); font-weight: 700; }
+  .live__dot { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #E0352B; margin-right: 0.35rem; vertical-align: 0.05em; }
+
+  /* Sections */
+  section { padding: 4.5rem 0 1rem; }
+  h2 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(2.1rem, 4.2vw, 3.1rem); line-height: 1; margin: 0 0 0.6rem;
+  }
+  .lede { color: var(--ink-soft); max-width: 38rem; margin: 0 0 2.25rem; }
+
+  /* Map legend: the key shows the same symbol as the map */
+  .legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 0 3rem; margin: 0; padding: 0; list-style: none; }
+  .legend li { display: grid; grid-template-columns: 4.25rem 1fr; gap: 1rem; padding: 1.1rem 0; border-top: 1px solid var(--rule); }
+  .legend h3 { font-family: var(--display); font-weight: 600; font-size: 1.55rem; line-height: 1.1; margin: 0.1rem 0 0.3rem; }
+  .legend p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; }
+  .key { width: 4.25rem; height: 3rem; display: flex; align-items: center; gap: 0.2rem; }
+  .pin {
+    display: inline-grid; place-items: center; width: 1.45rem; height: 1.45rem; border-radius: 50%;
+    color: #fff; font-family: var(--display); font-weight: 700; font-size: 0.8rem; border: 2px solid var(--paper-raised);
+  }
+  .key svg { width: 4.25rem; height: 3rem; }
+
+  /* Screens */
+  .screens { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.25rem 0 1.25rem; }
+  .screens figure { flex: 0 0 min(15.5rem, 70vw); margin: 0; scroll-snap-align: start; }
+  .screens img { width: 100%; aspect-ratio: 1206 / 2622; object-fit: cover; border-radius: 1.6rem; border: 1px solid var(--rule); background: var(--paper-raised); }
+  .screens figcaption { margin-top: 0.7rem; font-size: 1rem; color: var(--ink-soft); line-height: 1.4; }
+
+  /* Planning */
+  .modes { display: flex; flex-wrap: wrap; gap: 0.25rem 1.75rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
+  .modes li { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; }
+  .modes li:nth-child(1) { color: var(--queue-heavy); }
+  .modes li:nth-child(2) { color: var(--bus); }
+  .modes li:nth-child(3) { color: var(--boat); }
+  .modes li:nth-child(4) { color: var(--metro); }
+  .planning p { max-width: 40rem; margin: 0 0 1rem; }
+  .planning ul:not(.modes) { max-width: 40rem; margin: 0 0 1rem; padding-left: 1.2rem; }
+  .planning ul:not(.modes) li { margin-bottom: .45rem; }
+  .feature { display: grid; gap: 1.5rem 2.5rem; align-items: center; margin: 0 0 3rem; }
+  .feature img { width: min(16rem, 72vw); height: auto; justify-self: center; border-radius: 1.8rem; border: 1px solid var(--rule); background: var(--paper-raised); box-shadow: 0 1.2rem 2.5rem rgba(14, 34, 64, 0.18); }
+  .feature h3 { font-family: var(--display); font-size: 1.7rem; line-height: 1.15; margin: 0 0 0.6rem; }
+  .feature p { max-width: 34rem; margin: 0 0 0.8rem; }
+  @media (min-width: 46rem) {
+    .feature { grid-template-columns: 16rem 1fr; }
+    .feature.flip { grid-template-columns: 1fr 16rem; }
+    .feature.flip img { order: 2; }
+  }
+
+  /* Sources */
+  table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+  th, td { text-align: left; vertical-align: top; padding: 0.7rem 1rem 0.7rem 0; border-top: 1px solid var(--rule); }
+  th { font-weight: 700; }
+  td:last-child { color: var(--ink-soft); white-space: nowrap; }
+  .table-wrap { overflow-x: auto; }
+  .promise { margin-top: 1.75rem; max-width: 40rem; }
+
+  footer { margin-top: 4.5rem; padding: 2rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+
+  @media (max-width: 40rem) {
+    .hero { height: auto; min-height: 0; }
+    .hero canvas { position: relative; height: 62vh; }
+    .hero__text { position: relative; left: 0; bottom: 0; width: 100%; border: 0; border-radius: 0; padding: 1.5rem 1rem 1.75rem; background: var(--paper); }
+    .live { top: 0.75rem; right: 0.75rem; }
+    .masthead nav { display: none; }
+    /* Sources: one block per source instead of three narrow columns */
+    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    tr { display: block; padding: 0.8rem 0; border-top: 1px solid var(--rule); }
+    td { display: block; border: 0; padding: 0; white-space: normal; }
+    td:first-child { font-weight: 700; }
+    td:last-child { white-space: normal; font-size: 0.95rem; }
+  }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+
+<header class="wrap masthead">
+  <a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a>
+  <nav aria-label="頁面">
+    <a href="#map">地圖</a>
+    <a href="#plan">規劃</a>
+    <a href="#sources">來源</a>
+    <a href="#support">支援</a>
+    <a href="privacy.html">隱私權</a>
+  </nav>
+  <label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../" lang="sv">Svenska</option><option value="../en/" lang="en">English</option><option value="../de/" lang="de">Deutsch</option><option value="../nb/" lang="nb">Norsk</option><option value="../da/" lang="da">Dansk</option><option value="../fi/" lang="fi">Suomi</option><option value="../nl/" lang="nl">Nederlands</option><option value="../fr/" lang="fr">Français</option><option value="../es/" lang="es">Español</option><option value="../it/" lang="it">Italiano</option><option value="../pl/" lang="pl">Polski</option><option value="../cs/" lang="cs">Čeština</option><option value="../pt-br/" lang="pt-BR">Português (Brasil)</option><option value="../ro/" lang="ro">Română</option><option value="../hu/" lang="hu">Magyar</option><option value="../tr/" lang="tr">Türkçe</option><option value="../el/" lang="el">Ελληνικά</option><option value="../uk/" lang="uk">Українська</option><option value="../et/" lang="et">Eesti</option><option value="../lv/" lang="lv">Latviešu</option><option value="../lt/" lang="lt">Lietuvių</option><option value="../is/" lang="is">Íslenska</option><option value="../zh-hans/" lang="zh-Hans">简体中文</option><option value="../zh-hant/" lang="zh-Hant" selected>繁體中文</option><option value="../ja/" lang="ja">日本語</option><option value="../ko/" lang="ko">한국어</option><option value="../th/" lang="th">ไทย</option><option value="../fa/" lang="fa">فارسی</option></select></label>
+</header>
+
+<main>
+  <div class="hero">
+    <canvas id="live-map" role="img" aria-label="斯德哥爾摩即時地圖：每個圓點都是此刻正在行駛的公車、捷運列車或船隻，主要道路上的壅塞以黃色標示。"></canvas>
+    <p class="live" id="live-status" aria-live="polite"><span class="live__dot" aria-hidden="true"></span>正在取得斯德哥爾摩的車輛…</p>
+    <div class="hero__text">
+      <h1>一張地圖，即時看瑞典。</h1>
+      <p>360Maps 專為遊覽瑞典而做。找到必訪景點，搭乘公車、火車和船隻，查看交通、天氣和停車資訊，還能取得語音導航，支援 28 種語言，適用於 iPhone。上方的地圖是斯德哥爾摩此刻的樣子，以與 App 相同的資料繪製。</p>
+      <div class="actions">
+        <a class="button" href="#map">看看 App 會顯示什麼</a>
+        <a class="button" href="https://apps.apple.com/app/360maps/id6837692108">前往 App Store 下載</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="map" class="wrap">
+    <h2>地圖上有什麼</h2>
+    <p class="lede">開啟您需要的圖層。所有內容皆來自政府機關與交通業者的開放資料，並在您查看時即時更新。</p>
+    <ul class="legend">
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M34 6 L39.5 21 H55 L42.5 30.5 L47 45 L34 36 L21 45 L25.5 30.5 L13 21 H28.5 Z" fill="#E8A317"/></svg></div>
+        <div><h3>景點</h3><p>瑞典 340 多個必訪景點，附有照片、營業時間、Look Around 與您所用語言的簡短介紹。照片來自 Wikimedia Commons，文字來自 Wikipedia。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#F5C000"/><path d="M24 14 L27 21 H34 L28.5 25.5 L30.5 33 L24 28.5 L17.5 33 L19.5 25.5 L14 21 H21 Z" fill="#1C1C1E"/></svg></div>
+        <div><h3>精選地點</h3><p>我們為旅客挑選的地點，例如住在斯德哥爾摩的義大利人推薦的義式濃縮咖啡吧。無論縮放比例為何，都會顯示。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="16" cy="24" r="10" fill="#B20D5C"/><circle cx="34" cy="24" r="10" fill="#A94A1F"/><circle cx="52" cy="24" r="10" fill="#5B3A99"/></svg></div>
+        <div><h3>餐廳、咖啡館與酒吧</h3><p>各有專屬顏色，附營業時間，點一下成群的地點即可看到清單。瑞典全境約 20,000 個地點。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#B0202A"/><path d="M24 15 V33 M15 24 H33" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg></div>
+        <div><h3>藥局與急診</h3><p>瑞典全境的藥局與醫院急診室，附營業時間。緊急情況請撥 112。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#0B6A9E"/><text x="24" y="29" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="15" fill="#fff">18°</text></svg></div>
+        <div><h3>海水浴場、自然與極光</h3><p>附今日水溫的海灘、國家公園、自然保護區與溜冰場，以及看見極光的機率。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><span class="pin" style="background:var(--bus)">4</span><span class="pin" style="background:var(--metro)">14</span><span class="pin" style="background:var(--train)">41</span></div>
+        <div><h3>公車、捷運、火車與船隻</h3><p>車輛帶著路線號碼在地圖上移動，涵蓋 15 個郡。紅色是公車，藍色是捷運，紫色是火車，青綠色是船隻。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M4 34 C20 30 30 18 64 14" fill="none" stroke="var(--queue)" stroke-width="7" stroke-linecap="round"/><circle cx="40" cy="20" r="11" fill="var(--queue)" stroke="var(--paper-raised)" stroke-width="2.5"/><text x="40" y="24.5" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="12" fill="#fff">+2</text></svg></div>
+        <div><h3>壅塞與行車時間</h3><p>斯德哥爾摩主要道路與隧道的實測行車時間，每分鐘更新。壅塞會顯示為比平常多 +2 分鐘。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M4 36 L28 26 L64 30" fill="none" stroke="var(--queue-heavy)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(26 14)" stroke="var(--metro)" stroke-width="2.2" stroke-linecap="round"><path d="M0 -9 V9 M-8 -4.5 L8 4.5 M-8 4.5 L8 -4.5"/></g></svg></div>
+        <div><h3>路況</h3><p>道路上的積雪、雪泥與結冰以線條顯示，並標明路面狀況及上次除雪的時間。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><g opacity="0.85"><rect x="8" y="10" width="10" height="10" fill="#3D7BE0"/><rect x="18" y="10" width="10" height="10" fill="#2FB24C"/><rect x="28" y="10" width="10" height="10" fill="#2FB24C"/><rect x="18" y="20" width="10" height="10" fill="#2FB24C"/><rect x="28" y="20" width="10" height="10" fill="#E8D53A"/><rect x="38" y="20" width="10" height="10" fill="#2FB24C"/><rect x="28" y="30" width="10" height="10" fill="#3D7BE0"/><rect x="38" y="30" width="10" height="10" fill="#3D7BE0"/></g></svg></div>
+        <div><h3>雨量雷達</h3><p>來自 SMHI 氣象雷達的當前降水，每五分鐘更新。藍色表示較弱，黃色與紅色表示較強。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="14" fill="#F28C28"/><path d="M24 16 V27" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><circle cx="24" cy="32" r="2" fill="#fff"/></svg></div>
+        <div><h3>交通中斷與道路施工</h3><p>來自瑞典交通管理局的事故、封路與道路施工資訊，附地點與時間。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><rect x="10" y="13" width="30" height="22" rx="5" fill="#5856D6"/><circle cx="25" cy="24" r="6.5" fill="none" stroke="#fff" stroke-width="2.6"/><rect x="15" y="10" width="9" height="5" rx="1.5" fill="#5856D6"/></svg></div>
+        <div><h3>交通攝影機</h3><p>點一下攝影機即可查看道路畫面。您查看時，畫面會自動更新。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M2 36 Q12 31 22 36 T42 36 T62 36" fill="none" stroke="var(--boat)" stroke-width="2.4"/><path d="M14 30 L46 30 L41 37 L19 37 Z" fill="var(--boat)"/><rect x="22" y="21" width="16" height="9" rx="2" fill="var(--boat)"/></svg></div>
+        <div><h3>渡輪與船舶</h3><p>瑞典交通管理局道路渡輪的下一班開船時間，以及航行於海上的船舶。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><rect x="12" y="8" width="32" height="32" rx="7" fill="#1F6FE5"/><text x="28" y="31.5" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="24" fill="#fff">P</text></svg></div>
+        <div><h3>目的地的停車場</h3><p>規劃開車行程時，可查看目的地附近的停車場，附車位數量與價格。在城市公開分享空位資料的地方，也會顯示空車位。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><rect x="18" y="5" width="15" height="38" rx="5" fill="#3A4656"/><circle cx="25.5" cy="14" r="4.2" fill="#5E6B7B"/><circle cx="25.5" cy="24" r="4.2" fill="#5E6B7B"/><circle cx="25.5" cy="34" r="4.2" fill="#5E6B7B"/></svg></div>
+        <div><h3>路上的紅綠燈</h3><p>開車時顯示下一個紅綠燈的位置。待各城市公開其號誌資料後，將加入燈色與倒數。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M24 8 L38 14 V24 C38 32 31.5 37 24 40 C16.5 37 10 32 10 24 V14 Z" fill="#1F6FE5"/></svg></div>
+        <div><h3>警方、Krisinformation 與 SMHI</h3><p>您所在位置的事件、重要的公共公告與天氣警報。</p></div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="wrap" aria-labelledby="screens">
+    <h2 id="screens">App 的樣子</h2>
+    <p class="lede">來自 App 的圖片，以真實資料拍攝。截圖顯示的是瑞典語版本。</p>
+    <div class="screens" tabindex="0" aria-label="App 截圖，可左右滑動">
+      <figure><img src="../img/kollektivtrafik.jpg" alt="斯德哥爾摩市中心地圖：紅色為公車，藍色為捷運，紫色為通勤列車，青綠色為船隻，皆附有路線號碼。" loading="lazy" width="506" height="1100"><figcaption>斯德哥爾摩的即時大眾運輸</figcaption></figure>
+      <figure><img src="../img/restider.jpg" alt="Södra länken 與 Klara 隧道的壅塞，以黃色與橘色標示 +1 與 +2 分鐘。" loading="lazy" width="506" height="1100"><figcaption>Södra länken 與 Klara 隧道的壅塞</figcaption></figure>
+      <figure><img src="../img/regnradar-vaglag.jpg" alt="Mälaren 谷地上空的雨量雷達，黃色線條表示路況不佳的道路。" loading="lazy" width="506" height="1100"><figcaption>Mälaren 谷地的雨量雷達與路況</figcaption></figure>
+      <figure><img src="../img/farjor-fartyg.jpg" alt="斯德哥爾摩周邊的渡輪航線、E4 公路旁的休息區，以及群島中的一艘船。" loading="lazy" width="506" height="1100"><figcaption>道路渡輪、休息區與船舶</figcaption></figure>
+      <figure><img src="../img/trafikkamera.jpg" alt="Centralbron 交通攝影機的詳細資料頁，顯示攝影機的畫面。" loading="lazy" width="506" height="1100"><figcaption>Centralbron 的交通攝影機</figcaption></figure>
+      <figure><img src="../img/korlage.jpg" alt="駕駛模式：提示 650 公尺後有道路施工、40 公尺後有紅綠燈，路線上還剩 13 個。" loading="lazy" width="506" height="1100"><figcaption>駕駛模式會告訴您接下來有什麼</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="plan" class="wrap planning">
+    <h2>從 A 到 B</h2>
+    <ul class="modes" aria-label="出行方式">
+      <li>汽車</li><li>大眾運輸</li><li>騎自行車</li><li>步行</li>
+    </ul>
+    <p>選擇您的出行方式。360Maps 會結合目前的交通狀況比較各條路線，並顯示沿途情況：壅塞、路況、道路施工、渡輪與紅綠燈。搭乘大眾運輸時，您可以看到瑞典全境的發車時間、延誤與轉乘。</p>
+    <p>開車、騎自行車或步行時，下一個轉彎會以語音播報，即使鎖定螢幕也一樣。如果您轉錯了彎，App 會重新規劃路線；如果找到至少快三分鐘的路線，也會告訴您。接近目的地時，您可以看到可以在哪裡停車。</p>
+  </section>
+
+  <section id="day" class="wrap planning">
+    <h2>出遊一日</h2>
+    <div class="feature">
+      <img src="../img/en-surprise-me.jpg" alt="「給我驚喜」的步行一日行程：公園與一座教堂，附時間，還可選擇時間長度與您的喜好。" loading="lazy" width="506" height="1100">
+      <div>
+        <h3>給我驚喜</h3>
+        <p>App 會從您所在的位置出發規劃一天：景點與公園，午餐與咖啡安排在有營業的地點。選擇步行、騎自行車或大眾運輸，再不斷換一換，直到這一天合您的意。</p>
+        <p>博物館、宮殿與教堂安排在 17:00 之前，因為 App 不知道它們的營業時間。</p>
+        <p>要趕公車或火車？點一下該班次並選擇「帶我準時抵達」，App 會告訴您何時出發。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="plus" class="wrap planning">
+    <h2>免費版與 360Maps Plus</h2>
+    <p>包含所有圖層的地圖、搜尋、大眾運輸、騎自行車、步行、「給我驚喜」以及規劃開車路線皆免費。您的前三次開車導航行程也免費。</p>
+    <p>使用 360Maps Plus，您可取得開車導航：逐個轉彎語音播報，壅塞、結冰與道路施工警示，交通變化時自動改走新路線。還有這些：</p>
+    <div class="feature flip">
+      <img src="../img/en-trip-cost-winter.jpg" alt="前往 Arlanda 的開車路線，Norrtull 有 20 瑞典克朗的壅塞稅，冬季檢查顯示冬季路況良好。" loading="lazy" width="506" height="1100">
+      <div>
+        <h3>行程費用與冬季檢查</h3>
+        <p>開車路線上的壅塞稅與橋樑通行費，依您經過的時間計算，以及如果晚一點出發需要多少費用。</p>
+        <p>11 月 1 日至 4 月 30 日：沿途的結冰與積雪、您抵達時所在地的氣溫，以及 SMHI 的警報。</p>
+      </div>
+    </div>
+    <div class="feature">
+      <img src="../img/en-parking-rules.jpg" alt="斯德哥爾摩 Vasastan 的地圖，路緣依停車規定著色為綠色、紅色、橘色與灰色。" loading="lazy" width="506" height="1100">
+      <div>
+        <h3>斯德哥爾摩的停車規定</h3>
+        <p>放大地圖後，路緣會著色：綠色表示可以停車，橘色表示一天內會清掃街道，紅色表示現在禁止停車，灰色表示該位置已被保留。</p>
+        <p>依據市府規定。以街上的標誌為準。</p>
+      </div>
+    </div>
+    <div class="feature flip">
+      <img src="../img/en-parking-here.jpg" alt="「此處停車」卡片：可以停車，目前每小時 20 瑞典克朗，週三 09 至 14 時清掃街道，以及一個「提醒我」按鈕。" loading="lazy" width="506" height="1100">
+      <div>
+        <h3>車停在哪裡</h3>
+        <p>儲存車輛位置，App 會顯示該處適用的規定：目前價格、完整收費標準，以及街道清掃時間。</p>
+        <p>「提醒我」會在街道清掃開始的前一天晚上與一小時前發出通知。</p>
+      </div>
+    </div>
+    <p>Plus 提供一週（非訂閱）、按月、按年或一次性購買。App Store 會顯示您所在國家或地區的價格。<a href="terms.html">使用條款</a>。</p>
+  </section>
+
+  <section id="sources" class="wrap planning">
+    <h2>開放資料</h2>
+    <p>地圖上的所有內容皆來自瑞典政府機關與交通公司的開放資料。</p>
+    <p>來源包括：Trafiklab 與 Samtrafiken、SL、瑞典交通管理局、SMHI、瑞典警方、Krisinformation.se、斯德哥爾摩市、Wikipedia 以及 © OpenStreetMap 貢獻者。所有來源與授權皆列於 App 中的「來源、授權與隱私」下。</p>
+  </section>
+
+  <section id="support" class="wrap">
+    <h2>支援</h2>
+    <p class="lede">發現了錯誤、地圖上缺少內容，或對 App 有疑問？請寄電子郵件至 <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a>，我們會回覆。常見問題的解答在<a href="support.html">支援頁面</a>上。</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>iPhone 版 360Maps</span>
+    <span><a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a></span>
+    <span><a href="support.html">支援</a></span>
+    <span><a href="privacy.html">隱私權政策</a></span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // The live map: Stockholm drawn only with live data from the same API the app uses.
+  const canvas = document.getElementById('live-map');
+  const status = document.getElementById('live-status');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+  const view = { lat: 59.333, lon: 18.045, spanLat: 0.105, spanLon: 0.30 };
+  const box = { minLon: 17.86, minLat: 59.27, maxLon: 18.22, maxLat: 59.40 };
+  // The copy on GitHub Pages reads the same server; on the server itself the API is same-origin.
+  const API = location.hostname.endsWith('github.io') ? 'https://myvehicles.duckdns.org:8444' : '';
+  const kLon = Math.cos(view.lat * Math.PI / 180);
+  const places = [
+    ['Kungsholmen', 59.332, 18.030], ['Södermalm', 59.313, 18.068], ['Östermalm', 59.340, 18.088],
+    ['Vasastan', 59.346, 18.046], ['Gamla stan', 59.3245, 18.071], ['Djurgården', 59.326, 18.112],
+    ['Solna', 59.361, 18.000], ['Hammarby Sjöstad', 59.302, 18.098], ['Liljeholmen', 59.309, 18.022],
+  ];
+  const modeColor = symbol => {
+    if (!symbol) return css('--bus');
+    if (symbol.includes('tunnel')) return css('--metro');
+    if (symbol.startsWith('train')) return css('--train');
+    if (symbol.startsWith('tram')) return css('--tram');
+    if (symbol.startsWith('ferry')) return css('--boat');
+    return css('--bus');
+  };
+
+  let w = 0, h = 0, scale = 1;
+  function resize() {
+    const r = canvas.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = r.width; h = r.height;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    scale = Math.max(w / (view.spanLon * kLon), h / view.spanLat);  // cover the canvas
+  }
+  const project = (lat, lon) => [w / 2 + (lon - view.lon) * kLon * scale, h / 2 - (lat - view.lat) * scale];
+
+  let stretches = [];           // travel-time stretches: the motorway skeleton, queues in colour
+  const vehicles = new Map();    // id -> {from, to, start, duration, color, badge}
+
+  async function loadStretches() {
+    try {
+      const r = await fetch(API + '/v1/layers/travelTimes');
+      if (!r.ok) return;
+      const data = await r.json();
+      stretches = data.items.filter(i => i.path && i.path.length > 1);
+    } catch (_) {}
+  }
+
+  async function loadVehicles() {
+    try {
+      const r = await fetch(`${API}/v1/layers/transitVehicles?bbox=${box.minLon},${box.minLat},${box.maxLon},${box.maxLat}`);
+      if (!r.ok) throw new Error(r.status);
+      const data = await r.json();
+      const now = performance.now(), seen = new Set();
+      for (const item of data.items) {
+        seen.add(item.id);
+        const to = [item.coordinate.lat, item.coordinate.lon];
+        const old = vehicles.get(item.id);
+        const from = old ? position(old, now) : to;
+        vehicles.set(item.id, { from, to, start: now, duration: reduceMotion || !old ? 0 : 20000,
+                                color: modeColor(item.symbol), badge: item.badge || '' });
+      }
+      for (const id of [...vehicles.keys()]) if (!seen.has(id)) vehicles.delete(id);
+      const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+      status.innerHTML = `<span class="live__dot" aria-hidden="true"></span>斯德哥爾摩目前有 <strong>${data.items.length}</strong> 輛公車、火車和船隻在行駛。更新於 ${time}。`;
+    } catch (_) {
+      status.textContent = '即時地圖目前無法取得資料，稍後會再試一次。';
+    }
+  }
+
+  function position(v, now) {
+    if (!v.duration) return v.to;
+    const t = Math.min(1, (now - v.start) / v.duration);
+    return [v.from[0] + (v.to[0] - v.from[0]) * t, v.from[1] + (v.to[1] - v.from[1]) * t];
+  }
+
+  function draw(now) {
+    ctx.fillStyle = css('--paper');
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (const s of stretches) {
+      const queue = s.severity >= 2;
+      ctx.strokeStyle = queue ? (s.severity >= 3 ? css('--queue-heavy') : css('--queue')) : css('--road');
+      ctx.lineWidth = queue ? 6 : 3;
+      ctx.beginPath();
+      s.path.forEach((p, i) => { const [x, y] = project(p.lat, p.lon); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+      ctx.stroke();
+    }
+
+    const r = w < 640 ? 6 : 9;
+    const ring = css('--paper-raised');
+    for (const v of vehicles.values()) {
+      const [lat, lon] = position(v, now);
+      const [x, y] = project(lat, lon);
+      if (x < -20 || y < -20 || x > w + 20 || y > h + 20) continue;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = v.color; ctx.fill();
+      ctx.lineWidth = 1.5; ctx.strokeStyle = ring; ctx.stroke();
+      if (v.badge && r >= 9) {
+        ctx.fillStyle = '#fff';
+        ctx.font = `700 ${v.badge.length > 2 ? 9 : 11}px "Barlow Condensed", sans-serif`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(v.badge, x, y + 0.5);
+        ctx.textBaseline = 'alphabetic';
+      }
+    }
+
+    // District names on top, with a paper halo so they stay readable among the vehicles.
+    ctx.font = `700 ${w < 640 ? 14 : 18}px "Barlow Condensed", sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = css('--paper');
+    ctx.fillStyle = css('--ink-soft');
+    for (const [name, lat, lon] of places) {
+      const [x, y] = project(lat, lon);
+      ctx.strokeText(name, x, y);
+      ctx.fillText(name, x, y);
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  addEventListener('resize', resize);
+  loadStretches();
+  loadVehicles();
+  setInterval(() => { if (!document.hidden) loadVehicles(); }, 20000);
+  setInterval(() => { if (!document.hidden) loadStretches(); }, 60000);
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

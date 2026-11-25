@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>นโยบายความเป็นส่วนตัว – 360Maps</title>
+<meta name="description" content="วิธีที่ 360Maps จัดการตำแหน่งและข้อมูลอื่นๆ ของคุณ">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../integritet.html" lang="sv">Svenska</option><option value="../en/privacy.html" lang="en">English</option><option value="../de/privacy.html" lang="de">Deutsch</option><option value="../nb/privacy.html" lang="nb">Norsk</option><option value="../da/privacy.html" lang="da">Dansk</option><option value="../fi/privacy.html" lang="fi">Suomi</option><option value="../nl/privacy.html" lang="nl">Nederlands</option><option value="../fr/privacy.html" lang="fr">Français</option><option value="../es/privacy.html" lang="es">Español</option><option value="../it/privacy.html" lang="it">Italiano</option><option value="../pl/privacy.html" lang="pl">Polski</option><option value="../cs/privacy.html" lang="cs">Čeština</option><option value="../pt-br/privacy.html" lang="pt-BR">Português (Brasil)</option><option value="../ro/privacy.html" lang="ro">Română</option><option value="../hu/privacy.html" lang="hu">Magyar</option><option value="../tr/privacy.html" lang="tr">Türkçe</option><option value="../el/privacy.html" lang="el">Ελληνικά</option><option value="../uk/privacy.html" lang="uk">Українська</option><option value="../et/privacy.html" lang="et">Eesti</option><option value="../lv/privacy.html" lang="lv">Latviešu</option><option value="../lt/privacy.html" lang="lt">Lietuvių</option><option value="../is/privacy.html" lang="is">Íslenska</option><option value="../zh-hans/privacy.html" lang="zh-Hans">简体中文</option><option value="../zh-hant/privacy.html" lang="zh-Hant">繁體中文</option><option value="../ja/privacy.html" lang="ja">日本語</option><option value="../ko/privacy.html" lang="ko">한국어</option><option value="../th/privacy.html" lang="th" selected>ไทย</option><option value="../fa/privacy.html" lang="fa">فارسی</option></select></label></header>
+<main>
+  <h1>นโยบายความเป็นส่วนตัว</h1>
+  <p class="updated">มีผลตั้งแต่วันที่ 25 พฤศจิกายน 2026</p>
+
+  <p>360Maps แสดงการจราจร ขนส่งสาธารณะ สภาพอากาศ และเหตุขัดข้องบนแผนที่ และช่วยให้คุณค้นหาสถานที่ท่องเที่ยว ที่จอดรถ และเส้นทางในสวีเดน แอปไม่มีโฆษณา ไม่มีบัญชี และไม่มีการติดตาม ต่อไปนี้คือสิ่งที่เกิดขึ้นกับข้อมูลของคุณ</p>
+
+  <h2>ตำแหน่งของคุณ</h2>
+  <p>หากคุณอนุญาตให้แอปเข้าถึงตำแหน่งของคุณ แอปจะใช้ตำแหน่งขณะที่แอปเปิดอยู่ เพื่อแสดงสิ่งที่อยู่ใกล้คุณและวางแผนการเดินทางจากตรงนั้น ระหว่างการนำทาง แอปจะใช้ตำแหน่งด้วยเมื่อแอปอยู่เบื้องหลังหรือหน้าจอล็อกอยู่ เพื่อให้คุณได้ยินทางเลี้ยวถัดไป การใช้งานนี้จะหยุดเมื่อคุณถึงที่หมายหรือจบการเดินทาง เช่นเดียวกันขณะที่คุณบันทึกการเดินทางหรือแชร์ตำแหน่งสด จนกว่าคุณจะหยุด ตำแหน่งของคุณจะไม่ถูกเชื่อมโยงกับตัวคุณ และเราไม่จัดเก็บตำแหน่งนั้น ข้อยกเว้นเดียวคือการแชร์สด ซึ่งตำแหน่งจะถูกเก็บไว้กับเราในรูปแบบเข้ารหัสตราบที่การแชร์ยังดำเนินอยู่ (ดูด้านล่าง)</p>
+
+  <h2>สิ่งที่ถูกส่ง และส่งไปที่ไหน</h2>
+  <ul>
+    <li><strong>เซิร์ฟเวอร์ของเรา</strong>รับพื้นที่ที่มองเห็นของแผนที่เมื่อคุณดูยานพาหนะและเลเยอร์ที่หนาแน่นอื่นๆ รับป้ายหยุดที่คุณเปิด และรับจุดเริ่มต้นกับจุดหมายเมื่อคุณวางแผนเดินทางด้วยขนส่งสาธารณะ เซิร์ฟเวอร์ใช้ข้อมูลนี้เพื่อตอบกลับ และไม่จัดเก็บข้อมูลนั้น</li>
+    <li><strong>Apple</strong> รับจุดเริ่มต้นและจุดหมายเมื่อคุณวางแผนเดินทางด้วยรถยนต์ จักรยาน หรือเดินเท้า และวาดแผนที่ ซึ่งอยู่ภายใต้เงื่อนไขของ Apple</li>
+    <li><strong>แหล่งข้อมูล</strong> เช่น SL และ SMHI รับคำขอเกี่ยวกับพื้นที่ที่คุณกำลังดู โดยไม่มีข้อมูลว่าคุณเป็นใคร</li>
+    <li><strong>เซิร์ฟเวอร์ของเรา</strong>ถูกขอข้อมูลขีดจำกัดความเร็วในช่องสี่เหลี่ยมขนาดหนึ่งกิโลเมตรที่คุณขับอยู่ ระหว่างการนำทางด้วยรถยนต์ เซิร์ฟเวอร์รับเพียงว่าเป็นช่องไหน ไม่ได้รับว่าคุณอยู่ตรงไหนในช่องนั้นหรือคุณเป็นใคร และไม่จัดเก็บข้อมูลนั้น</li>
+    <li><strong>รูปภาพสถานที่ท่องเที่ยว</strong>มาจาก Wikimedia Commons เซิร์ฟเวอร์ของเราดึงรูปจาก Wikimedia ให้แอป ดังนั้น Wikimedia จึงไม่เห็นตัวคุณ เซิร์ฟเวอร์รับว่าแสดงรูปไหน ใช้ข้อมูลนี้เพื่อตอบกลับ และไม่จัดเก็บข้อมูลนั้น</li>
+    <li><strong>อุณหภูมิน้ำและแสงเหนือ:</strong> แอปดึงพยากรณ์อุณหภูมิน้ำของวันนี้สำหรับแหล่งเล่นน้ำทั้งหมดจากสำนักงานทะเลและน้ำแห่งสวีเดน และพยากรณ์แสงเหนือทั่วโลกจาก NOAA ในสหรัฐอเมริกา ทั้งสองแห่งไม่ได้รับข้อมูลว่าคุณอยู่ที่ไหน</li>
+    <li><strong>Look Around:</strong> เมื่อคุณเปิดสถานที่ท่องเที่ยว แอปจะขอภาพระดับถนนจาก Apple ณ ตำแหน่งของสถานที่นั้น ไม่ใช่ตำแหน่งของคุณ ซึ่งอยู่ภายใต้เงื่อนไขของ Apple</li>
+  </ul>
+
+  <h2>การแชร์ตำแหน่งของคุณ</h2>
+  <p>“ส่งตำแหน่ง” จะใส่ที่อยู่ของคุณและลิงก์พร้อมเส้นทางมาหาคุณลงในข้อความ และคุณเลือกเองว่าจะส่งถึงใคร ข้อความนี้ไม่ผ่านเรา</p>
+  <p>“แชร์สด” แสดงว่าคุณอยู่ที่ไหนให้ทุกคนที่มีลิงก์เห็น จนกว่าพวกเขาจะมาถึง เวลาที่คุณเลือกจะหมด หรือคุณแตะ หยุด ขณะแชร์ แอปจะส่งตำแหน่งของคุณไปยังเซิร์ฟเวอร์ของเราเมื่อคุณเคลื่อนที่ไปประมาณ 25 เมตร และส่งนาทีละครั้งเมื่อคุณอยู่นิ่ง รวมถึงเมื่อแอปอยู่เบื้องหลัง ตำแหน่งและที่อยู่ รวมถึงชื่อของคุณหากคุณพิมพ์ไว้ จะถูกเข้ารหัสบนโทรศัพท์ของคุณด้วยกุญแจที่มีอยู่ในลิงก์เท่านั้น นอกจากนั้น ชื่อจะถูกเก็บไว้บนโทรศัพท์ของคุณเท่านั้น ไม่มีบัญชี เบราว์เซอร์ไม่เคยส่งส่วนนั้นของลิงก์ ดังนั้นเซิร์ฟเวอร์ของเราจึงอ่านไม่ได้ว่าคุณอยู่ที่ไหน เซิร์ฟเวอร์เก็บเพียงตำแหน่งที่เข้ารหัสล่าสุดและเวลาที่การแชร์สิ้นสุด และลบทุกอย่างช้าที่สุดสิบนาทีหลังจากการแชร์สิ้นสุด ทุกคนที่มีลิงก์สามารถเห็นว่าคุณอยู่ที่ไหนตลอดเวลาที่การแชร์ดำเนินอยู่ ดังนั้นควรส่งให้เฉพาะคนที่คุณต้องการให้เห็นเท่านั้น</p>
+  <p>ผู้ที่เปิดลิงก์สามารถเลือกดูได้ว่าคุณอยู่ห่างแค่ไหน ระยะทางจะถูกคำนวณในเบราว์เซอร์ของพวกเขาและไม่ถูกส่งไปที่ไหนเลย</p>
+
+  <h2>ร้านอาหาร คาเฟ่ และการจองโต๊ะ</h2>
+  <p>ร้านอาหาร คาเฟ่ และศูนย์การค้ามากับแอปอยู่แล้ว ดังนั้นการเรียกดูบนแผนที่และในรายการจึงไม่ส่งข้อมูลใดๆ เมื่อคุณแตะ “คะแนนและรูปภาพ” แอปจะสอบถามแผนที่ Apple เกี่ยวกับสถานที่นั้น และเงื่อนไขของ Apple มีผลบังคับใช้ หน้าจองเป็นของผู้ให้บริการจองของร้านอาหาร และนโยบายความเป็นส่วนตัวของผู้ให้บริการนั้นมีผลบังคับใช้ที่นั่น 360Maps ไม่ส่งข้อมูลใดๆ ว่าคุณดูสถานที่ไหน</p>
+
+  <h2>สิ่งที่บันทึกไว้บนโทรศัพท์ของคุณ</h2>
+  <p>แอปจดจำตัวเลือกของคุณ เช่น เลเยอร์แผนที่ที่เปิดอยู่และประกาศที่คุณปิดไปแล้ว จุดหมายล่าสุดของคุณ สถานที่ที่คุณบันทึกเป็น บ้าน และ ที่ทำงาน และตำแหน่งล่าสุดของโทรศัพท์ (เพื่อให้แผนที่เปิดที่พื้นที่ที่ถูกต้อง) ข้อมูลเหล่านี้อยู่บนโทรศัพท์ของคุณเท่านั้น ไม่เคยถูกส่งมาถึงเรา และจะหายไปเมื่อคุณลบแอป คุณลบจุดหมายได้โดยกดค้างที่จุดหมายนั้นในรายการ สำหรับสถานที่ที่คุณเปิด “คะแนนและรูปภาพ” โทรศัพท์จะจดจำตัวระบุของสถานที่นั้นในแผนที่ Apple เพื่อให้การค้นหาทำงานเพียงครั้งเดียว ตัวระบุนี้อยู่บนโทรศัพท์ของคุณและไม่เคยถูกส่งมาถึงเรา ประวัติของสถานที่ที่คุณเปิดการ์ดและการเดินทางที่คุณติดตาม สถานที่ที่คุณทำเครื่องหมายว่าไปแล้ว และวันที่คุณวางแผนไว้ จะถูกเก็บไว้บนโทรศัพท์ในลักษณะเดียวกัน คุณล้างประวัติได้ที่ ประวัติ → ล้างประวัติ</p>
+
+  <h2>การซื้อ</h2>
+  <p>360Maps Plus ซื้อผ่าน Apple แอปและเซิร์ฟเวอร์ของเราไม่เคยได้รับข้อมูลบัตรหรือรายละเอียดการชำระเงินอื่นๆ ของคุณ และเราไม่เก็บบันทึกว่าคุณซื้ออะไร โทรศัพท์จะถาม Apple ว่าคุณมี Plus หรือไม่ จำนวนครั้งที่คุณใช้ไปจากการเดินทางด้วยรถยนต์ฟรีสามครั้งถูกบันทึกไว้บนโทรศัพท์เท่านั้น ในพวงกุญแจของโทรศัพท์ ดังนั้นตัวเลขจะยังอยู่แม้คุณติดตั้งแอปใหม่ และไม่เคยถูกส่งมาถึงเรา</p>
+
+  <h2>บันทึกทางเทคนิค</h2>
+  <p>เซิร์ฟเวอร์ของเราเก็บบันทึกทางเทคนิคไว้ช่วงสั้นๆ เพื่อให้เราแก้ไขข้อผิดพลาดได้ บันทึกเหล่านี้มีข้อมูลว่ามีการร้องขอส่วนใดของบริการ ไม่ได้ระบุว่าคุณเป็นใคร และจะถูกล้างโดยอัตโนมัติ</p>
+
+  <h2>เว็บไซต์นี้</h2>
+  <p>เว็บไซต์ไม่ใช้คุกกี้และไม่ใช้บริการวิเคราะห์ข้อมูล ฟอนต์โฮสต์อยู่บนเว็บไซต์เอง แผนที่สดบนหน้าแรกดึงตำแหน่งยานพาหนะจากเซิร์ฟเวอร์เดียวกับแอป สำเนาของเว็บไซต์โฮสต์อยู่บน GitHub Pages (tintronix-lab.github.io/360Maps) ซึ่ง GitHub เก็บบันทึกทางเทคนิคตามเงื่อนไขของตนเอง</p>
+
+  <h2>คำถาม</h2>
+  <p>หากคุณมีคำถามเกี่ยวกับความเป็นส่วนตัวหรือวิธีที่แอปจัดการข้อมูลของคุณ ส่งอีเมลมาที่ <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a></p>
+</main>
+<footer><a href="./">กลับไปหน้าแรก</a> · <a href="terms.html">เงื่อนไขการใช้งาน</a></footer>
+</body>
+</html>

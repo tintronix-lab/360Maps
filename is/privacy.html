@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Persónuverndarstefna – 360Maps</title>
+<meta name="description" content="Hvernig 360Maps meðhöndlar staðsetningu þína og önnur gögn.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../integritet.html" lang="sv">Svenska</option><option value="../en/privacy.html" lang="en">English</option><option value="../de/privacy.html" lang="de">Deutsch</option><option value="../nb/privacy.html" lang="nb">Norsk</option><option value="../da/privacy.html" lang="da">Dansk</option><option value="../fi/privacy.html" lang="fi">Suomi</option><option value="../nl/privacy.html" lang="nl">Nederlands</option><option value="../fr/privacy.html" lang="fr">Français</option><option value="../es/privacy.html" lang="es">Español</option><option value="../it/privacy.html" lang="it">Italiano</option><option value="../pl/privacy.html" lang="pl">Polski</option><option value="../cs/privacy.html" lang="cs">Čeština</option><option value="../pt-br/privacy.html" lang="pt-BR">Português (Brasil)</option><option value="../ro/privacy.html" lang="ro">Română</option><option value="../hu/privacy.html" lang="hu">Magyar</option><option value="../tr/privacy.html" lang="tr">Türkçe</option><option value="../el/privacy.html" lang="el">Ελληνικά</option><option value="../uk/privacy.html" lang="uk">Українська</option><option value="../et/privacy.html" lang="et">Eesti</option><option value="../lv/privacy.html" lang="lv">Latviešu</option><option value="../lt/privacy.html" lang="lt">Lietuvių</option><option value="../is/privacy.html" lang="is" selected>Íslenska</option><option value="../zh-hans/privacy.html" lang="zh-Hans">简体中文</option><option value="../zh-hant/privacy.html" lang="zh-Hant">繁體中文</option><option value="../ja/privacy.html" lang="ja">日本語</option><option value="../ko/privacy.html" lang="ko">한국어</option><option value="../th/privacy.html" lang="th">ไทย</option><option value="../fa/privacy.html" lang="fa">فارسی</option></select></label></header>
+<main>
+  <h1>Persónuverndarstefna</h1>
+  <p class="updated">Gildir frá 25. nóvember 2026.</p>
+
+  <p>360Maps sýnir umferð, almenningssamgöngur, veður og truflanir á korti og hjálpar þér að finna áhugaverða staði, bílastæði og leiðina um Svíþjóð. Appið er án auglýsinga, án aðgangs og án rakningar. Svona er farið með gögnin þín.</p>
+
+  <h2>Staðsetning þín</h2>
+  <p>Ef þú gefur appinu aðgang að staðsetningu þinni er hún notuð á meðan appið er opið, til að sýna hvað er nálægt þér og til að skipuleggja ferðir þaðan. Meðan á leiðsögn stendur er hún einnig notuð þegar appið er í bakgrunni eða skjárinn er læstur, svo að þú heyrir næstu beygju. Því lýkur þegar þú kemur á áfangastað eða lýkur ferðinni. Sama gildir á meðan þú tekur upp ferð eða deilir staðsetningu þinni í beinni, þar til þú stöðvar það. Staðsetning þín er aldrei tengd þér og við geymum hana ekki. Eina undantekningin er deiling í beinni, þar sem hún er geymd hjá okkur á dulkóðuðu formi á meðan deilingin varir (sjá hér að neðan).</p>
+
+  <h2>Hvað er sent, og hvert</h2>
+  <ul>
+    <li><strong>Þjónninn okkar</strong> fær sýnilegt svæði kortsins þegar þú skoðar farartæki og önnur þétt lög, hvaða stoppistöð þú opnar, og upphafsstað og áfangastað þegar þú skipuleggur ferð með almenningssamgöngum. Hann notar þetta til að svara og geymir það ekki.</li>
+    <li><strong>Apple</strong> fær upphafsstað og áfangastað þegar þú skipuleggur ferð á bíl, hjóli eða fótgangandi, og teiknar kortið. Skilmálar Apple gilda um það.</li>
+    <li><strong>Gagnalindirnar</strong>, til dæmis SL og SMHI, fá beiðnir um svæðið sem þú skoðar, án upplýsinga um hver þú ert.</li>
+    <li><strong>Þjónninn okkar</strong> er spurður, við leiðsögn í bíl, um hámarkshraða í kílómetrareitnum sem þú ekur í. Þjónninn fær aðeins að vita hvaða reitur það er, ekki hvar í honum þú ert né hver þú ert, og geymir það ekki.</li>
+    <li><strong>Myndir af áhugaverðum stöðum</strong> koma frá Wikimedia Commons. Þjónninn okkar sækir myndina frá Wikimedia fyrir appið, þannig að Wikimedia sér þig aldrei. Þjónninn fær að vita hvaða mynd er sýnd, notar það til að svara og geymir það ekki.</li>
+    <li><strong>Vatnshiti og norðurljós:</strong> appið sækir spá dagsins um vatnshita fyrir alla baðstaði frá sænsku sjávar- og vatnsstofnuninni, og norðurljósaspá fyrir allan heiminn frá NOAA í Bandaríkjunum. Hvorugur aðilinn fær að vita hvar þú ert.</li>
+    <li><strong>Look Around:</strong> þegar þú opnar áhugaverðan stað biður appið Apple um götumyndir á stað áhugaverða staðarins, ekki þinni staðsetningu. Skilmálar Apple gilda um það.</li>
+  </ul>
+
+  <h2>Deiling staðsetningar þinnar</h2>
+  <p>„Senda staðsetningu“ setur heimilisfang þitt og hlekk með leiðarlýsingu til þín í skilaboð, og þú velur hver fær þau. Það fer ekki í gegnum okkur.</p>
+  <p>„Deila í beinni“ sýnir hvar þú ert fyrir alla sem hafa hlekkinn, þar til viðkomandi kemur, tíminn sem þú valdir rennur út eða þú ýtir á Stöðva. Meðan á deilingu stendur sendir appið staðsetningu þína til þjónsins okkar þegar þú hefur fært þig um það bil 25 metra, og einu sinni á mínútu þegar þú stendur í stað, einnig þegar appið er í bakgrunni. Staðsetningin og heimilisfangið, og nafnið þitt ef þú hefur slegið það inn, eru dulkóðuð í símanum þínum með lykli sem er aðeins til í hlekknum. Nafnið er að öðru leyti aðeins geymt í símanum þínum; það er enginn aðgangur. Vafrar senda þann hluta hlekks aldrei áfram, svo þjónninn okkar getur ekki lesið hvar þú ert. Þjónninn geymir aðeins nýjustu dulkóðuðu staðsetninguna og hvenær deilingunni lýkur, og eyðir öllu í síðasta lagi tíu mínútum eftir að deilingunni lýkur. Allir sem hafa hlekkinn geta séð hvar þú ert á meðan deilingin varir, svo sendu hann aðeins til fólks sem þú vilt að sjái það.</p>
+  <p>Sá sem opnar hlekkinn getur valið að sjá hversu langt í burtu þú ert. Fjarlægðin er þá reiknuð í vafra viðkomandi og send hvergi.</p>
+
+  <h2>Veitingastaðir, kaffihús og borðapantanir</h2>
+  <p>Veitingastaðirnir, kaffihúsin og verslunarmiðstöðvarnar fylgja með appinu, svo að ekkert er sent þegar þú skoðar þau á kortinu og í listunum. Þegar þú ýtir á „Einkunnir og myndir“ spyr appið Kort frá Apple um þann stað, og skilmálar Apple gilda. Bókunarsíða tilheyrir bókunarveitu veitingastaðarins og þar gildir persónuverndarstefna hennar. 360Maps sendir engar upplýsingar um hvaða staði þú skoðar.</p>
+
+  <h2>Hvað er vistað í símanum þínum</h2>
+  <p>Appið man val þín, til dæmis hvaða kortalög eru kveikt og hvaða tilkynningum þú hefur lokað, nýlega áfangastaði, staðina sem þú hefur vistað sem Heima og Vinna, og hvar síminn var síðast (svo að kortið opnist yfir réttu svæði). Þetta helst aðeins í símanum þínum, er aldrei sent til okkar og hverfur ef þú eyðir appinu. Þú fjarlægir áfangastað með því að halda honum inni í listanum. Fyrir staði þar sem þú hefur opnað „Einkunnir og myndir“ man síminn auðkenni Korta frá Apple fyrir þann stað, svo að uppflettingin fer aðeins fram einu sinni. Það helst í símanum þínum og er aldrei sent til okkar. Sagan yfir staði sem þú opnaðir spjaldið fyrir og ferðir sem þú fylgdir, staðina sem þú merktir sem heimsótta og dagana sem þú skipuleggur eru geymd í símanum á sama hátt; þú hreinsar söguna undir Saga → Hreinsa sögu.</p>
+
+  <h2>Kaup</h2>
+  <p>360Maps Plus er keypt í gegnum Apple. Appið og þjónninn okkar fá aldrei kortið þitt eða aðrar greiðsluupplýsingar, og við höldum enga skrá yfir það sem þú hefur keypt. Síminn spyr Apple hvort þú sért með Plus. Hversu margar af þremur ókeypis bílferðunum þínum þú hefur notað er aðeins vistað í símanum, í lyklakippu hans, svo talan er enn til staðar ef þú setur appið upp aftur. Það er aldrei sent til okkar.</p>
+
+  <h2>Tæknilegar skrár</h2>
+  <p>Þjónninn okkar geymir tæknilegar skrár í stuttan tíma svo að við getum lagað villur. Þær innihalda hvaða hlutar þjónustunnar var beðið um, ekki hver þú ert, og eru hreinsaðar sjálfkrafa.</p>
+
+  <h2>Þessi vefsíða</h2>
+  <p>Vefsíðan notar engar vafrakökur og enga greiningarþjónustu. Letrið er hýst á vefsíðunni sjálfri. Lifandi kortið á forsíðunni sækir staðsetningar farartækja frá sama þjóni og appið. Afrit af vefsíðunni er hýst á GitHub Pages (tintronix-lab.github.io/360Maps), þar sem GitHub geymir tæknilegar skrár samkvæmt eigin skilmálum.</p>
+
+  <h2>Spurningar</h2>
+  <p>Ef þú ert með spurningar um persónuvernd eða hvernig appið meðhöndlar gögnin þín, sendu tölvupóst á <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a>.</p>
+</main>
+<footer><a href="./">Aftur á forsíðu</a> · <a href="terms.html">Notkunarskilmálar</a></footer>
+</body>
+</html>

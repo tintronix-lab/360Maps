@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adatvédelmi tájékoztató – 360Maps</title>
+<meta name="description" content="Hogyan kezeli a 360Maps a pozíciódat és más adataidat.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../integritet.html" lang="sv">Svenska</option><option value="../en/privacy.html" lang="en">English</option><option value="../de/privacy.html" lang="de">Deutsch</option><option value="../nb/privacy.html" lang="nb">Norsk</option><option value="../da/privacy.html" lang="da">Dansk</option><option value="../fi/privacy.html" lang="fi">Suomi</option><option value="../nl/privacy.html" lang="nl">Nederlands</option><option value="../fr/privacy.html" lang="fr">Français</option><option value="../es/privacy.html" lang="es">Español</option><option value="../it/privacy.html" lang="it">Italiano</option><option value="../pl/privacy.html" lang="pl">Polski</option><option value="../cs/privacy.html" lang="cs">Čeština</option><option value="../pt-br/privacy.html" lang="pt-BR">Português (Brasil)</option><option value="../ro/privacy.html" lang="ro">Română</option><option value="../hu/privacy.html" lang="hu" selected>Magyar</option><option value="../tr/privacy.html" lang="tr">Türkçe</option><option value="../el/privacy.html" lang="el">Ελληνικά</option><option value="../uk/privacy.html" lang="uk">Українська</option><option value="../et/privacy.html" lang="et">Eesti</option><option value="../lv/privacy.html" lang="lv">Latviešu</option><option value="../lt/privacy.html" lang="lt">Lietuvių</option><option value="../is/privacy.html" lang="is">Íslenska</option><option value="../zh-hans/privacy.html" lang="zh-Hans">简体中文</option><option value="../zh-hant/privacy.html" lang="zh-Hant">繁體中文</option><option value="../ja/privacy.html" lang="ja">日本語</option><option value="../ko/privacy.html" lang="ko">한국어</option><option value="../th/privacy.html" lang="th">ไทย</option><option value="../fa/privacy.html" lang="fa">فارسی</option></select></label></header>
+<main>
+  <h1>Adatvédelmi tájékoztató</h1>
+  <p class="updated">Hatályos: 2026. november 25-től.</p>
+
+  <p>A 360Maps térképen mutatja a forgalmat, a tömegközlekedést, az időjárást és a fennakadásokat, és segít megtalálni a látnivalókat, a parkolást és az utat Svédországban. Az alkalmazásban nincs reklám, fiók és nyomkövetés. Ez történik az adataiddal.</p>
+
+  <h2>A pozíciód</h2>
+  <p>Ha hozzáférést adsz az alkalmazásnak a pozíciódhoz, azt az alkalmazás megnyitott állapotában használja arra, hogy megmutassa, mi van a közeledben, és onnan tervezzen útvonalakat. Útmutatás közben akkor is használja, ha az alkalmazás a háttérben van, vagy a képernyő zárolva van, hogy hallhasd a következő kanyart. Ez megszűnik, amikor megérkezel vagy befejezed az utat. Ugyanez igaz, amíg útvonalat rögzítesz vagy élőben megosztod a pozíciódat, a leállításig. A pozíciódat soha nem kapcsoljuk össze veled, és nem tároljuk. Az egyetlen kivétel az élő megosztás, amelynél titkosított formában nálunk marad, amíg a megosztás tart (lásd lent).</p>
+
+  <h2>Mi kerül elküldésre, és hová</h2>
+  <ul>
+    <li><strong>A szerverünk</strong> megkapja a térkép látható területét, amikor járműveket és más sűrű rétegeket nézel, azt, hogy melyik megállót nyitod meg, és az indulási és az úti célt, amikor tömegközlekedési utat tervezel. Ezt a válaszadáshoz használja, és nem tárolja.</li>
+    <li><strong>Az Apple</strong> megkapja az indulási és az úti célt, amikor autós, kerékpáros vagy gyalogos utat tervezel, és ő rajzolja a térképet. Erre az Apple feltételei vonatkoznak.</li>
+    <li><strong>Az adatforrások</strong>, például az SL és az SMHI, kéréseket kapnak arról a területről, amelyet nézel, anélkül, hogy bármit megtudnának arról, ki vagy.</li>
+    <li><strong>A szerverünktől</strong> kéri el az alkalmazás az autós útmutatás közben a sebességhatárokat abban az egy kilométeres négyzetben, amelyben vezetsz. A szerver csak azt kapja meg, hogy melyik négyzetről van szó, azt nem, hogy hol vagy benne, vagy hogy ki vagy, és nem tárolja.</li>
+    <li><strong>A látnivalók fotói</strong> a Wikimedia Commonsról származnak. A szerverünk az alkalmazás számára tölti le a fotót a Wikimediától, így a Wikimedia soha nem lát téged. A szerver megkapja, hogy melyik fotó látható, ezt a válaszadáshoz használja, és nem tárolja.</li>
+    <li><strong>Vízhőmérséklet és sarki fény:</strong> az alkalmazás az összes strandra vonatkozó napi vízhőmérséklet-előrejelzést a Svéd Tengeri és Vízgazdálkodási Hatóságtól kéri le, a sarki fény előrejelzését az egész világra pedig az amerikai NOAA-tól. Egyik sem kapja meg, hol vagy.</li>
+    <li><strong>Look Around:</strong> amikor megnyitsz egy látnivalót, az alkalmazás az Apple-től kéri el az utcaszintű képeket a látnivaló helyéről, nem a tiédről. Erre az Apple feltételei vonatkoznak.</li>
+  </ul>
+
+  <h2>A pozíciód megosztása</h2>
+  <p>A „Hely küldése” a címedet és egy hozzád vezető útvonal-hivatkozást tesz egy üzenetbe, és te döntöd el, kinek megy. Ez nem megy át rajtunk.</p>
+  <p>Az „Élő megosztás” mindenkinek megmutatja, hol vagy, akinél megvan a hivatkozás, amíg meg nem érkeznek, le nem telik a választott idő, vagy rá nem koppintasz a Leállításra. Megosztás közben az alkalmazás elküldi a pozíciódat a szerverünknek, ha kb. 25 métert mozogtál, és percenként egyszer, ha egy helyben állsz, akkor is, ha az alkalmazás a háttérben van. A pozíciót és a címet, valamint a nevedet, ha beírtál egyet, a telefonodon titkosítja egy olyan kulcs, amely csak a hivatkozásban létezik. A nevet egyébként csak a telefonod őrzi; nincs fiók. A böngészők a hivatkozásnak ezt a részét soha nem küldik el, így a szerverünk nem tudja kiolvasni, hol vagy. A szerver csak a legutóbbi titkosított pozíciót és a megosztás végét tárolja, és mindent legkésőbb tíz perccel a megosztás befejezése után töröl. Mindenki, akinél megvan a hivatkozás, látja, hol vagy, amíg a megosztás tart, ezért csak olyanoknak küldd el, akik láthatják ezt.</p>
+  <p>Aki megnyitja a hivatkozást, megnézheti, milyen messze vagy tőle. A távolságot ilyenkor a böngészője számolja ki, és nem küldi el sehová.</p>
+
+  <h2>Éttermek, kávézók és asztalfoglalás</h2>
+  <p>Az éttermek, kávézók és bevásárlóközpontok az alkalmazással együtt érkeznek, így ha a térképen és a listákban böngészed őket, semmi nem kerül elküldésre. Amikor az „Értékelések és fotók” gombra koppintasz, az alkalmazás az Apple Térképektől kérdez az adott helyről, és az Apple feltételei vonatkoznak rá. A foglalási oldal az étterem foglalási szolgáltatójához tartozik, és ott az ő adatvédelmi tájékoztatójuk érvényes. A 360Maps nem küld semmilyen információt arról, hogy mely helyeket nézed.</p>
+
+  <h2>Mi van elmentve a telefonodon</h2>
+  <p>Az alkalmazás megjegyzi a választásaidat, például hogy mely térképrétegek vannak bekapcsolva, és mely értesítéseket zártad be, a legutóbbi úti céljaidat, az Otthonként és Munkahelyként elmentett helyeket, és hogy hol volt utoljára a telefon (hogy a térkép a megfelelő területen nyíljon meg). Ezek csak a telefonodon maradnak, soha nem kerülnek hozzánk, és eltűnnek, ha törlöd az alkalmazást. Egy úti célt úgy távolítasz el, hogy nyomva tartod a listában. Azoknál a helyeknél, ahol megnyitottad az „Értékelések és fotók” részt, a telefon megjegyzi az Apple Térképek azonosítóját az adott helyhez, így a lekérdezés csak egyszer fut le. Ez a telefonodon marad, és soha nem kerül hozzánk. Azon helyek előzményei, amelyek kártyáját megnyitottad, és az általad követett utak, a meglátogatottként megjelölt helyek és a tervezett napjaid ugyanígy a telefonon maradnak; az előzményeket az Előzmények → Előzmények törlése alatt törölheted.</p>
+
+  <h2>Vásárlások</h2>
+  <p>A 360Maps Plust az Apple-n keresztül vásárolod meg. Az alkalmazás és a szerverünk soha nem kapja meg a kártyád vagy más fizetési adataid, és nem vezetünk nyilvántartást arról, mit vettél. A telefon az Apple-től kérdezi meg, hogy van-e Plusod. Hogy a három ingyenes autós útból hányat használtál fel, azt csak a telefon őrzi, a kulcskarikáján, így a szám az alkalmazás újratelepítése után is megvan. Ez soha nem kerül hozzánk.</p>
+
+  <h2>Technikai naplók</h2>
+  <p>A szerverünk rövid ideig technikai naplókat őriz, hogy ki tudjuk javítani a hibákat. Ezek azt tartalmazzák, hogy a szolgáltatás mely részeit kérték le, azt nem, hogy ki vagy, és automatikusan törlődnek.</p>
+
+  <h2>Ez a weboldal</h2>
+  <p>A weboldal nem használ sütiket és analitikai szolgáltatást. A betűtípusok magán a weboldalon vannak tárolva. A főoldalon lévő élő térkép a járműpozíciókat ugyanarról a szerverről kéri le, mint az alkalmazás. A weboldal egy másolata a GitHub Pagesen (tintronix-lab.github.io/360Maps) található, ahol a GitHub a saját feltételei szerint vezet technikai naplókat.</p>
+
+  <h2>Kérdések</h2>
+  <p>Ha kérdésed van az adatvédelemről vagy arról, hogyan kezeli az alkalmazás az adataidat, írj ide: <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a>.</p>
+</main>
+<footer><a href="./">Vissza a főoldalra</a> · <a href="terms.html">Felhasználási feltételek</a></footer>
+</body>
+</html>

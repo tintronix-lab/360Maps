@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de privacidade – 360Maps</title>
+<meta name="description" content="Como o 360Maps trata a sua localização e outros dados.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../integritet.html" lang="sv">Svenska</option><option value="../en/privacy.html" lang="en">English</option><option value="../de/privacy.html" lang="de">Deutsch</option><option value="../nb/privacy.html" lang="nb">Norsk</option><option value="../da/privacy.html" lang="da">Dansk</option><option value="../fi/privacy.html" lang="fi">Suomi</option><option value="../nl/privacy.html" lang="nl">Nederlands</option><option value="../fr/privacy.html" lang="fr">Français</option><option value="../es/privacy.html" lang="es">Español</option><option value="../it/privacy.html" lang="it">Italiano</option><option value="../pl/privacy.html" lang="pl">Polski</option><option value="../cs/privacy.html" lang="cs">Čeština</option><option value="../pt-br/privacy.html" lang="pt-BR" selected>Português (Brasil)</option><option value="../ro/privacy.html" lang="ro">Română</option><option value="../hu/privacy.html" lang="hu">Magyar</option><option value="../tr/privacy.html" lang="tr">Türkçe</option><option value="../el/privacy.html" lang="el">Ελληνικά</option><option value="../uk/privacy.html" lang="uk">Українська</option><option value="../et/privacy.html" lang="et">Eesti</option><option value="../lv/privacy.html" lang="lv">Latviešu</option><option value="../lt/privacy.html" lang="lt">Lietuvių</option><option value="../is/privacy.html" lang="is">Íslenska</option><option value="../zh-hans/privacy.html" lang="zh-Hans">简体中文</option><option value="../zh-hant/privacy.html" lang="zh-Hant">繁體中文</option><option value="../ja/privacy.html" lang="ja">日本語</option><option value="../ko/privacy.html" lang="ko">한국어</option><option value="../th/privacy.html" lang="th">ไทย</option><option value="../fa/privacy.html" lang="fa">فارسی</option></select></label></header>
+<main>
+  <h1>Política de privacidade</h1>
+  <p class="updated">Em vigor a partir de 25 de novembro de 2026.</p>
+
+  <p>O 360Maps mostra trânsito, transporte público, clima e interrupções em um mapa e ajuda você a encontrar atrações, estacionamento e o seu caminho pela Suécia. O app não tem anúncios, conta nem rastreamento. Veja o que acontece com os seus dados.</p>
+
+  <h2>Sua localização</h2>
+  <p>Se você der ao app acesso à sua localização, ela é usada enquanto o app está aberto, para mostrar o que está perto de você e planejar viagens a partir dali. Durante a orientação, ela também é usada quando o app está em segundo plano ou a tela está bloqueada, para que você ouça a próxima curva. Isso termina quando você chega ou encerra a viagem. O mesmo vale enquanto você grava um trajeto ou compartilha sua localização ao vivo, até você parar. Sua localização nunca é associada a você, e nós não a armazenamos. A única exceção é o compartilhamento ao vivo, em que ela fica conosco, de forma criptografada, enquanto o compartilhamento durar (veja abaixo).</p>
+
+  <h2>O que é enviado, e para onde</h2>
+  <ul>
+    <li><strong>Nosso servidor</strong> recebe a área visível do mapa quando você olha veículos e outras camadas densas, qual parada você abre e a origem e o destino quando você planeja uma viagem de transporte público. Ele usa isso para responder e não armazena.</li>
+    <li><strong>A Apple</strong> recebe a origem e o destino quando você planeja uma viagem de carro, de bicicleta ou a pé, e desenha o mapa. Os termos da Apple se aplicam a isso.</li>
+    <li><strong>As fontes de dados</strong>, por exemplo a SL e o SMHI, recebem solicitações sobre a área que você está olhando, sem nenhuma informação sobre quem você é.</li>
+    <li><strong>Nosso servidor</strong> é consultado, durante a orientação de carro, sobre os limites de velocidade no quadrado de um quilômetro em que você está dirigindo. O servidor recebe apenas qual é o quadrado, não onde você está dentro dele nem quem você é, e não o armazena.</li>
+    <li><strong>As fotos das atrações</strong> vêm do Wikimedia Commons. Nosso servidor busca a foto no Wikimedia para o app, então o Wikimedia nunca vê você. O servidor recebe qual foto é exibida, usa isso para responder e não armazena.</li>
+    <li><strong>Temperatura da água e aurora boreal:</strong> o app busca a previsão do dia da temperatura da água de todos os locais de banho na Agência Sueca de Gestão Marinha e Hídrica, e a previsão de aurora boreal do mundo todo na NOAA, nos EUA. Nenhuma das duas recebe onde você está.</li>
+    <li><strong>Look Around:</strong> quando você abre uma atração, o app pede à Apple imagens do nível da rua na posição da atração, não na sua. Os termos da Apple se aplicam a isso.</li>
+  </ul>
+
+  <h2>Compartilhar sua localização</h2>
+  <p>“Enviar localização” coloca em uma mensagem o seu endereço e um link com o caminho até você, e você escolhe para quem ela vai. Ela não passa por nós.</p>
+  <p>“Compartilhar ao vivo” mostra onde você está a qualquer pessoa com o link, até ela chegar, o tempo que você escolheu acabar ou você tocar em Parar. Durante o compartilhamento, o app envia sua localização ao nosso servidor quando você se move cerca de 25 metros e uma vez por minuto quando você está parado, inclusive quando o app está em segundo plano. A localização e o endereço, e o seu nome se você digitou um, são criptografados no seu celular com uma chave que existe apenas no link. O nome, fora isso, fica apenas no seu celular; não há conta. Os navegadores nunca enviam essa parte de um link, então o nosso servidor não consegue ler onde você está. O servidor guarda apenas a última localização criptografada e quando o compartilhamento termina, e apaga tudo no máximo dez minutos depois que o compartilhamento terminou. Qualquer pessoa com o link pode ver onde você está enquanto o compartilhamento durar, então envie-o apenas a quem você quer que veja isso.</p>
+  <p>Quem abre o link pode escolher ver a que distância você está. A distância é então calculada no navegador dela e não é enviada a lugar nenhum.</p>
+
+  <h2>Restaurantes, cafés e reserva de mesa</h2>
+  <p>Os restaurantes, cafés e shoppings já vêm com o app, então navegar por eles no mapa e nas listas não envia nada. Quando você toca em “Avaliações e fotos”, o app consulta os Mapas da Apple sobre aquele lugar, e os termos da Apple se aplicam. Uma página de reserva pertence ao provedor de reservas do restaurante, e a política de privacidade dele se aplica ali. O 360Maps não envia nenhuma informação sobre quais lugares você olha.</p>
+
+  <h2>O que fica salvo no seu celular</h2>
+  <p>O app lembra das suas escolhas, como quais camadas do mapa estão ativadas e quais avisos você dispensou, dos seus destinos recentes, dos lugares que você salvou como Casa e Trabalho e de onde o celular esteve por último (para que o mapa abra na área certa). Eles ficam apenas no seu celular, nunca são enviados a nós e desaparecem se você apagar o app. Você remove um destino mantendo-o pressionado na lista. Para os lugares em que você abriu “Avaliações e fotos”, o celular lembra o identificador dos Mapas da Apple para aquele lugar, para que a consulta aconteça só uma vez. Ele fica no seu celular e nunca é enviado a nós. O histórico dos lugares cujo cartão você abriu e das viagens que você seguiu, os lugares que você marcou como visitados e os dias que você planeja ficam salvos no celular da mesma forma; você limpa o histórico em Histórico → Limpar histórico.</p>
+
+  <h2>Compras</h2>
+  <p>O 360Maps Plus é comprado pela Apple. O app e o nosso servidor nunca recebem o seu cartão nem outros dados de pagamento, e não guardamos nenhum registro do que você comprou. O celular pergunta à Apple se você tem o Plus. Quantas das suas três viagens de carro grátis você já usou fica salvo apenas no celular, no seu chaveiro, para que o número continue lá se você reinstalar o app. Ele nunca é enviado a nós.</p>
+
+  <h2>Registros técnicos</h2>
+  <p>Nosso servidor guarda registros técnicos por pouco tempo para que possamos corrigir erros. Eles contêm quais partes do serviço foram solicitadas, não quem você é, e são apagados automaticamente.</p>
+
+  <h2>Este site</h2>
+  <p>O site não usa cookies nem serviço de análise. As fontes tipográficas ficam hospedadas no próprio site. O mapa ao vivo da página inicial busca as posições dos veículos no mesmo servidor do app. Uma cópia do site fica hospedada no GitHub Pages (tintronix-lab.github.io/360Maps), onde o GitHub guarda registros técnicos conforme os próprios termos.</p>
+
+  <h2>Dúvidas</h2>
+  <p>Se você tiver dúvidas sobre privacidade ou sobre como o app trata os seus dados, escreva para <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a>.</p>
+</main>
+<footer><a href="./">Voltar à página inicial</a> · <a href="terms.html">Termos de uso</a></footer>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zásady ochrany soukromí – 360Maps</title>
+<meta name="description" content="Jak 360Maps zachází s tvou polohou a dalšími daty.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../integritet.html" lang="sv">Svenska</option><option value="../en/privacy.html" lang="en">English</option><option value="../de/privacy.html" lang="de">Deutsch</option><option value="../nb/privacy.html" lang="nb">Norsk</option><option value="../da/privacy.html" lang="da">Dansk</option><option value="../fi/privacy.html" lang="fi">Suomi</option><option value="../nl/privacy.html" lang="nl">Nederlands</option><option value="../fr/privacy.html" lang="fr">Français</option><option value="../es/privacy.html" lang="es">Español</option><option value="../it/privacy.html" lang="it">Italiano</option><option value="../pl/privacy.html" lang="pl">Polski</option><option value="../cs/privacy.html" lang="cs" selected>Čeština</option><option value="../pt-br/privacy.html" lang="pt-BR">Português (Brasil)</option><option value="../ro/privacy.html" lang="ro">Română</option><option value="../hu/privacy.html" lang="hu">Magyar</option><option value="../tr/privacy.html" lang="tr">Türkçe</option><option value="../el/privacy.html" lang="el">Ελληνικά</option><option value="../uk/privacy.html" lang="uk">Українська</option><option value="../et/privacy.html" lang="et">Eesti</option><option value="../lv/privacy.html" lang="lv">Latviešu</option><option value="../lt/privacy.html" lang="lt">Lietuvių</option><option value="../is/privacy.html" lang="is">Íslenska</option><option value="../zh-hans/privacy.html" lang="zh-Hans">简体中文</option><option value="../zh-hant/privacy.html" lang="zh-Hant">繁體中文</option><option value="../ja/privacy.html" lang="ja">日本語</option><option value="../ko/privacy.html" lang="ko">한국어</option><option value="../th/privacy.html" lang="th">ไทย</option><option value="../fa/privacy.html" lang="fa">فارسی</option></select></label></header>
+<main>
+  <h1>Zásady ochrany soukromí</h1>
+  <p class="updated">Platí od 25. listopadu 2026.</p>
+
+  <p>360Maps ukazuje na mapě dopravu, veřejnou dopravu, počasí a poruchy a pomáhá ti najít pamětihodnosti, parkování a cestu po Švédsku. Aplikace nemá reklamy, účet ani sledování. Tady je, co se s tvými daty děje.</p>
+
+  <h2>Tvoje poloha</h2>
+  <p>Pokud aplikaci povolíš přístup k poloze, používá se, když je aplikace otevřená, aby ukázala, co je poblíž, a naplánovala odtud cesty. Při navigaci se používá i tehdy, když je aplikace na pozadí nebo je obrazovka zamčená, aby se ti četla další odbočka. To skončí, když dorazíš nebo ukončíš cestu. Totéž platí, když nahráváš cestu nebo živě sdílíš polohu, dokud to nezastavíš. Tvoje poloha není nikdy spojena s tebou a neukládáme ji. Jedinou výjimkou je živé sdílení, kdy se u nás ukládá v zašifrované podobě, dokud sdílení trvá (viz níže).</p>
+
+  <h2>Co se odesílá a kam</h2>
+  <ul>
+    <li><strong>Náš server</strong> dostává viditelnou oblast mapy, když se díváš na vozidla a další husté vrstvy, jakou zastávku otevřeš, a výchozí bod a cíl, když plánuješ cestu veřejnou dopravou. Používá to k odpovědi a neukládá to.</li>
+    <li><strong>Apple</strong> dostává výchozí bod a cíl, když plánuješ cestu autem, na kole nebo pěšky, a kreslí mapu. Platí k tomu podmínky Apple.</li>
+    <li><strong>Zdroje dat</strong>, například SL a SMHI, dostávají dotazy na oblast, na kterou se díváš, bez jakékoli informace o tom, kdo jsi.</li>
+    <li><strong>Náš server</strong> dostává při navigaci autem dotaz na rychlostní limity ve čtverci o straně jednoho kilometru, ve kterém jedeš. Server dostává jen informaci, o který čtverec jde, ne kde v něm jsi ani kdo jsi, a neukládá ji.</li>
+    <li><strong>Fotky pamětihodností</strong> pocházejí z Wikimedia Commons. Náš server stáhne fotku z Wikimedia pro aplikaci, takže Wikimedia tě nikdy nevidí. Server dostává informaci, která fotka se zobrazuje, používá ji k odpovědi a neukládá ji.</li>
+    <li><strong>Teplota vody a polární záře:</strong> aplikace stahuje denní předpověď teploty vody pro všechna místa ke koupání od Švédského úřadu pro správu moří a vod a předpověď polární záře pro celý svět od NOAA v USA. Ani jeden z nich nedostává informaci, kde jsi.</li>
+    <li><strong>Look Around:</strong> když otevřeš pamětihodnost, aplikace žádá Apple o snímky z úrovně ulice v místě pamětihodnosti, ne v tom tvém. Platí k tomu podmínky Apple.</li>
+  </ul>
+
+  <h2>Sdílení polohy</h2>
+  <p>„Poslat polohu“ vloží do zprávy tvou adresu a odkaz s navigací k tobě a ty si vybereš, komu půjde. Neprochází to námi.</p>
+  <p>„Sdílet živě“ ukazuje, kde jsi, každému, kdo má odkaz, dokud nedorazí, neuplyne zvolený čas nebo neklepneš na Zastavit. Během sdílení aplikace posílá tvou polohu na náš server, když se posuneš asi o 25 metrů, a jednou za minutu, když stojíš, i když je aplikace na pozadí. Poloha a adresa a tvé jméno, pokud je zadáno, jsou zašifrovány na tvém telefonu klíčem, který existuje jen v odkazu. Jméno je jinak uloženo jen na tvém telefonu; žádný účet neexistuje. Prohlížeče tuto část odkazu nikdy neodesílají, takže náš server nemůže přečíst, kde jsi. Server uchovává jen poslední zašifrovanou polohu a čas konce sdílení a všechno maže nejpozději deset minut po skončení sdílení. Každý, kdo má odkaz, vidí, kde jsi, dokud sdílení trvá, takže ho posílej jen lidem, kteří to mají vidět.</p>
+  <p>Ten, kdo odkaz otevře, si může zvolit zobrazení, jak daleko jsi. Vzdálenost se pak spočítá v jeho prohlížeči a nikam se neposílá.</p>
+
+  <h2>Restaurace, kavárny a rezervace stolu</h2>
+  <p>Restaurace, kavárny a nákupní centra jsou součástí aplikace, takže jejich procházení na mapě a v seznamech nic neodesílá. Když klepneš na „Hodnocení a fotky“, aplikace se na dané místo zeptá v Mapách Apple a platí podmínky Apple. Stránka rezervace patří poskytovateli rezervací restaurace a platí tam jeho zásady ochrany soukromí. 360Maps neodesílá žádné informace o tom, na která místa se díváš.</p>
+
+  <h2>Co se ukládá v tvém telefonu</h2>
+  <p>Aplikace si pamatuje tvoje volby, například které vrstvy mapy jsou zapnuté a která oznámení byla zavřena, tvé poslední cíle, místa uložená jako Domov a Práce a kde telefon byl naposledy (aby se mapa otevřela nad správnou oblastí). Zůstávají jen v tvém telefonu, nikdy se k nám neodesílají a zmizí, když aplikaci smažeš. Cíl odstraníš jeho podržením v seznamu. U míst, kde byly otevřeny „Hodnocení a fotky“, si telefon pamatuje identifikátor tohoto místa v Mapách Apple, aby se vyhledávání provedlo jen jednou. Zůstává v tvém telefonu a nikdy se k nám neodesílá. Historie míst, jejichž karta byla otevřena, a cest, které byly sledovány, místa označená jako navštívená a dny, které plánuješ, se uchovávají v telefonu stejným způsobem; historii vymažeš v Historie → Vymazat historii.</p>
+
+  <h2>Nákupy</h2>
+  <p>360Maps Plus se kupuje přes Apple. Aplikace ani náš server nikdy nedostanou tvou kartu ani jiné platební údaje a nevedeme záznam o tom, co bylo zakoupeno. Telefon se ptá Apple, zda máš Plus. Kolik z tvých tří bezplatných jízd autem je využito, se ukládá jen v telefonu, v jeho klíčence, takže číslo zůstane i po přeinstalaci aplikace. Nikdy se k nám neodesílá.</p>
+
+  <h2>Technické záznamy</h2>
+  <p>Náš server uchovává technické záznamy krátkou dobu, abychom mohli opravovat chyby. Obsahují, jaké části služby byly požadovány, ne kdo jsi, a automaticky se mažou.</p>
+
+  <h2>Tento web</h2>
+  <p>Web nepoužívá cookies ani analytickou službu. Písma jsou hostována přímo na webu. Živá mapa na úvodní stránce stahuje polohy vozidel ze stejného serveru jako aplikace. Kopie webu je hostována na GitHub Pages (tintronix-lab.github.io/360Maps), kde GitHub uchovává technické záznamy podle vlastních podmínek.</p>
+
+  <h2>Dotazy</h2>
+  <p>Pokud máš otázky o soukromí nebo o tom, jak aplikace zachází s tvými daty, napiš na <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a>.</p>
+</main>
+<footer><a href="./">Zpět na úvodní stránku</a> · <a href="terms.html">Podmínky použití</a></footer>
+</body>
+</html>

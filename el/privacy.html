@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Πολιτική απορρήτου – 360Maps</title>
+<meta name="description" content="Πώς το 360Maps χειρίζεται την τοποθεσία και άλλα δεδομένα σας.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../integritet.html" lang="sv">Svenska</option><option value="../en/privacy.html" lang="en">English</option><option value="../de/privacy.html" lang="de">Deutsch</option><option value="../nb/privacy.html" lang="nb">Norsk</option><option value="../da/privacy.html" lang="da">Dansk</option><option value="../fi/privacy.html" lang="fi">Suomi</option><option value="../nl/privacy.html" lang="nl">Nederlands</option><option value="../fr/privacy.html" lang="fr">Français</option><option value="../es/privacy.html" lang="es">Español</option><option value="../it/privacy.html" lang="it">Italiano</option><option value="../pl/privacy.html" lang="pl">Polski</option><option value="../cs/privacy.html" lang="cs">Čeština</option><option value="../pt-br/privacy.html" lang="pt-BR">Português (Brasil)</option><option value="../ro/privacy.html" lang="ro">Română</option><option value="../hu/privacy.html" lang="hu">Magyar</option><option value="../tr/privacy.html" lang="tr">Türkçe</option><option value="../el/privacy.html" lang="el" selected>Ελληνικά</option><option value="../uk/privacy.html" lang="uk">Українська</option><option value="../et/privacy.html" lang="et">Eesti</option><option value="../lv/privacy.html" lang="lv">Latviešu</option><option value="../lt/privacy.html" lang="lt">Lietuvių</option><option value="../is/privacy.html" lang="is">Íslenska</option><option value="../zh-hans/privacy.html" lang="zh-Hans">简体中文</option><option value="../zh-hant/privacy.html" lang="zh-Hant">繁體中文</option><option value="../ja/privacy.html" lang="ja">日本語</option><option value="../ko/privacy.html" lang="ko">한국어</option><option value="../th/privacy.html" lang="th">ไทย</option><option value="../fa/privacy.html" lang="fa">فارسی</option></select></label></header>
+<main>
+  <h1>Πολιτική απορρήτου</h1>
+  <p class="updated">Σε ισχύ από 25 Νοεμβρίου 2026.</p>
+
+  <p>Το 360Maps δείχνει κίνηση, δημόσιες συγκοινωνίες, καιρό και διακοπές σε έναν χάρτη και σας βοηθά να βρίσκετε αξιοθέατα, στάθμευση και τον δρόμο σας στη Σουηδία. Η εφαρμογή δεν έχει διαφημίσεις, λογαριασμό ή παρακολούθηση. Να τι συμβαίνει με τα δεδομένα σας.</p>
+
+  <h2>Η τοποθεσία σας</h2>
+  <p>Αν δώσετε στην εφαρμογή πρόσβαση στην τοποθεσία σας, χρησιμοποιείται όσο η εφαρμογή είναι ανοιχτή, για να δείχνει τι υπάρχει κοντά σας και να σχεδιάζει διαδρομές από εκεί. Κατά την καθοδήγηση χρησιμοποιείται και όταν η εφαρμογή είναι στο παρασκήνιο ή η οθόνη είναι κλειδωμένη, ώστε να ακούτε την επόμενη στροφή. Αυτό σταματά όταν φτάσετε ή τερματίσετε τη διαδρομή. Το ίδιο ισχύει όσο καταγράφετε μια διαδρομή ή κοινοποιείτε ζωντανά την τοποθεσία σας, μέχρι να σταματήσετε. Η τοποθεσία σας δεν συνδέεται ποτέ με εσάς και δεν την αποθηκεύουμε. Η μοναδική εξαίρεση είναι η ζωντανή κοινοποίηση, όπου τηρείται από εμάς σε κρυπτογραφημένη μορφή όσο διαρκεί η κοινοποίηση (βλ. παρακάτω).</p>
+
+  <h2>Τι αποστέλλεται και πού</h2>
+  <ul>
+    <li><strong>Ο διακομιστής μας</strong> λαμβάνει την ορατή περιοχή του χάρτη όταν βλέπετε οχήματα και άλλα πυκνά επίπεδα, ποια στάση ανοίγετε, και την αφετηρία και τον προορισμό όταν σχεδιάζετε διαδρομή με δημόσιες συγκοινωνίες. Τα χρησιμοποιεί για να απαντήσει και δεν τα αποθηκεύει.</li>
+    <li><strong>Η Apple</strong> λαμβάνει την αφετηρία και τον προορισμό όταν σχεδιάζετε διαδρομή με αυτοκίνητο, ποδήλατο ή με τα πόδια, και σχεδιάζει τον χάρτη. Σε αυτό ισχύουν οι όροι της Apple.</li>
+    <li><strong>Οι πηγές δεδομένων</strong>, για παράδειγμα η SL και η SMHI, λαμβάνουν αιτήματα για την περιοχή που κοιτάτε, χωρίς πληροφορίες για το ποιοι είστε.</li>
+    <li><strong>Ο διακομιστής μας</strong> ερωτάται, κατά την καθοδήγηση με αυτοκίνητο, για τα όρια ταχύτητας στο τετράγωνο του ενός χιλιομέτρου όπου οδηγείτε. Ο διακομιστής λαμβάνει μόνο ποιο τετράγωνο είναι, όχι πού μέσα σε αυτό βρίσκεστε ούτε ποιοι είστε, και δεν το αποθηκεύει.</li>
+    <li><strong>Οι φωτογραφίες των αξιοθέατων</strong> προέρχονται από το Wikimedia Commons. Ο διακομιστής μας ανακτά τη φωτογραφία από το Wikimedia για την εφαρμογή, οπότε το Wikimedia δεν σας βλέπει ποτέ. Ο διακομιστής λαμβάνει ποια φωτογραφία εμφανίζεται, το χρησιμοποιεί για να απαντήσει και δεν το αποθηκεύει.</li>
+    <li><strong>Θερμοκρασία νερού και βόρειο σέλας:</strong> η εφαρμογή ανακτά την πρόγνωση θερμοκρασίας νερού της ημέρας για όλα τα μέρη κολύμβησης από τη Σουηδική Υπηρεσία Θαλάσσιων και Υδάτινων Πόρων και την πρόγνωση βόρειου σέλαος για ολόκληρο τον κόσμο από την NOAA στις ΗΠΑ. Καμία από τις δύο δεν λαμβάνει πού βρίσκεστε.</li>
+    <li><strong>Look Around:</strong> όταν ανοίγετε ένα αξιοθέατο, η εφαρμογή ζητά από την Apple εικόνες σε επίπεδο δρόμου στη θέση του αξιοθέατου, όχι στη δική σας. Σε αυτό ισχύουν οι όροι της Apple.</li>
+  </ul>
+
+  <h2>Κοινοποίηση της τοποθεσίας σας</h2>
+  <p>Το «Αποστολή θέσης» βάζει τη διεύθυνσή σας και έναν σύνδεσμο με οδηγίες προς εσάς σε ένα μήνυμα, και εσείς επιλέγετε σε ποιον θα πάει. Δεν περνά από εμάς.</p>
+  <p>Το «Ζωντανή κοινοποίηση» δείχνει πού βρίσκεστε σε όποιον έχει τον σύνδεσμο, μέχρι να φτάσει, να λήξει ο χρόνος που επιλέξατε ή να πατήσετε Διακοπή. Κατά την κοινοποίηση, η εφαρμογή στέλνει την τοποθεσία σας στον διακομιστή μας όταν έχετε μετακινηθεί περίπου 25 μέτρα, και μία φορά το λεπτό όταν μένετε ακίνητοι, ακόμη και όταν η εφαρμογή είναι στο παρασκήνιο. Η τοποθεσία και η διεύθυνση, και το όνομά σας αν έχετε πληκτρολογήσει κάποιο, κρυπτογραφούνται στο τηλέφωνό σας με ένα κλειδί που υπάρχει μόνο στον σύνδεσμο. Κατά τα άλλα, το όνομα φυλάσσεται μόνο στο τηλέφωνό σας· δεν υπάρχει λογαριασμός. Τα προγράμματα περιήγησης δεν στέλνουν ποτέ αυτό το τμήμα ενός συνδέσμου, οπότε ο διακομιστής μας δεν μπορεί να διαβάσει πού βρίσκεστε. Ο διακομιστής κρατά μόνο την πιο πρόσφατη κρυπτογραφημένη τοποθεσία και πότε τελειώνει η κοινοποίηση, και διαγράφει τα πάντα το αργότερο δέκα λεπτά μετά το τέλος της κοινοποίησης. Όποιος έχει τον σύνδεσμο μπορεί να δει πού βρίσκεστε όσο διαρκεί η κοινοποίηση, γι' αυτό στείλτε τον μόνο σε άτομα που θέλετε να το δουν.</p>
+  <p>Το άτομο που ανοίγει τον σύνδεσμο μπορεί να επιλέξει να δει πόσο μακριά βρίσκεστε. Η απόσταση τότε υπολογίζεται στο πρόγραμμα περιήγησής του και δεν αποστέλλεται πουθενά.</p>
+
+  <h2>Εστιατόρια, καφέ και κράτηση τραπεζιού</h2>
+  <p>Τα εστιατόρια, τα καφέ και τα εμπορικά κέντρα περιλαμβάνονται στην εφαρμογή, οπότε η περιήγησή τους στον χάρτη και στις λίστες δεν στέλνει τίποτα. Όταν πατάτε «Βαθμολογίες και φωτογραφίες», η εφαρμογή ρωτά το Apple Maps για αυτό το μέρος και ισχύουν οι όροι της Apple. Μια σελίδα κράτησης ανήκει στον πάροχο κρατήσεων του εστιατορίου και εκεί ισχύει η δική του πολιτική απορρήτου. Το 360Maps δεν στέλνει πληροφορίες για το ποια μέρη βλέπετε.</p>
+
+  <h2>Τι αποθηκεύεται στο τηλέφωνό σας</h2>
+  <p>Η εφαρμογή θυμάται τις επιλογές σας, όπως ποια επίπεδα χάρτη είναι ενεργά και ποιες ειδοποιήσεις έχετε απορρίψει, τους πρόσφατους προορισμούς σας, τα μέρη που έχετε αποθηκεύσει ως Σπίτι και Εργασία, και πού ήταν τελευταία φορά το τηλέφωνο (ώστε ο χάρτης να ανοίγει στη σωστή περιοχή). Μένουν μόνο στο τηλέφωνό σας, δεν στέλνονται ποτέ σε εμάς και εξαφανίζονται αν διαγράψετε την εφαρμογή. Αφαιρείτε έναν προορισμό πατώντας τον παρατεταμένα στη λίστα. Για μέρη όπου έχετε ανοίξει «Βαθμολογίες και φωτογραφίες», το τηλέφωνο θυμάται το αναγνωριστικό του Apple Maps για αυτό το μέρος, ώστε η αναζήτηση να γίνεται μόνο μία φορά. Μένει στο τηλέφωνό σας και δεν στέλνεται ποτέ σε εμάς. Το ιστορικό των μερών των οποίων ανοίξατε την κάρτα και των διαδρομών που ακολουθήσατε, τα μέρη που σημειώσατε ως επισκεμμένα και οι ημέρες που σχεδιάζετε φυλάσσονται στο τηλέφωνο με τον ίδιο τρόπο· εκκαθαρίζετε το ιστορικό από το Ιστορικό → Εκκαθάριση ιστορικού.</p>
+
+  <h2>Αγορές</h2>
+  <p>Το 360Maps Plus αγοράζεται μέσω της Apple. Η εφαρμογή και ο διακομιστής μας δεν λαμβάνουν ποτέ την κάρτα σας ή άλλα στοιχεία πληρωμής, και δεν τηρούμε αρχείο με ό,τι έχετε αγοράσει. Το τηλέφωνο ρωτά την Apple αν έχετε το Plus. Πόσες από τις τρεις δωρεάν διαδρομές σας με αυτοκίνητο έχετε χρησιμοποιήσει αποθηκεύεται μόνο στο τηλέφωνο, στην αλυσίδα κλειδιών του, ώστε ο αριθμός να υπάρχει ακόμη αν εγκαταστήσετε ξανά την εφαρμογή. Δεν στέλνεται ποτέ σε εμάς.</p>
+
+  <h2>Τεχνικά αρχεία καταγραφής</h2>
+  <p>Ο διακομιστής μας τηρεί τεχνικά αρχεία καταγραφής για σύντομο χρονικό διάστημα ώστε να διορθώνουμε σφάλματα. Περιέχουν ποια τμήματα της υπηρεσίας ζητήθηκαν, όχι ποιοι είστε, και διαγράφονται αυτόματα.</p>
+
+  <h2>Αυτός ο ιστότοπος</h2>
+  <p>Ο ιστότοπος δεν χρησιμοποιεί cookies ούτε υπηρεσία ανάλυσης. Οι γραμματοσειρές φιλοξενούνται στον ίδιο τον ιστότοπο. Ο ζωντανός χάρτης στην πρώτη σελίδα ανακτά τις θέσεις των οχημάτων από τον ίδιο διακομιστή με την εφαρμογή. Ένα αντίγραφο του ιστότοπου φιλοξενείται στο GitHub Pages (tintronix-lab.github.io/360Maps), όπου το GitHub τηρεί τεχνικά αρχεία καταγραφής σύμφωνα με τους δικούς του όρους.</p>
+
+  <h2>Ερωτήσεις</h2>
+  <p>Αν έχετε ερωτήσεις για το απόρρητο ή για το πώς η εφαρμογή χειρίζεται τα δεδομένα σας, στείλτε email στο <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a>.</p>
+</main>
+<footer><a href="./">Πίσω στην αρχική σελίδα</a> · <a href="terms.html">Όροι χρήσης</a></footer>
+</body>
+</html>

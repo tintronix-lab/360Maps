@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>支援 – 360Maps</title>
+<meta name="description" content="360Maps 的說明與聯絡方式。">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .contact { font-size: 1.35rem; margin: 0.5rem 0 0; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../support.html" lang="sv">Svenska</option><option value="../en/support.html" lang="en">English</option><option value="../de/support.html" lang="de">Deutsch</option><option value="../nb/support.html" lang="nb">Norsk</option><option value="../da/support.html" lang="da">Dansk</option><option value="../fi/support.html" lang="fi">Suomi</option><option value="../nl/support.html" lang="nl">Nederlands</option><option value="../fr/support.html" lang="fr">Français</option><option value="../es/support.html" lang="es">Español</option><option value="../it/support.html" lang="it">Italiano</option><option value="../pl/support.html" lang="pl">Polski</option><option value="../cs/support.html" lang="cs">Čeština</option><option value="../pt-br/support.html" lang="pt-BR">Português (Brasil)</option><option value="../ro/support.html" lang="ro">Română</option><option value="../hu/support.html" lang="hu">Magyar</option><option value="../tr/support.html" lang="tr">Türkçe</option><option value="../el/support.html" lang="el">Ελληνικά</option><option value="../uk/support.html" lang="uk">Українська</option><option value="../et/support.html" lang="et">Eesti</option><option value="../lv/support.html" lang="lv">Latviešu</option><option value="../lt/support.html" lang="lt">Lietuvių</option><option value="../is/support.html" lang="is">Íslenska</option><option value="../zh-hans/support.html" lang="zh-Hans">简体中文</option><option value="../zh-hant/support.html" lang="zh-Hant" selected>繁體中文</option><option value="../ja/support.html" lang="ja">日本語</option><option value="../ko/support.html" lang="ko">한국어</option><option value="../th/support.html" lang="th">ไทย</option><option value="../fa/support.html" lang="fa">فارسی</option></select></label></header>
+<main>
+  <h1>支援</h1>
+  <p class="contact">寄電子郵件至 <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a></p>
+  <p>請告訴我們您的 iPhone 機型與 iOS 版本、問題出現在地圖上的哪個位置，以及大約發生在什麼時候。我們會盡快回覆。</p>
+
+  <h2>我所在的位置地圖是空的</h2>
+  <p>360Maps 顯示瑞典的資料。只有在交通業者公開分享其車輛位置的地方，才會出現移動的車輛，目前涵蓋 15 個郡。</p>
+
+  <h2>某個圖層缺少或沒有顯示內容</h2>
+  <p>點一下右上角的圖層按鈕，開啟您想查看的內容。如果某個資料來源此時沒有回應，App 會稍後再試。</p>
+
+  <h2>景點</h2>
+  <p>「景點」圖層顯示瑞典 300 多個必訪景點。照片來自 Wikimedia Commons，介紹來自 Wikipedia，出處皆顯示在卡片上。點一下某個景點可閱讀更多內容，或規劃前往那裡的行程。</p>
+
+  <h2>語音導航</h2>
+  <p>開車、騎自行車或步行時，下一個轉彎會以語音播報，即使鎖定螢幕也一樣。頂部橫幅中的喇叭按鈕可開關語音。</p>
+
+  <h2>目的地的停車場</h2>
+  <p>車位數量與價格來自 OpenStreetMap，空車位來自公開分享這些資料的城市。如果缺少某些資訊，通常是資料來源本身也沒有。</p>
+
+  <h2>住家、公司與最近的目的地</h2>
+  <p>在清單中長按某個目的地，可將其儲存為住家或公司，或將其移除。您的目的地只儲存在您的手機上。</p>
+
+  <h2>語言</h2>
+  <p>App 支援 28 種語言，從瑞典文與英文到日文、泰文與波斯文，並跟隨您 iPhone 所設定的語言。您也可以只為 360Maps 更改語言，路徑為「設定」→「360Maps」→「語言」。</p>
+
+  <h2>定位服務</h2>
+  <p>App 需要您的位置來顯示您附近的內容並從該處規劃行程。您可以在「設定」→「隱私權與安全性」→「定位服務」→「360Maps」中更改。更多資訊請見<a href="privacy.html">隱私權政策</a>。</p>
+</main>
+<footer><a href="./">返回首頁</a> · <a href="privacy.html">隱私權政策</a></footer>
+</body>
+</html>

@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>360Maps – リアルタイムのスウェーデン</title>
+<meta name="description" content="360Mapsは、スウェーデン旅行のための地図です。必見の名所、リアルタイムのバスと電車、交通状況、天気、駐車場を、28言語でiPhoneに。オープンデータを活用しています。">
+<link rel="icon" href="../img/favicon.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<meta property="og:title" content="360Maps – リアルタイムのスウェーデン">
+<meta property="og:description" content="名所、バス、電車、交通状況、雨の情報を、1つの地図でリアルタイムに。">
+<meta property="og:image" content="/img/ikon-512.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root {
+    --paper: #F3F6F9;
+    --paper-raised: #FFFFFF;
+    --ink: #0E2240;
+    --ink-soft: #46586F;
+    --rule: #D5DEE8;
+    --brand: #1F4FFF;
+    --teal: #10C7B4;
+    --bus: #CC1A24;
+    --metro: #0061B3;
+    --train: #7840A1;
+    --tram: #CC5C00;
+    --boat: #00808F;
+    --queue: #F2B705;
+    --queue-heavy: #F28C28;
+    --road: rgba(14, 34, 64, 0.16);
+    --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+    --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0F1B2D;
+      --paper-raised: #16263D;
+      --ink: #EAF0F7;
+      --ink-soft: #A9B8CB;
+      --rule: #2A3C56;
+      --road: rgba(234, 240, 247, 0.16);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  @media (prefers-color-scheme: dark) { a { color: #8FA9FF; } }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  img { max-width: 100%; display: block; }
+
+  .wrap { width: min(72rem, 100% - 2rem); margin-inline: auto; }
+
+  /* Header */
+  .masthead {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.9rem 0;
+  }
+  .brand { display: flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; letter-spacing: 0.01em; }
+  .masthead nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .masthead nav a { color: var(--ink-soft); text-decoration: none; font-size: 1rem; }
+  .masthead nav a:hover { color: var(--ink); text-decoration: underline; }
+
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  /* Hero: the live map is the picture */
+  .hero { position: relative; height: min(86vh, 48rem); min-height: 34rem; overflow: hidden; border-block: 1px solid var(--rule); }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero__text {
+    position: absolute; left: max(1rem, calc((100% - 72rem) / 2)); bottom: 1.5rem;
+    width: min(34rem, calc(100% - 2rem));
+    background: color-mix(in srgb, var(--paper) 94%, transparent);
+    padding: 1.5rem 1.75rem 1.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--rule);
+  }
+  h1 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(2.75rem, 6.5vw, 4.75rem); line-height: 0.95; letter-spacing: -0.005em;
+    margin: 0 0 0.75rem;
+  }
+  .hero__text p { margin: 0 0 1.1rem; color: var(--ink-soft); max-width: 30rem; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.25rem; }
+  .button {
+    display: inline-block; font-family: var(--display); font-weight: 600; font-size: 1.25rem; letter-spacing: 0.01em;
+    background: var(--brand); color: #fff; text-decoration: none;
+    padding: 0.55rem 1.2rem 0.6rem; border-radius: 999px;
+  }
+  .button:hover { background: #1640D9; }
+  .soon { font-size: 1rem; color: var(--ink-soft); }
+  .live {
+    position: absolute; right: max(1rem, calc((100% - 72rem) / 2)); top: 1rem;
+    max-width: min(22rem, calc(100% - 2rem));
+    font-size: 0.95rem; line-height: 1.4; color: var(--ink-soft);
+    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    padding: 0.45rem 0.75rem; border-radius: 0.4rem; border: 1px solid var(--rule);
+  }
+  .live strong { color: var(--ink); font-weight: 700; }
+  .live__dot { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #E0352B; margin-right: 0.35rem; vertical-align: 0.05em; }
+
+  /* Sections */
+  section { padding: 4.5rem 0 1rem; }
+  h2 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(2.1rem, 4.2vw, 3.1rem); line-height: 1; margin: 0 0 0.6rem;
+  }
+  .lede { color: var(--ink-soft); max-width: 38rem; margin: 0 0 2.25rem; }
+
+  /* Map legend: the key shows the same symbol as the map */
+  .legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 0 3rem; margin: 0; padding: 0; list-style: none; }
+  .legend li { display: grid; grid-template-columns: 4.25rem 1fr; gap: 1rem; padding: 1.1rem 0; border-top: 1px solid var(--rule); }
+  .legend h3 { font-family: var(--display); font-weight: 600; font-size: 1.55rem; line-height: 1.1; margin: 0.1rem 0 0.3rem; }
+  .legend p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; }
+  .key { width: 4.25rem; height: 3rem; display: flex; align-items: center; gap: 0.2rem; }
+  .pin {
+    display: inline-grid; place-items: center; width: 1.45rem; height: 1.45rem; border-radius: 50%;
+    color: #fff; font-family: var(--display); font-weight: 700; font-size: 0.8rem; border: 2px solid var(--paper-raised);
+  }
+  .key svg { width: 4.25rem; height: 3rem; }
+
+  /* Screens */
+  .screens { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.25rem 0 1.25rem; }
+  .screens figure { flex: 0 0 min(15.5rem, 70vw); margin: 0; scroll-snap-align: start; }
+  .screens img { width: 100%; aspect-ratio: 1206 / 2622; object-fit: cover; border-radius: 1.6rem; border: 1px solid var(--rule); background: var(--paper-raised); }
+  .screens figcaption { margin-top: 0.7rem; font-size: 1rem; color: var(--ink-soft); line-height: 1.4; }
+
+  /* Planning */
+  .modes { display: flex; flex-wrap: wrap; gap: 0.25rem 1.75rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
+  .modes li { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; }
+  .modes li:nth-child(1) { color: var(--queue-heavy); }
+  .modes li:nth-child(2) { color: var(--bus); }
+  .modes li:nth-child(3) { color: var(--boat); }
+  .modes li:nth-child(4) { color: var(--metro); }
+  .planning p { max-width: 40rem; margin: 0 0 1rem; }
+  .planning ul:not(.modes) { max-width: 40rem; margin: 0 0 1rem; padding-left: 1.2rem; }
+  .planning ul:not(.modes) li { margin-bottom: .45rem; }
+  .feature { display: grid; gap: 1.5rem 2.5rem; align-items: center; margin: 0 0 3rem; }
+  .feature img { width: min(16rem, 72vw); height: auto; justify-self: center; border-radius: 1.8rem; border: 1px solid var(--rule); background: var(--paper-raised); box-shadow: 0 1.2rem 2.5rem rgba(14, 34, 64, 0.18); }
+  .feature h3 { font-family: var(--display); font-size: 1.7rem; line-height: 1.15; margin: 0 0 0.6rem; }
+  .feature p { max-width: 34rem; margin: 0 0 0.8rem; }
+  @media (min-width: 46rem) {
+    .feature { grid-template-columns: 16rem 1fr; }
+    .feature.flip { grid-template-columns: 1fr 16rem; }
+    .feature.flip img { order: 2; }
+  }
+
+  /* Sources */
+  table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+  th, td { text-align: left; vertical-align: top; padding: 0.7rem 1rem 0.7rem 0; border-top: 1px solid var(--rule); }
+  th { font-weight: 700; }
+  td:last-child { color: var(--ink-soft); white-space: nowrap; }
+  .table-wrap { overflow-x: auto; }
+  .promise { margin-top: 1.75rem; max-width: 40rem; }
+
+  footer { margin-top: 4.5rem; padding: 2rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+
+  @media (max-width: 40rem) {
+    .hero { height: auto; min-height: 0; }
+    .hero canvas { position: relative; height: 62vh; }
+    .hero__text { position: relative; left: 0; bottom: 0; width: 100%; border: 0; border-radius: 0; padding: 1.5rem 1rem 1.75rem; background: var(--paper); }
+    .live { top: 0.75rem; right: 0.75rem; }
+    .masthead nav { display: none; }
+    /* Sources: one block per source instead of three narrow columns */
+    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    tr { display: block; padding: 0.8rem 0; border-top: 1px solid var(--rule); }
+    td { display: block; border: 0; padding: 0; white-space: normal; }
+    td:first-child { font-weight: 700; }
+    td:last-child { white-space: normal; font-size: 0.95rem; }
+  }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+
+<header class="wrap masthead">
+  <a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a>
+  <nav aria-label="Page">
+    <a href="#map">地図</a>
+    <a href="#plan">ルート</a>
+    <a href="#sources">情報源</a>
+    <a href="#support">サポート</a>
+    <a href="privacy.html">プライバシー</a>
+  </nav>
+  <label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../" lang="sv">Svenska</option><option value="../en/" lang="en">English</option><option value="../de/" lang="de">Deutsch</option><option value="../nb/" lang="nb">Norsk</option><option value="../da/" lang="da">Dansk</option><option value="../fi/" lang="fi">Suomi</option><option value="../nl/" lang="nl">Nederlands</option><option value="../fr/" lang="fr">Français</option><option value="../es/" lang="es">Español</option><option value="../it/" lang="it">Italiano</option><option value="../pl/" lang="pl">Polski</option><option value="../cs/" lang="cs">Čeština</option><option value="../pt-br/" lang="pt-BR">Português (Brasil)</option><option value="../ro/" lang="ro">Română</option><option value="../hu/" lang="hu">Magyar</option><option value="../tr/" lang="tr">Türkçe</option><option value="../el/" lang="el">Ελληνικά</option><option value="../uk/" lang="uk">Українська</option><option value="../et/" lang="et">Eesti</option><option value="../lv/" lang="lv">Latviešu</option><option value="../lt/" lang="lt">Lietuvių</option><option value="../is/" lang="is">Íslenska</option><option value="../zh-hans/" lang="zh-Hans">简体中文</option><option value="../zh-hant/" lang="zh-Hant">繁體中文</option><option value="../ja/" lang="ja" selected>日本語</option><option value="../ko/" lang="ko">한국어</option><option value="../th/" lang="th">ไทย</option><option value="../fa/" lang="fa">فارسی</option></select></label>
+</header>
+
+<main>
+  <div class="hero">
+    <canvas id="live-map" role="img" aria-label="ストックホルムのライブマップ。点はそれぞれ、今走っているバス、地下鉄、船を表し、主要道路の渋滞は黄色で示されます。"></canvas>
+    <p class="live" id="live-status" aria-live="polite"><span class="live__dot" aria-hidden="true"></span>ストックホルムの車両を取得しています…</p>
+    <div class="hero__text">
+      <h1>1枚の地図で見る、リアルタイムのスウェーデン。</h1>
+      <p>360Mapsは、スウェーデンを訪れる人のためのアプリです。必見の名所を探し、バスや電車、船に乗り、交通状況、天気、駐車場を確認し、音声案内も受けられます。iPhoneで28言語に対応しています。上の地図は今のストックホルムで、アプリと同じデータで描かれています。</p>
+      <div class="actions">
+        <a class="button" href="#map">アプリで見られるものを見る</a>
+        <a class="button" href="https://apps.apple.com/app/360maps/id6837692108">App Storeで入手</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="map" class="wrap">
+    <h2>地図で見られるもの</h2>
+    <p class="lede">必要なものをオンにしてください。すべて官公庁や交通事業者のオープンデータで、見ている間も更新されます。</p>
+    <ul class="legend">
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M34 6 L39.5 21 H55 L42.5 30.5 L47 45 L34 36 L21 45 L25.5 30.5 L13 21 H28.5 Z" fill="#E8A317"/></svg></div>
+        <div><h3>名所</h3><p>スウェーデンの必見スポット340か所以上を、写真、営業時間、Look Around、あなたの言語の短い説明つきで紹介します。写真はWikimedia Commons、説明文はWikipediaからです。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#F5C000"/><path d="M24 14 L27 21 H34 L28.5 25.5 L30.5 33 L24 28.5 L17.5 33 L19.5 25.5 L14 21 H21 Z" fill="#1C1C1E"/></svg></div>
+        <div><h3>厳選スポット</h3><p>旅行者のために選んだ場所です。たとえば、ストックホルムに住むイタリア人がすすめるイタリア式のエスプレッソバーなど。ズームに関係なく常に表示されます。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="16" cy="24" r="10" fill="#B20D5C"/><circle cx="34" cy="24" r="10" fill="#A94A1F"/><circle cx="52" cy="24" r="10" fill="#5B3A99"/></svg></div>
+        <div><h3>レストラン、カフェ、バー</h3><p>それぞれ専用の色で表示され、営業時間もわかります。まとまりをタップすると一覧が開きます。スウェーデン全土で約2万か所です。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#B0202A"/><path d="M24 15 V33 M15 24 H33" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg></div>
+        <div><h3>薬局と救急外来</h3><p>スウェーデン全土の薬局と病院の救急外来を、営業時間つきで表示します。緊急のときは112番に電話してください。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#0B6A9E"/><text x="24" y="29" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="15" fill="#fff">18°</text></svg></div>
+        <div><h3>海水浴場、自然、オーロラ</h3><p>今日の水温つきのビーチ、国立公園、自然保護区、アイスリンク、そしてオーロラが見える可能性。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><span class="pin" style="background:var(--bus)">4</span><span class="pin" style="background:var(--metro)">14</span><span class="pin" style="background:var(--train)">41</span></div>
+        <div><h3>バス、地下鉄、電車、船</h3><p>15の県で、車両が路線番号つきで地図上を動きます。赤はバス、青は地下鉄、紫は電車、ターコイズは船です。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M4 34 C20 30 30 18 64 14" fill="none" stroke="var(--queue)" stroke-width="7" stroke-linecap="round"/><circle cx="40" cy="20" r="11" fill="var(--queue)" stroke="var(--paper-raised)" stroke-width="2.5"/><text x="40" y="24.5" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="12" fill="#fff">+2</text></svg></div>
+        <div><h3>渋滞と所要時間</h3><p>ストックホルムの主要道路とトンネルで測定した所要時間を、1分ごとに表示します。渋滞は、通常より+2分のように表示されます。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M4 36 L28 26 L64 30" fill="none" stroke="var(--queue-heavy)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(26 14)" stroke="var(--metro)" stroke-width="2.2" stroke-linecap="round"><path d="M0 -9 V9 M-8 -4.5 L8 4.5 M-8 4.5 L8 -4.5"/></g></svg></div>
+        <div><h3>道路の路面状況</h3><p>道路の雪、シャーベット状の雪、凍結を線で表示し、路面の状態と除雪された時刻もわかります。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><g opacity="0.85"><rect x="8" y="10" width="10" height="10" fill="#3D7BE0"/><rect x="18" y="10" width="10" height="10" fill="#2FB24C"/><rect x="28" y="10" width="10" height="10" fill="#2FB24C"/><rect x="18" y="20" width="10" height="10" fill="#2FB24C"/><rect x="28" y="20" width="10" height="10" fill="#E8D53A"/><rect x="38" y="20" width="10" height="10" fill="#2FB24C"/><rect x="28" y="30" width="10" height="10" fill="#3D7BE0"/><rect x="38" y="30" width="10" height="10" fill="#3D7BE0"/></g></svg></div>
+        <div><h3>雨雲レーダー</h3><p>SMHIの気象レーダーによる現在の降水を、5分ごとに表示します。青は弱い雨、黄色と赤は強い雨です。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="14" fill="#F28C28"/><path d="M24 16 V27" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><circle cx="24" cy="32" r="2" fill="#fff"/></svg></div>
+        <div><h3>通行障害と道路工事</h3><p>スウェーデン交通局による事故、通行止め、道路工事の情報を、場所と時間つきで表示します。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><rect x="10" y="13" width="30" height="22" rx="5" fill="#5856D6"/><circle cx="25" cy="24" r="6.5" fill="none" stroke="#fff" stroke-width="2.6"/><rect x="15" y="10" width="9" height="5" rx="1.5" fill="#5856D6"/></svg></div>
+        <div><h3>交通カメラ</h3><p>カメラをタップすると道路の様子が見られます。画像は見ている間に自動で更新されます。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M2 36 Q12 31 22 36 T42 36 T62 36" fill="none" stroke="var(--boat)" stroke-width="2.4"/><path d="M14 30 L46 30 L41 37 L19 37 Z" fill="var(--boat)"/><rect x="22" y="21" width="16" height="9" rx="2" fill="var(--boat)"/></svg></div>
+        <div><h3>フェリーと船舶</h3><p>スウェーデン交通局の道路フェリーの次の出発時刻と、海上を航行する船舶を表示します。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><rect x="12" y="8" width="32" height="32" rx="7" fill="#1F6FE5"/><text x="28" y="31.5" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="24" fill="#fff">P</text></svg></div>
+        <div><h3>目的地の駐車場</h3><p>車でのルートを計画すると、目的地の近くの駐車場が、台数と料金つきで表示されます。市が公開している地域では、空きも表示されます。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><rect x="18" y="5" width="15" height="38" rx="5" fill="#3A4656"/><circle cx="25.5" cy="14" r="4.2" fill="#5E6B7B"/><circle cx="25.5" cy="24" r="4.2" fill="#5E6B7B"/><circle cx="25.5" cy="34" r="4.2" fill="#5E6B7B"/></svg></div>
+        <div><h3>道路上の信号機</h3><p>運転中、次の信号機がどこにあるかがわかります。色とカウントダウンは、各都市が信号データを公開した時点で対応します。</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M24 8 L38 14 V24 C38 32 31.5 37 24 40 C16.5 37 10 32 10 24 V14 Z" fill="#1F6FE5"/></svg></div>
+        <div><h3>警察、Krisinformation、SMHI</h3><p>現在地周辺の事件、重要な公的お知らせ、気象警報を表示します。</p></div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="wrap" aria-labelledby="screens">
+    <h2 id="screens">アプリの画面</h2>
+    <p class="lede">実際のデータで撮影したアプリの画面です。スクリーンショットはスウェーデン語版です。</p>
+    <div class="screens" tabindex="0" aria-label="アプリのスクリーンショット。横にスクロールできます">
+      <figure><img src="../img/kollektivtrafik.jpg" alt="ストックホルム中心部の地図。バスは赤、地下鉄は青、近郊電車は紫、船はターコイズで、すべて路線番号つきで表示されています。" loading="lazy" width="506" height="1100"><figcaption>ストックホルムの公共交通機関をリアルタイムで</figcaption></figure>
+      <figure><img src="../img/restider.jpg" alt="Södra länkenとKlaraトンネルの渋滞が、黄色とオレンジで+1分、+2分と表示されています。" loading="lazy" width="506" height="1100"><figcaption>Södra länkenとKlaraトンネルの渋滞</figcaption></figure>
+      <figure><img src="../img/regnradar-vaglag.jpg" alt="Mälaren地方の雨雲レーダー。路面状況の悪い道路が黄色の線で示されています。" loading="lazy" width="506" height="1100"><figcaption>Mälaren地方の雨雲レーダーと道路の路面状況</figcaption></figure>
+      <figure><img src="../img/farjor-fartyg.jpg" alt="ストックホルム周辺のフェリー航路、E4沿いの休憩所、多島海の船舶。" loading="lazy" width="506" height="1100"><figcaption>道路フェリー、休憩所、船舶</figcaption></figure>
+      <figure><img src="../img/trafikkamera.jpg" alt="Centralbronの交通カメラの詳細画面。カメラの画像が表示されています。" loading="lazy" width="506" height="1100"><figcaption>Centralbronの交通カメラ</figcaption></figure>
+      <figure><img src="../img/korlage.jpg" alt="運転モード。650m先の道路工事の警告と、40m先の信号機、ルート上の残り13が表示されています。" loading="lazy" width="506" height="1100"><figcaption>運転モードでは、この先にあるものを知らせます</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="plan" class="wrap planning">
+    <h2>A地点からB地点へ</h2>
+    <ul class="modes" aria-label="移動手段">
+      <li>運転</li><li>公共交通機関</li><li>自転車</li><li>徒歩</li>
+    </ul>
+    <p>移動手段を選んでください。360Mapsは今の交通状況でルートを比較し、道中にあるもの（渋滞、道路の路面状況、道路工事、フェリー、信号機）を表示します。公共交通機関では、スウェーデン全土の出発時刻、遅延、乗り換えがわかります。</p>
+    <p>車、自転車、徒歩の移動中は、画面がロックされていても次の曲がり角が読み上げられます。道を間違えると、アプリが新しいルートを探し、3分以上早く着くルートが見つかったときはお知らせします。目的地の近くでは、駐車できる場所が表示されます。</p>
+  </section>
+
+  <section id="day" class="wrap planning">
+    <h2>街で過ごす1日</h2>
+    <div class="feature">
+      <img src="../img/en-surprise-me.jpg" alt="徒歩で過ごす1日の「おまかせ」。公園と教会が時間つきで表示され、時間の長さと好みを選べます。" loading="lazy" width="506" height="1100">
+      <div>
+        <h3>おまかせ</h3>
+        <p>アプリが現在地から1日の予定を立てます。名所や公園に加えて、営業中のお店でのランチとコーヒーも入ります。徒歩、自転車、公共交通機関から選び、気に入るまでシャッフルできます。</p>
+        <p>博物館、宮殿、教会は、アプリが営業時間を把握していないため、17:00より前に入れています。</p>
+        <p>バスや電車に乗りますか？出発をタップして「間に合うように連れて行って」を選ぶと、アプリが出発する時間を知らせます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="plus" class="wrap planning">
+    <h2>無料版と360Maps Plus</h2>
+    <p>すべてのレイヤを含む地図、検索、公共交通機関、自転車、徒歩、おまかせ、車のルート計画は無料です。車のナビによる最初の3回の移動も無料です。</p>
+    <p>360Maps Plusでは、車のナビが使えます。曲がり角ごとの読み上げ、渋滞、凍結、道路工事の警告、交通状況が変わったときの新しいルートです。さらに次の機能もあります。</p>
+    <div class="feature flip">
+      <img src="../img/en-trip-cost-winter.jpg" alt="Arlandaまでの車のルート。Norrtullで20クローナの渋滞税がかかり、冬のチェックでは冬の道路状況は良好と表示されています。" loading="lazy" width="506" height="1100">
+      <div>
+        <h3>移動の費用と冬のチェック</h3>
+        <p>車のルート上の渋滞税と橋の通行料を、通過する時刻に合わせて計算し、あとで出発した場合の費用も表示します。</p>
+        <p>11月1日から4月30日まで、道中の凍結と積雪、到着時にいる場所の気温、SMHIの警報を表示します。</p>
+      </div>
+    </div>
+    <div class="feature">
+      <img src="../img/en-parking-rules.jpg" alt="ストックホルムのVasastanの地図。路肩が駐車規則に応じて緑、赤、オレンジ、グレーに色分けされています。" loading="lazy" width="506" height="1100">
+      <div>
+        <h3>ストックホルムの駐車規則</h3>
+        <p>拡大すると路肩に色がつきます。緑は駐車できる場所、オレンジは1日以内に道路清掃がある場所、赤は今駐車禁止の場所、グレーは予約済みの場所です。</p>
+        <p>市の規則に基づいています。道路の標識が優先されます。</p>
+      </div>
+    </div>
+    <div class="feature flip">
+      <img src="../img/en-parking-here.jpg" alt="「ここに駐車場あり」カード。駐車可、現在は1時間20クローナ、水曜日の9時から14時は道路清掃、「通知する」ボタンが表示されています。" loading="lazy" width="506" height="1100">
+      <div>
+        <h3>車を停めた場所</h3>
+        <p>車の位置を保存すると、その場所で適用される内容（現在の料金、料金表の全体、道路清掃の時間）を表示します。</p>
+        <p>「通知する」を選ぶと、道路清掃が始まる前日の夕方と1時間前に通知が届きます。</p>
+      </div>
+    </div>
+    <p>Plusは、1週間（サブスクリプションではありません）、月額、年額、または買い切りで利用できます。価格はお住まいの国のApp Storeに表示されます。<a href="terms.html">利用規約</a>。</p>
+  </section>
+
+  <section id="sources" class="wrap planning">
+    <h2>オープンデータ</h2>
+    <p>地図上のすべては、スウェーデンの官公庁と交通事業者のオープンデータによるものです。</p>
+    <p>情報源は、Trafiklab、Samtrafiken、SL、スウェーデン交通局、SMHI、スウェーデン警察、Krisinformation.se、ストックホルム市、Wikipedia、© OpenStreetMap contributorsなどです。すべての情報源とライセンスは、アプリの「情報源、ライセンス、プライバシー」に記載されています。</p>
+  </section>
+
+  <section id="support" class="wrap">
+    <h2>サポート</h2>
+    <p class="lede">不具合や地図の不足、アプリについてのご質問は、<a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a>までメールでお知らせください。返信します。よくある質問への回答は<a href="support.html">サポートページ</a>にあります。</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>iPhone用360Maps</span>
+    <span><a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a></span>
+    <span><a href="support.html">サポート</a></span>
+    <span><a href="privacy.html">プライバシーポリシー</a></span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // The live map: Stockholm drawn only with live data from the same API the app uses.
+  const canvas = document.getElementById('live-map');
+  const status = document.getElementById('live-status');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+  const view = { lat: 59.333, lon: 18.045, spanLat: 0.105, spanLon: 0.30 };
+  const box = { minLon: 17.86, minLat: 59.27, maxLon: 18.22, maxLat: 59.40 };
+  // The copy on GitHub Pages reads the same server; on the server itself the API is same-origin.
+  const API = location.hostname.endsWith('github.io') ? 'https://myvehicles.duckdns.org:8444' : '';
+  const kLon = Math.cos(view.lat * Math.PI / 180);
+  const places = [
+    ['Kungsholmen', 59.332, 18.030], ['Södermalm', 59.313, 18.068], ['Östermalm', 59.340, 18.088],
+    ['Vasastan', 59.346, 18.046], ['Gamla stan', 59.3245, 18.071], ['Djurgården', 59.326, 18.112],
+    ['Solna', 59.361, 18.000], ['Hammarby Sjöstad', 59.302, 18.098], ['Liljeholmen', 59.309, 18.022],
+  ];
+  const modeColor = symbol => {
+    if (!symbol) return css('--bus');
+    if (symbol.includes('tunnel')) return css('--metro');
+    if (symbol.startsWith('train')) return css('--train');
+    if (symbol.startsWith('tram')) return css('--tram');
+    if (symbol.startsWith('ferry')) return css('--boat');
+    return css('--bus');
+  };
+
+  let w = 0, h = 0, scale = 1;
+  function resize() {
+    const r = canvas.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = r.width; h = r.height;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    scale = Math.max(w / (view.spanLon * kLon), h / view.spanLat);  // cover the canvas
+  }
+  const project = (lat, lon) => [w / 2 + (lon - view.lon) * kLon * scale, h / 2 - (lat - view.lat) * scale];
+
+  let stretches = [];           // travel-time stretches: the motorway skeleton, queues in colour
+  const vehicles = new Map();    // id -> {from, to, start, duration, color, badge}
+
+  async function loadStretches() {
+    try {
+      const r = await fetch(API + '/v1/layers/travelTimes');
+      if (!r.ok) return;
+      const data = await r.json();
+      stretches = data.items.filter(i => i.path && i.path.length > 1);
+    } catch (_) {}
+  }
+
+  async function loadVehicles() {
+    try {
+      const r = await fetch(`${API}/v1/layers/transitVehicles?bbox=${box.minLon},${box.minLat},${box.maxLon},${box.maxLat}`);
+      if (!r.ok) throw new Error(r.status);
+      const data = await r.json();
+      const now = performance.now(), seen = new Set();
+      for (const item of data.items) {
+        seen.add(item.id);
+        const to = [item.coordinate.lat, item.coordinate.lon];
+        const old = vehicles.get(item.id);
+        const from = old ? position(old, now) : to;
+        vehicles.set(item.id, { from, to, start: now, duration: reduceMotion || !old ? 0 : 20000,
+                                color: modeColor(item.symbol), badge: item.badge || '' });
+      }
+      for (const id of [...vehicles.keys()]) if (!seen.has(id)) vehicles.delete(id);
+      const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+      status.innerHTML = `<span class="live__dot" aria-hidden="true"></span>ストックホルムでは今、バス、電車、船が合わせて<strong>${data.items.length}</strong>台運行中です。更新時刻: ${time}`;
+    } catch (_) {
+      status.textContent = 'ライブマップは今、データを取得できませんでした。まもなく再試行します。';
+    }
+  }
+
+  function position(v, now) {
+    if (!v.duration) return v.to;
+    const t = Math.min(1, (now - v.start) / v.duration);
+    return [v.from[0] + (v.to[0] - v.from[0]) * t, v.from[1] + (v.to[1] - v.from[1]) * t];
+  }
+
+  function draw(now) {
+    ctx.fillStyle = css('--paper');
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (const s of stretches) {
+      const queue = s.severity >= 2;
+      ctx.strokeStyle = queue ? (s.severity >= 3 ? css('--queue-heavy') : css('--queue')) : css('--road');
+      ctx.lineWidth = queue ? 6 : 3;
+      ctx.beginPath();
+      s.path.forEach((p, i) => { const [x, y] = project(p.lat, p.lon); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+      ctx.stroke();
+    }
+
+    const r = w < 640 ? 6 : 9;
+    const ring = css('--paper-raised');
+    for (const v of vehicles.values()) {
+      const [lat, lon] = position(v, now);
+      const [x, y] = project(lat, lon);
+      if (x < -20 || y < -20 || x > w + 20 || y > h + 20) continue;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = v.color; ctx.fill();
+      ctx.lineWidth = 1.5; ctx.strokeStyle = ring; ctx.stroke();
+      if (v.badge && r >= 9) {
+        ctx.fillStyle = '#fff';
+        ctx.font = `700 ${v.badge.length > 2 ? 9 : 11}px "Barlow Condensed", sans-serif`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(v.badge, x, y + 0.5);
+        ctx.textBaseline = 'alphabetic';
+      }
+    }
+
+    // District names on top, with a paper halo so they stay readable among the vehicles.
+    ctx.font = `700 ${w < 640 ? 14 : 18}px "Barlow Condensed", sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = css('--paper');
+    ctx.fillStyle = css('--ink-soft');
+    for (const [name, lat, lon] of places) {
+      const [x, y] = project(lat, lon);
+      ctx.strokeText(name, x, y);
+      ctx.fillText(name, x, y);
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  addEventListener('resize', resize);
+  loadStretches();
+  loadVehicles();
+  setInterval(() => { if (!document.hidden) loadVehicles(); }, 20000);
+  setInterval(() => { if (!document.hidden) loadStretches(); }, 60000);
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

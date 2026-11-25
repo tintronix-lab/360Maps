@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>360Maps – a Suécia em tempo real</title>
+<meta name="description" content="O 360Maps é o mapa para quem visita a Suécia: atrações imperdíveis, ônibus e trens ao vivo, trânsito, clima e estacionamento, em 28 idiomas, no iPhone. Criado com dados abertos.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<meta property="og:title" content="360Maps – a Suécia em tempo real">
+<meta property="og:description" content="Atrações, ônibus, trens, trânsito e chuva em um só mapa, em tempo real.">
+<meta property="og:image" content="/img/ikon-512.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root {
+    --paper: #F3F6F9;
+    --paper-raised: #FFFFFF;
+    --ink: #0E2240;
+    --ink-soft: #46586F;
+    --rule: #D5DEE8;
+    --brand: #1F4FFF;
+    --teal: #10C7B4;
+    --bus: #CC1A24;
+    --metro: #0061B3;
+    --train: #7840A1;
+    --tram: #CC5C00;
+    --boat: #00808F;
+    --queue: #F2B705;
+    --queue-heavy: #F28C28;
+    --road: rgba(14, 34, 64, 0.16);
+    --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+    --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0F1B2D;
+      --paper-raised: #16263D;
+      --ink: #EAF0F7;
+      --ink-soft: #A9B8CB;
+      --rule: #2A3C56;
+      --road: rgba(234, 240, 247, 0.16);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  @media (prefers-color-scheme: dark) { a { color: #8FA9FF; } }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  img { max-width: 100%; display: block; }
+
+  .wrap { width: min(72rem, 100% - 2rem); margin-inline: auto; }
+
+  /* Header */
+  .masthead {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.9rem 0;
+  }
+  .brand { display: flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; letter-spacing: 0.01em; }
+  .masthead nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .masthead nav a { color: var(--ink-soft); text-decoration: none; font-size: 1rem; }
+  .masthead nav a:hover { color: var(--ink); text-decoration: underline; }
+
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  /* Hero: the live map is the picture */
+  .hero { position: relative; height: min(86vh, 48rem); min-height: 34rem; overflow: hidden; border-block: 1px solid var(--rule); }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero__text {
+    position: absolute; left: max(1rem, calc((100% - 72rem) / 2)); bottom: 1.5rem;
+    width: min(34rem, calc(100% - 2rem));
+    background: color-mix(in srgb, var(--paper) 94%, transparent);
+    padding: 1.5rem 1.75rem 1.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--rule);
+  }
+  h1 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(2.75rem, 6.5vw, 4.75rem); line-height: 0.95; letter-spacing: -0.005em;
+    margin: 0 0 0.75rem;
+  }
+  .hero__text p { margin: 0 0 1.1rem; color: var(--ink-soft); max-width: 30rem; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.25rem; }
+  .button {
+    display: inline-block; font-family: var(--display); font-weight: 600; font-size: 1.25rem; letter-spacing: 0.01em;
+    background: var(--brand); color: #fff; text-decoration: none;
+    padding: 0.55rem 1.2rem 0.6rem; border-radius: 999px;
+  }
+  .button:hover { background: #1640D9; }
+  .soon { font-size: 1rem; color: var(--ink-soft); }
+  .live {
+    position: absolute; right: max(1rem, calc((100% - 72rem) / 2)); top: 1rem;
+    max-width: min(22rem, calc(100% - 2rem));
+    font-size: 0.95rem; line-height: 1.4; color: var(--ink-soft);
+    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    padding: 0.45rem 0.75rem; border-radius: 0.4rem; border: 1px solid var(--rule);
+  }
+  .live strong { color: var(--ink); font-weight: 700; }
+  .live__dot { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #E0352B; margin-right: 0.35rem; vertical-align: 0.05em; }
+
+  /* Sections */
+  section { padding: 4.5rem 0 1rem; }
+  h2 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(2.1rem, 4.2vw, 3.1rem); line-height: 1; margin: 0 0 0.6rem;
+  }
+  .lede { color: var(--ink-soft); max-width: 38rem; margin: 0 0 2.25rem; }
+
+  /* Map legend: the key shows the same symbol as the map */
+  .legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 0 3rem; margin: 0; padding: 0; list-style: none; }
+  .legend li { display: grid; grid-template-columns: 4.25rem 1fr; gap: 1rem; padding: 1.1rem 0; border-top: 1px solid var(--rule); }
+  .legend h3 { font-family: var(--display); font-weight: 600; font-size: 1.55rem; line-height: 1.1; margin: 0.1rem 0 0.3rem; }
+  .legend p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; }
+  .key { width: 4.25rem; height: 3rem; display: flex; align-items: center; gap: 0.2rem; }
+  .pin {
+    display: inline-grid; place-items: center; width: 1.45rem; height: 1.45rem; border-radius: 50%;
+    color: #fff; font-family: var(--display); font-weight: 700; font-size: 0.8rem; border: 2px solid var(--paper-raised);
+  }
+  .key svg { width: 4.25rem; height: 3rem; }
+
+  /* Screens */
+  .screens { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.25rem 0 1.25rem; }
+  .screens figure { flex: 0 0 min(15.5rem, 70vw); margin: 0; scroll-snap-align: start; }
+  .screens img { width: 100%; aspect-ratio: 1206 / 2622; object-fit: cover; border-radius: 1.6rem; border: 1px solid var(--rule); background: var(--paper-raised); }
+  .screens figcaption { margin-top: 0.7rem; font-size: 1rem; color: var(--ink-soft); line-height: 1.4; }
+
+  /* Planning */
+  .modes { display: flex; flex-wrap: wrap; gap: 0.25rem 1.75rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
+  .modes li { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; }
+  .modes li:nth-child(1) { color: var(--queue-heavy); }
+  .modes li:nth-child(2) { color: var(--bus); }
+  .modes li:nth-child(3) { color: var(--boat); }
+  .modes li:nth-child(4) { color: var(--metro); }
+  .planning p { max-width: 40rem; margin: 0 0 1rem; }
+  .planning ul:not(.modes) { max-width: 40rem; margin: 0 0 1rem; padding-left: 1.2rem; }
+  .planning ul:not(.modes) li { margin-bottom: .45rem; }
+  .feature { display: grid; gap: 1.5rem 2.5rem; align-items: center; margin: 0 0 3rem; }
+  .feature img { width: min(16rem, 72vw); height: auto; justify-self: center; border-radius: 1.8rem; border: 1px solid var(--rule); background: var(--paper-raised); box-shadow: 0 1.2rem 2.5rem rgba(14, 34, 64, 0.18); }
+  .feature h3 { font-family: var(--display); font-size: 1.7rem; line-height: 1.15; margin: 0 0 0.6rem; }
+  .feature p { max-width: 34rem; margin: 0 0 0.8rem; }
+  @media (min-width: 46rem) {
+    .feature { grid-template-columns: 16rem 1fr; }
+    .feature.flip { grid-template-columns: 1fr 16rem; }
+    .feature.flip img { order: 2; }
+  }
+
+  /* Sources */
+  table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+  th, td { text-align: left; vertical-align: top; padding: 0.7rem 1rem 0.7rem 0; border-top: 1px solid var(--rule); }
+  th { font-weight: 700; }
+  td:last-child { color: var(--ink-soft); white-space: nowrap; }
+  .table-wrap { overflow-x: auto; }
+  .promise { margin-top: 1.75rem; max-width: 40rem; }
+
+  footer { margin-top: 4.5rem; padding: 2rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+
+  @media (max-width: 40rem) {
+    .hero { height: auto; min-height: 0; }
+    .hero canvas { position: relative; height: 62vh; }
+    .hero__text { position: relative; left: 0; bottom: 0; width: 100%; border: 0; border-radius: 0; padding: 1.5rem 1rem 1.75rem; background: var(--paper); }
+    .live { top: 0.75rem; right: 0.75rem; }
+    .masthead nav { display: none; }
+    /* Sources: one block per source instead of three narrow columns */
+    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    tr { display: block; padding: 0.8rem 0; border-top: 1px solid var(--rule); }
+    td { display: block; border: 0; padding: 0; white-space: normal; }
+    td:first-child { font-weight: 700; }
+    td:last-child { white-space: normal; font-size: 0.95rem; }
+  }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+
+<header class="wrap masthead">
+  <a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a>
+  <nav aria-label="Página">
+    <a href="#map">Mapa</a>
+    <a href="#plan">Planejar</a>
+    <a href="#sources">Fontes</a>
+    <a href="#support">Suporte</a>
+    <a href="privacy.html">Privacidade</a>
+  </nav>
+  <label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../" lang="sv">Svenska</option><option value="../en/" lang="en">English</option><option value="../de/" lang="de">Deutsch</option><option value="../nb/" lang="nb">Norsk</option><option value="../da/" lang="da">Dansk</option><option value="../fi/" lang="fi">Suomi</option><option value="../nl/" lang="nl">Nederlands</option><option value="../fr/" lang="fr">Français</option><option value="../es/" lang="es">Español</option><option value="../it/" lang="it">Italiano</option><option value="../pl/" lang="pl">Polski</option><option value="../cs/" lang="cs">Čeština</option><option value="../pt-br/" lang="pt-BR" selected>Português (Brasil)</option><option value="../ro/" lang="ro">Română</option><option value="../hu/" lang="hu">Magyar</option><option value="../tr/" lang="tr">Türkçe</option><option value="../el/" lang="el">Ελληνικά</option><option value="../uk/" lang="uk">Українська</option><option value="../et/" lang="et">Eesti</option><option value="../lv/" lang="lv">Latviešu</option><option value="../lt/" lang="lt">Lietuvių</option><option value="../is/" lang="is">Íslenska</option><option value="../zh-hans/" lang="zh-Hans">简体中文</option><option value="../zh-hant/" lang="zh-Hant">繁體中文</option><option value="../ja/" lang="ja">日本語</option><option value="../ko/" lang="ko">한국어</option><option value="../th/" lang="th">ไทย</option><option value="../fa/" lang="fa">فارسی</option></select></label>
+</header>
+
+<main>
+  <div class="hero">
+    <canvas id="live-map" role="img" aria-label="Mapa ao vivo de Estocolmo: cada ponto é um ônibus, um trem do metrô ou um barco em movimento agora, e os congestionamentos nas vias principais aparecem em amarelo."></canvas>
+    <p class="live" id="live-status" aria-live="polite"><span class="live__dot" aria-hidden="true"></span>Buscando os veículos em Estocolmo…</p>
+    <div class="hero__text">
+      <h1>A Suécia em um só mapa, em tempo real.</h1>
+      <p>O 360Maps foi feito para quem visita a Suécia. Encontre as atrações imperdíveis, pegue ônibus, trens e barcos, veja trânsito, clima e estacionamento e receba orientações por voz, em 28 idiomas no iPhone. O mapa acima mostra Estocolmo agora, desenhado com os mesmos dados do app.</p>
+      <div class="actions">
+        <a class="button" href="#map">Veja o que o app mostra</a>
+        <a class="button" href="https://apps.apple.com/app/360maps/id6837692108">Baixe na App Store</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="map" class="wrap">
+    <h2>O que você vê no mapa</h2>
+    <p class="lede">Ative o que você precisa. Tudo vem de dados abertos de órgãos públicos e operadores de transporte e é atualizado enquanto você olha.</p>
+    <ul class="legend">
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M34 6 L39.5 21 H55 L42.5 30.5 L47 45 L34 36 L21 45 L25.5 30.5 L13 21 H28.5 Z" fill="#E8A317"/></svg></div>
+        <div><h3>Atrações</h3><p>Mais de 340 lugares imperdíveis na Suécia, com foto, horário de funcionamento, Look Around e um texto curto no seu idioma. As fotos vêm do Wikimedia Commons e os textos da Wikipedia.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#F5C000"/><path d="M24 14 L27 21 H34 L28.5 25.5 L30.5 33 L24 28.5 L17.5 33 L19.5 25.5 L14 21 H21 Z" fill="#1C1C1E"/></svg></div>
+        <div><h3>Lugares selecionados</h3><p>Lugares que escolhemos para os visitantes, como os bares de espresso italianos que os italianos em Estocolmo recomendam. Eles sempre aparecem, em qualquer zoom.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="16" cy="24" r="10" fill="#B20D5C"/><circle cx="34" cy="24" r="10" fill="#A94A1F"/><circle cx="52" cy="24" r="10" fill="#5B3A99"/></svg></div>
+        <div><h3>Restaurantes, cafés e bares</h3><p>Cada um na sua cor, com horário de funcionamento e uma lista quando você toca em um grupo deles. Cerca de 20.000 lugares em toda a Suécia.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#B0202A"/><path d="M24 15 V33 M15 24 H33" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg></div>
+        <div><h3>Farmácias e pronto-socorro</h3><p>Farmácias e pronto-socorros de hospitais em toda a Suécia, com horário de funcionamento. Em uma emergência, ligue para 112.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#0B6A9E"/><text x="24" y="29" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="15" fill="#fff">18°</text></svg></div>
+        <div><h3>Locais de banho, natureza e aurora boreal</h3><p>Praias com a temperatura da água de hoje, parques nacionais, reservas naturais e pistas de patinação no gelo, além da chance de ver a aurora boreal.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><span class="pin" style="background:var(--bus)">4</span><span class="pin" style="background:var(--metro)">14</span><span class="pin" style="background:var(--train)">41</span></div>
+        <div><h3>Ônibus, metrô, trens e barcos</h3><p>Os veículos se movem no mapa com o número da linha, em 15 condados. Vermelho é ônibus, azul é metrô, roxo é trem e turquesa é barco.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M4 34 C20 30 30 18 64 14" fill="none" stroke="var(--queue)" stroke-width="7" stroke-linecap="round"/><circle cx="40" cy="20" r="11" fill="var(--queue)" stroke="var(--paper-raised)" stroke-width="2.5"/><text x="40" y="24.5" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="12" fill="#fff">+2</text></svg></div>
+        <div><h3>Congestionamentos e tempos de viagem</h3><p>Tempos de viagem medidos nas principais vias e túneis de Estocolmo, a cada minuto. Um congestionamento aparece como +2 minutos em relação ao normal.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M4 36 L28 26 L64 30" fill="none" stroke="var(--queue-heavy)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(26 14)" stroke="var(--metro)" stroke-width="2.2" stroke-linecap="round"><path d="M0 -9 V9 M-8 -4.5 L8 4.5 M-8 4.5 L8 -4.5"/></g></svg></div>
+        <div><h3>Condições da pista</h3><p>Neve, gelo derretido e gelo nas estradas, em linhas, com o que há na pista e quando a neve foi removida.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><g opacity="0.85"><rect x="8" y="10" width="10" height="10" fill="#3D7BE0"/><rect x="18" y="10" width="10" height="10" fill="#2FB24C"/><rect x="28" y="10" width="10" height="10" fill="#2FB24C"/><rect x="18" y="20" width="10" height="10" fill="#2FB24C"/><rect x="28" y="20" width="10" height="10" fill="#E8D53A"/><rect x="38" y="20" width="10" height="10" fill="#2FB24C"/><rect x="28" y="30" width="10" height="10" fill="#3D7BE0"/><rect x="38" y="30" width="10" height="10" fill="#3D7BE0"/></g></svg></div>
+        <div><h3>Radar de chuva</h3><p>A precipitação atual do radar meteorológico do SMHI, a cada cinco minutos. Azul é fraca; amarelo e vermelho, forte.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="14" fill="#F28C28"/><path d="M24 16 V27" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><circle cx="24" cy="32" r="2" fill="#fff"/></svg></div>
+        <div><h3>Interrupções e obras</h3><p>Acidentes, bloqueios e obras da Administração de Transportes da Suécia, com local e horário.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><rect x="10" y="13" width="30" height="22" rx="5" fill="#5856D6"/><circle cx="25" cy="24" r="6.5" fill="none" stroke="#fff" stroke-width="2.6"/><rect x="15" y="10" width="9" height="5" rx="1.5" fill="#5856D6"/></svg></div>
+        <div><h3>Câmeras de trânsito</h3><p>Toque em uma câmera para ver a via. A imagem é atualizada sozinha enquanto você olha.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M2 36 Q12 31 22 36 T42 36 T62 36" fill="none" stroke="var(--boat)" stroke-width="2.4"/><path d="M14 30 L46 30 L41 37 L19 37 Z" fill="var(--boat)"/><rect x="22" y="21" width="16" height="9" rx="2" fill="var(--boat)"/></svg></div>
+        <div><h3>Balsas e navios</h3><p>A próxima partida das balsas rodoviárias da Administração de Transportes da Suécia e os navios em movimento no mar.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><rect x="12" y="8" width="32" height="32" rx="7" fill="#1F6FE5"/><text x="28" y="31.5" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="24" fill="#fff">P</text></svg></div>
+        <div><h3>Estacionamento no destino</h3><p>Ao planejar uma viagem de carro, veja o estacionamento perto de onde você vai, com o número de vagas e o preço. As vagas livres aparecem nas cidades que as compartilham.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><rect x="18" y="5" width="15" height="38" rx="5" fill="#3A4656"/><circle cx="25.5" cy="14" r="4.2" fill="#5E6B7B"/><circle cx="25.5" cy="24" r="4.2" fill="#5E6B7B"/><circle cx="25.5" cy="34" r="4.2" fill="#5E6B7B"/></svg></div>
+        <div><h3>Semáforos no caminho</h3><p>Onde fica o próximo semáforo enquanto você dirige. A cor e a contagem regressiva virão quando as cidades compartilharem abertamente os dados dos semáforos.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M24 8 L38 14 V24 C38 32 31.5 37 24 40 C16.5 37 10 32 10 24 V14 Z" fill="#1F6FE5"/></svg></div>
+        <div><h3>Polícia, Krisinformation e SMHI</h3><p>Ocorrências perto de você, avisos públicos importantes e alertas meteorológicos.</p></div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="wrap" aria-labelledby="screens">
+    <h2 id="screens">Como é por dentro</h2>
+    <p class="lede">Imagens do app, feitas com dados reais. As capturas de tela mostram a versão em sueco.</p>
+    <div class="screens" tabindex="0" aria-label="Capturas de tela do app, role para o lado">
+      <figure><img src="../img/kollektivtrafik.jpg" alt="Mapa do centro de Estocolmo com ônibus em vermelho, metrô em azul, trens urbanos em roxo e barcos em turquesa, todos com o número da linha." loading="lazy" width="506" height="1100"><figcaption>O transporte público de Estocolmo, em tempo real</figcaption></figure>
+      <figure><img src="../img/restider.jpg" alt="Congestionamentos em Södra länken e no túnel Klara marcados com +1 e +2 minutos em amarelo e laranja." loading="lazy" width="506" height="1100"><figcaption>Congestionamentos em Södra länken e no túnel Klara</figcaption></figure>
+      <figure><img src="../img/regnradar-vaglag.jpg" alt="Radar de chuva sobre o vale do Mälaren com linhas amarelas nas estradas com condições difíceis." loading="lazy" width="506" height="1100"><figcaption>Radar de chuva e condições da pista no vale do Mälaren</figcaption></figure>
+      <figure><img src="../img/farjor-fartyg.jpg" alt="Rotas de balsa em volta de Estocolmo, uma área de descanso na E4 e um navio no arquipélago." loading="lazy" width="506" height="1100"><figcaption>Balsas rodoviárias, áreas de descanso e navios</figcaption></figure>
+      <figure><img src="../img/trafikkamera.jpg" alt="Visão detalhada da câmera de trânsito em Centralbron com a imagem da câmera." loading="lazy" width="506" height="1100"><figcaption>A câmera de trânsito em Centralbron</figcaption></figure>
+      <figure><img src="../img/korlage.jpg" alt="Modo de direção com um aviso de obras a 650 metros e um semáforo a 40 metros, 13 restantes no trajeto." loading="lazy" width="506" height="1100"><figcaption>O modo de direção avisa o que vem pela frente</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="plan" class="wrap planning">
+    <h2>De A a B</h2>
+    <ul class="modes" aria-label="Formas de viajar">
+      <li>Carro</li><li>Transporte público</li><li>Bicicleta</li><li>A pé</li>
+    </ul>
+    <p>Escolha como quer viajar. O 360Maps compara as rotas com o trânsito de agora e mostra o que há no seu caminho: congestionamentos, condições da pista, obras, balsas e semáforos. De transporte público, você recebe partidas, atrasos e baldeações em toda a Suécia.</p>
+    <p>Em uma viagem de carro, de bicicleta ou a pé, a próxima curva é lida em voz alta, mesmo com a tela bloqueada. Se você errar o caminho, o app encontra uma nova rota e, se achar uma que seja pelo menos três minutos mais rápida, avisa você. Perto do destino, você vê onde estacionar.</p>
+  </section>
+
+  <section id="day" class="wrap planning">
+    <h2>Um dia de passeio</h2>
+    <div class="feature">
+      <img src="../img/en-surprise-me.jpg" alt="Surpreenda-me com um dia a pé: parques e uma igreja com horários, e opções de quanto tempo e do que você gosta." loading="lazy" width="506" height="1100">
+      <div>
+        <h3>Surpreenda-me</h3>
+        <p>O app planeja um dia a partir de onde você está: atrações e parques, com almoço e café em lugares abertos. Escolha caminhar, ir de bicicleta ou de transporte público e embaralhe até o dia ficar do seu jeito.</p>
+        <p>Museus, palácios e igrejas ficam antes das 17:00, porque o app não conhece os horários de funcionamento deles.</p>
+        <p>Vai pegar um ônibus ou um trem? Toque na partida e escolha Leve-me até lá a tempo, e o app avisa quando você deve sair.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="plus" class="wrap planning">
+    <h2>Grátis e 360Maps Plus</h2>
+    <p>O mapa com todas as camadas, a busca, o transporte público, as rotas de bicicleta e a pé, o Surpreenda-me e o planejamento de uma rota de carro são grátis. Suas três primeiras viagens com orientação de carro também são grátis.</p>
+    <p>Com o 360Maps Plus você tem orientação de carro: curva a curva em voz alta, avisos de congestionamentos, gelo e obras e uma nova rota quando o trânsito muda. E mais isto:</p>
+    <div class="feature flip">
+      <img src="../img/en-trip-cost-winter.jpg" alt="Rota de carro até Arlanda com uma taxa de congestionamento de 20 coroas em Norrtull e uma verificação de inverno indicando boas condições de inverno nas estradas." loading="lazy" width="506" height="1100">
+      <div>
+        <h3>Quanto a viagem custa e uma verificação de inverno</h3>
+        <p>Taxa de congestionamento e pedágios de ponte ao longo da sua rota de carro, calculados para a hora em que você passa, e quanto custa se você sair mais tarde.</p>
+        <p>De 1º de novembro a 30 de abril: gelo e neve pelo caminho, a temperatura do lugar onde você estará quando chegar e os alertas do SMHI.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <img src="../img/en-parking-rules.jpg" alt="Mapa de Vasastan, em Estocolmo, com o meio-fio colorido de verde, vermelho, laranja e cinza conforme as regras de estacionamento." loading="lazy" width="506" height="1100">
+      <div>
+        <h3>Regras de estacionamento em Estocolmo</h3>
+        <p>Aproxime o zoom e o meio-fio fica colorido: verde onde você pode estacionar, laranja onde a rua é limpa em até um dia, vermelho onde o estacionamento está proibido agora e cinza onde o lugar é reservado.</p>
+        <p>Conforme os regulamentos da cidade. As placas na rua prevalecem.</p>
+      </div>
+    </div>
+    <div class="feature flip">
+      <img src="../img/en-parking-here.jpg" alt="O cartão Estacionamento aqui: estacionamento permitido, 20 coroas por hora agora, limpeza de rua na quarta-feira das 09 às 14 e um botão Lembrar-me." loading="lazy" width="506" height="1100">
+      <div>
+        <h3>Onde o carro está</h3>
+        <p>Salve onde o carro está, e o app mostra o que vale ali: o preço agora, a tarifa completa e quando a rua é limpa.</p>
+        <p>Lembrar-me envia uma notificação na noite anterior e uma hora antes de a limpeza da rua começar.</p>
+      </div>
+    </div>
+    <p>O Plus vem em uma semana (não é uma assinatura), mensal, anual ou como compra única. A App Store mostra o preço no seu país. <a href="terms.html">Termos de uso</a>.</p>
+  </section>
+
+  <section id="sources" class="wrap planning">
+    <h2>Dados abertos</h2>
+    <p>Tudo no mapa vem de dados abertos de órgãos suecos e empresas de transporte.</p>
+    <p>Entre as fontes: Trafiklab e Samtrafiken, SL, a Administração de Transportes da Suécia, SMHI, a Polícia sueca, Krisinformation.se, a Cidade de Estocolmo, a Wikipedia e © colaboradores do OpenStreetMap. Todas as fontes e licenças estão listadas no app, em Fontes, licenças e privacidade.</p>
+  </section>
+
+  <section id="support" class="wrap">
+    <h2>Suporte</h2>
+    <p class="lede">Encontrou um erro, sentiu falta de algo no mapa ou tem uma dúvida sobre o app? Escreva para <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a> e responderemos. As respostas para as dúvidas comuns estão na <a href="support.html">página de suporte</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>360Maps para iPhone</span>
+    <span><a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a></span>
+    <span><a href="support.html">Suporte</a></span>
+    <span><a href="privacy.html">Política de privacidade</a></span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // The live map: Stockholm drawn only with live data from the same API the app uses.
+  const canvas = document.getElementById('live-map');
+  const status = document.getElementById('live-status');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+  const view = { lat: 59.333, lon: 18.045, spanLat: 0.105, spanLon: 0.30 };
+  const box = { minLon: 17.86, minLat: 59.27, maxLon: 18.22, maxLat: 59.40 };
+  // The copy on GitHub Pages reads the same server; on the server itself the API is same-origin.
+  const API = location.hostname.endsWith('github.io') ? 'https://myvehicles.duckdns.org:8444' : '';
+  const kLon = Math.cos(view.lat * Math.PI / 180);
+  const places = [
+    ['Kungsholmen', 59.332, 18.030], ['Södermalm', 59.313, 18.068], ['Östermalm', 59.340, 18.088],
+    ['Vasastan', 59.346, 18.046], ['Gamla stan', 59.3245, 18.071], ['Djurgården', 59.326, 18.112],
+    ['Solna', 59.361, 18.000], ['Hammarby Sjöstad', 59.302, 18.098], ['Liljeholmen', 59.309, 18.022],
+  ];
+  const modeColor = symbol => {
+    if (!symbol) return css('--bus');
+    if (symbol.includes('tunnel')) return css('--metro');
+    if (symbol.startsWith('train')) return css('--train');
+    if (symbol.startsWith('tram')) return css('--tram');
+    if (symbol.startsWith('ferry')) return css('--boat');
+    return css('--bus');
+  };
+
+  let w = 0, h = 0, scale = 1;
+  function resize() {
+    const r = canvas.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = r.width; h = r.height;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    scale = Math.max(w / (view.spanLon * kLon), h / view.spanLat);  // cover the canvas
+  }
+  const project = (lat, lon) => [w / 2 + (lon - view.lon) * kLon * scale, h / 2 - (lat - view.lat) * scale];
+
+  let stretches = [];           // travel-time stretches: the motorway skeleton, queues in colour
+  const vehicles = new Map();    // id -> {from, to, start, duration, color, badge}
+
+  async function loadStretches() {
+    try {
+      const r = await fetch(API + '/v1/layers/travelTimes');
+      if (!r.ok) return;
+      const data = await r.json();
+      stretches = data.items.filter(i => i.path && i.path.length > 1);
+    } catch (_) {}
+  }
+
+  async function loadVehicles() {
+    try {
+      const r = await fetch(`${API}/v1/layers/transitVehicles?bbox=${box.minLon},${box.minLat},${box.maxLon},${box.maxLat}`);
+      if (!r.ok) throw new Error(r.status);
+      const data = await r.json();
+      const now = performance.now(), seen = new Set();
+      for (const item of data.items) {
+        seen.add(item.id);
+        const to = [item.coordinate.lat, item.coordinate.lon];
+        const old = vehicles.get(item.id);
+        const from = old ? position(old, now) : to;
+        vehicles.set(item.id, { from, to, start: now, duration: reduceMotion || !old ? 0 : 20000,
+                                color: modeColor(item.symbol), badge: item.badge || '' });
+      }
+      for (const id of [...vehicles.keys()]) if (!seen.has(id)) vehicles.delete(id);
+      const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+      status.innerHTML = `<span class="live__dot" aria-hidden="true"></span><strong>${data.items.length}</strong> ônibus, trens e barcos em Estocolmo agora. Atualizado às ${time}.`;
+    } catch (_) {
+      status.textContent = 'O mapa ao vivo não conseguiu buscar os dados agora. Ele tentará de novo em instantes.';
+    }
+  }
+
+  function position(v, now) {
+    if (!v.duration) return v.to;
+    const t = Math.min(1, (now - v.start) / v.duration);
+    return [v.from[0] + (v.to[0] - v.from[0]) * t, v.from[1] + (v.to[1] - v.from[1]) * t];
+  }
+
+  function draw(now) {
+    ctx.fillStyle = css('--paper');
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (const s of stretches) {
+      const queue = s.severity >= 2;
+      ctx.strokeStyle = queue ? (s.severity >= 3 ? css('--queue-heavy') : css('--queue')) : css('--road');
+      ctx.lineWidth = queue ? 6 : 3;
+      ctx.beginPath();
+      s.path.forEach((p, i) => { const [x, y] = project(p.lat, p.lon); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+      ctx.stroke();
+    }
+
+    const r = w < 640 ? 6 : 9;
+    const ring = css('--paper-raised');
+    for (const v of vehicles.values()) {
+      const [lat, lon] = position(v, now);
+      const [x, y] = project(lat, lon);
+      if (x < -20 || y < -20 || x > w + 20 || y > h + 20) continue;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = v.color; ctx.fill();
+      ctx.lineWidth = 1.5; ctx.strokeStyle = ring; ctx.stroke();
+      if (v.badge && r >= 9) {
+        ctx.fillStyle = '#fff';
+        ctx.font = `700 ${v.badge.length > 2 ? 9 : 11}px "Barlow Condensed", sans-serif`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(v.badge, x, y + 0.5);
+        ctx.textBaseline = 'alphabetic';
+      }
+    }
+
+    // District names on top, with a paper halo so they stay readable among the vehicles.
+    ctx.font = `700 ${w < 640 ? 14 : 18}px "Barlow Condensed", sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = css('--paper');
+    ctx.fillStyle = css('--ink-soft');
+    for (const [name, lat, lon] of places) {
+      const [x, y] = project(lat, lon);
+      ctx.strokeText(name, x, y);
+      ctx.fillText(name, x, y);
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  addEventListener('resize', resize);
+  loadStretches();
+  loadVehicles();
+  setInterval(() => { if (!document.hidden) loadVehicles(); }, 20000);
+  setInterval(() => { if (!document.hidden) loadStretches(); }, 60000);
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

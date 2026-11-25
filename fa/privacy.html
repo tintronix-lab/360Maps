@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سیاست حریم خصوصی – 360Maps</title>
+<meta name="description" content="نحوهٔ برخورد 360Maps با موقعیت مکانی و دیگر داده‌های شما.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+/* right to left */ [dir=rtl] .hero__text { left: auto; right: max(1rem, calc((100% - 72rem) / 2)); } [dir=rtl] .live { right: auto; left: max(1rem, calc((100% - 72rem) / 2)); } [dir=rtl] .live__dot { margin-right: 0; margin-left: 0.35rem; } [dir=rtl] .planning ul:not(.modes) { padding-left: 0; padding-right: 1.2rem; } [dir=rtl] th, [dir=rtl] td { text-align: right; padding: 0.7rem 0 0.7rem 1rem; } @media (max-width: 40rem) { [dir=rtl] .hero__text { right: 0; } [dir=rtl] .live { left: 0.75rem; } }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../integritet.html" lang="sv">Svenska</option><option value="../en/privacy.html" lang="en">English</option><option value="../de/privacy.html" lang="de">Deutsch</option><option value="../nb/privacy.html" lang="nb">Norsk</option><option value="../da/privacy.html" lang="da">Dansk</option><option value="../fi/privacy.html" lang="fi">Suomi</option><option value="../nl/privacy.html" lang="nl">Nederlands</option><option value="../fr/privacy.html" lang="fr">Français</option><option value="../es/privacy.html" lang="es">Español</option><option value="../it/privacy.html" lang="it">Italiano</option><option value="../pl/privacy.html" lang="pl">Polski</option><option value="../cs/privacy.html" lang="cs">Čeština</option><option value="../pt-br/privacy.html" lang="pt-BR">Português (Brasil)</option><option value="../ro/privacy.html" lang="ro">Română</option><option value="../hu/privacy.html" lang="hu">Magyar</option><option value="../tr/privacy.html" lang="tr">Türkçe</option><option value="../el/privacy.html" lang="el">Ελληνικά</option><option value="../uk/privacy.html" lang="uk">Українська</option><option value="../et/privacy.html" lang="et">Eesti</option><option value="../lv/privacy.html" lang="lv">Latviešu</option><option value="../lt/privacy.html" lang="lt">Lietuvių</option><option value="../is/privacy.html" lang="is">Íslenska</option><option value="../zh-hans/privacy.html" lang="zh-Hans">简体中文</option><option value="../zh-hant/privacy.html" lang="zh-Hant">繁體中文</option><option value="../ja/privacy.html" lang="ja">日本語</option><option value="../ko/privacy.html" lang="ko">한국어</option><option value="../th/privacy.html" lang="th">ไทย</option><option value="../fa/privacy.html" lang="fa" selected>فارسی</option></select></label></header>
+<main>
+  <h1>سیاست حریم خصوصی</h1>
+  <p class="updated">از 25 نوامبر 2026 اجرا می‌شود.</p>
+
+  <p>360Maps ترافیک، حمل‌ونقل عمومی، آب‌وهوا و اختلال‌ها را روی نقشه نشان می‌دهد و به شما کمک می‌کند جاذبه‌ها، پارکینگ و راه خود را در سوئد پیدا کنید. برنامه تبلیغ ندارد، حساب کاربری ندارد و ردیابی نمی‌کند. این است آنچه بر سر داده‌های شما می‌آید.</p>
+
+  <h2>موقعیت مکانی شما</h2>
+  <p>اگر به برنامه اجازهٔ دسترسی به موقعیت مکانی‌تان را بدهید، از آن در زمانی که برنامه باز است استفاده می‌شود، تا آنچه نزدیک شماست نشان داده شود و سفرها از همان‌جا برنامه‌ریزی شوند. هنگام راهنمایی مسیر، وقتی برنامه در پس‌زمینه است یا صفحه قفل است نیز از آن استفاده می‌شود تا پیچ بعدی را بشنوید. این کار با رسیدن شما یا پایان سفر متوقف می‌شود. همین در مورد زمانی هم صدق می‌کند که سفری را ضبط می‌کنید یا موقعیت‌تان را زنده به اشتراک می‌گذارید، تا وقتی که متوقفش کنید. موقعیت مکانی شما هرگز به شما مرتبط نمی‌شود و ما آن را ذخیره نمی‌کنیم. تنها استثنا اشتراک‌گذاری زنده است که در آن، تا زمانی که اشتراک‌گذاری ادامه دارد، موقعیت به‌صورت رمزگذاری‌شده نزد ما نگه داشته می‌شود (پایین را ببینید).</p>
+
+  <h2>چه چیزی و به کجا فرستاده می‌شود</h2>
+  <ul>
+    <li><strong>سرور ما</strong> محدودهٔ قابل‌مشاهدهٔ نقشه را وقتی وسیله‌های نقلیه و دیگر لایه‌های پرتراکم را می‌بینید، ایستگاهی را که باز می‌کنید، و مبدأ و مقصد را وقتی سفری با حمل‌ونقل عمومی برنامه‌ریزی می‌کنید دریافت می‌کند. از این اطلاعات برای پاسخ‌دادن استفاده می‌کند و آن را ذخیره نمی‌کند.</li>
+    <li><strong>Apple</strong> مبدأ و مقصد را وقتی سفری با خودرو، دوچرخه یا پیاده برنامه‌ریزی می‌کنید دریافت می‌کند و نقشه را رسم می‌کند. شرایط Apple بر آن حاکم است.</li>
+    <li><strong>منابع داده</strong>، برای مثال SL و SMHI، درخواست‌هایی دربارهٔ محدوده‌ای که نگاه می‌کنید دریافت می‌کنند، بدون هیچ اطلاعاتی دربارهٔ اینکه شما کی هستید.</li>
+    <li>از <strong>سرور ما</strong> هنگام راهنمایی مسیر با خودرو، محدودیت‌های سرعت در مربع یک‌کیلومتری که در آن رانندگی می‌کنید پرسیده می‌شود. سرور فقط می‌فهمد کدام مربع است، نه اینکه در آن کجا هستید و نه اینکه شما کی هستید، و آن را ذخیره نمی‌کند.</li>
+    <li><strong>عکس‌های جاذبه‌ها</strong> از Wikimedia Commons می‌آید. سرور ما عکس را برای برنامه از Wikimedia می‌گیرد، بنابراین Wikimedia هرگز شما را نمی‌بیند. سرور می‌فهمد کدام عکس نمایش داده می‌شود، از آن برای پاسخ‌دادن استفاده می‌کند و آن را ذخیره نمی‌کند.</li>
+    <li><strong>دمای آب و شفق قطبی:</strong> برنامه پیش‌بینی امروز دمای آب را برای همهٔ محل‌های شنا از سازمان مدیریت دریا و آب سوئد می‌گیرد، و پیش‌بینی شفق قطبی برای کل جهان را از NOAA در ایالات متحده. هیچ‌یک از این دو نمی‌فهمد شما کجا هستید.</li>
+    <li><strong>Look Around:</strong> وقتی جاذبه‌ای را باز می‌کنید، برنامه از Apple تصاویر سطح خیابان را در موقعیت همان جاذبه، نه موقعیت شما، درخواست می‌کند. شرایط Apple بر آن حاکم است.</li>
+  </ul>
+
+  <h2>اشتراک‌گذاری موقعیت مکانی شما</h2>
+  <p>«ارسال موقعیت» نشانی شما و پیوندی با مسیر رسیدن به شما را در یک پیام قرار می‌دهد و شما انتخاب می‌کنید به چه کسی برود. این پیام از طریق ما عبور نمی‌کند.</p>
+  <p>«اشتراک‌گذاری زنده» موقعیت شما را به هر کسی که پیوند را دارد نشان می‌دهد، تا وقتی که برسند، زمانی که انتخاب کرده‌اید تمام شود یا روی «توقف» بزنید. در طول اشتراک‌گذاری، برنامه وقتی حدود 25 متر جابه‌جا شده باشید موقعیت شما را به سرور ما می‌فرستد، و وقتی ثابت هستید دقیقه‌ای یک بار، حتی وقتی برنامه در پس‌زمینه است. موقعیت و نشانی، و نام شما اگر وارد کرده باشید، روی گوشی شما با کلیدی رمزگذاری می‌شوند که فقط در خود پیوند وجود دارد. نام در غیر این صورت فقط روی گوشی شما می‌ماند؛ حساب کاربری وجود ندارد. مرورگرها آن بخش از پیوند را هرگز نمی‌فرستند، پس سرور ما نمی‌تواند بخواند شما کجا هستید. سرور فقط آخرین موقعیت رمزگذاری‌شده و زمان پایان اشتراک‌گذاری را نگه می‌دارد و حداکثر ده دقیقه پس از پایان اشتراک‌گذاری همه‌چیز را پاک می‌کند. هر کسی که پیوند را دارد تا زمانی که اشتراک‌گذاری ادامه دارد می‌تواند ببیند شما کجا هستید، پس آن را فقط برای کسانی بفرستید که می‌خواهید این را ببینند.</p>
+  <p>کسی که پیوند را باز می‌کند می‌تواند انتخاب کند ببیند چقدر از شما فاصله دارد. فاصله در این حالت در مرورگر خودش محاسبه می‌شود و جایی فرستاده نمی‌شود.</p>
+
+  <h2>رستوران‌ها، کافه‌ها و رزرو میز</h2>
+  <p>رستوران‌ها، کافه‌ها و مراکز خرید همراه برنامه هستند، پس مرور آن‌ها روی نقشه و در فهرست‌ها چیزی نمی‌فرستد. وقتی روی «امتیاز و عکس‌ها» می‌زنید، برنامه دربارهٔ آن مکان از نقشه‌های Apple می‌پرسد و شرایط Apple بر آن حاکم است. صفحهٔ رزرو متعلق به ارائه‌دهندهٔ رزرو رستوران است و سیاست حریم خصوصی آن‌ها در آنجا اعمال می‌شود. 360Maps هیچ اطلاعاتی دربارهٔ اینکه کدام مکان‌ها را می‌بینید نمی‌فرستد.</p>
+
+  <h2>چه چیزی روی گوشی شما ذخیره می‌شود</h2>
+  <p>برنامه انتخاب‌های شما را به خاطر می‌سپارد، مثل اینکه کدام لایه‌های نقشه روشن است و کدام اعلان‌ها را بسته‌اید، مقصدهای اخیر، مکان‌هایی که به‌عنوان خانه و محل کار ذخیره کرده‌اید، و جای آخرین موقعیت گوشی (تا نقشه روی منطقهٔ درست باز شود). این‌ها فقط روی گوشی شما می‌مانند، هرگز برای ما فرستاده نمی‌شوند و با حذف برنامه از بین می‌روند. مقصدی را با نگه‌داشتن انگشت روی آن در فهرست حذف می‌کنید. برای مکان‌هایی که «امتیاز و عکس‌ها» را برایشان باز کرده‌اید، گوشی شناسهٔ آن مکان در نقشه‌های Apple را به خاطر می‌سپارد، تا جستجو فقط یک بار انجام شود. این شناسه روی گوشی شما می‌ماند و هرگز برای ما فرستاده نمی‌شود. تاریخچهٔ مکان‌هایی که کارتشان را باز کرده‌اید و سفرهایی که دنبال کرده‌اید، مکان‌هایی که به‌عنوان بازدیدشده علامت زده‌اید و روزهایی که برنامه‌ریزی می‌کنید، به همین شیوه روی گوشی نگه داشته می‌شوند؛ تاریخچه را از «تاریخچه ← پاک کردن تاریخچه» پاک می‌کنید.</p>
+
+  <h2>خریدها</h2>
+  <p>360Maps Plus از طریق Apple خریداری می‌شود. برنامه و سرور ما هرگز کارت یا دیگر اطلاعات پرداخت شما را دریافت نمی‌کنند و ما هیچ سابقه‌ای از آنچه خریده‌اید نگه نمی‌داریم. گوشی از Apple می‌پرسد که Plus دارید یا نه. اینکه از سه سفر رایگان با خودرو چند تا را استفاده کرده‌اید فقط روی گوشی و در Keychain آن ذخیره می‌شود، تا اگر برنامه را دوباره نصب کنید این عدد همچنان باشد. این عدد هرگز برای ما فرستاده نمی‌شود.</p>
+
+  <h2>گزارش‌های فنی</h2>
+  <p>سرور ما گزارش‌های فنی را برای مدت کوتاهی نگه می‌دارد تا بتوانیم خطاها را رفع کنیم. این گزارش‌ها شامل این است که کدام بخش‌های سرویس درخواست شده‌اند، نه اینکه شما کی هستید، و به‌طور خودکار پاک می‌شوند.</p>
+
+  <h2>این وب‌سایت</h2>
+  <p>این وب‌سایت از کوکی و سرویس تحلیل استفاده نمی‌کند. قلم‌ها روی خود وب‌سایت میزبانی می‌شوند. نقشهٔ زنده در صفحهٔ اول موقعیت وسیله‌های نقلیه را از همان سروری می‌گیرد که برنامه می‌گیرد. نسخه‌ای از وب‌سایت روی GitHub Pages (tintronix-lab.github.io/360Maps) میزبانی می‌شود، جایی که GitHub طبق شرایط خودش گزارش‌های فنی نگه می‌دارد.</p>
+
+  <h2>پرسش‌ها</h2>
+  <p>اگر دربارهٔ حریم خصوصی یا نحوهٔ برخورد برنامه با داده‌هایتان پرسشی دارید، به <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a> ایمیل بزنید.</p>
+</main>
+<footer><a href="./">بازگشت به صفحهٔ اصلی</a> · <a href="terms.html">شرایط استفاده</a></footer>
+</body>
+</html>
