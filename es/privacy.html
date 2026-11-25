@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de privacidad – 360Maps</title>
+<meta name="description" content="Cómo trata 360Maps tu ubicación y otros datos.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../integritet.html" lang="sv">Svenska</option><option value="../en/privacy.html" lang="en">English</option><option value="../de/privacy.html" lang="de">Deutsch</option><option value="../nb/privacy.html" lang="nb">Norsk</option><option value="../da/privacy.html" lang="da">Dansk</option><option value="../fi/privacy.html" lang="fi">Suomi</option><option value="../nl/privacy.html" lang="nl">Nederlands</option><option value="../fr/privacy.html" lang="fr">Français</option><option value="../es/privacy.html" lang="es" selected>Español</option><option value="../it/privacy.html" lang="it">Italiano</option></select></label></header>
+<main>
+  <h1>Política de privacidad</h1>
+  <p class="updated">En vigor desde el 25 de noviembre de 2026.</p>
+
+  <p>360Maps muestra en un mapa el tráfico, el transporte público, el tiempo y las incidencias, y te ayuda a encontrar lugares de interés, aparcamiento y tu camino por Suecia. La app no tiene anuncios, ni cuenta, ni seguimiento. Esto es lo que ocurre con tus datos.</p>
+
+  <h2>Tu ubicación</h2>
+  <p>Si das acceso a la app a tu ubicación, se usa mientras la app está abierta, para mostrar lo que hay cerca de ti y para planificar viajes desde allí. Durante la guía también se usa cuando la app está en segundo plano o la pantalla está bloqueada, para que oigas el próximo giro. Esto termina cuando llegas o finalizas el viaje. Lo mismo ocurre mientras grabas un recorrido o compartes tu ubicación en directo, hasta que lo detengas. Tu ubicación nunca se vincula contigo y no la almacenamos. La única excepción es compartir en directo, en cuyo caso se conserva con nosotros de forma cifrada mientras dure el uso compartido (véase más abajo).</p>
+
+  <h2>Qué se envía y adónde</h2>
+  <ul>
+    <li><strong>Nuestro servidor</strong> recibe la zona visible del mapa cuando miras vehículos y otras capas densas, qué parada abres, y el origen y el destino cuando planificas un viaje en transporte público. Lo usa para responder y no lo almacena.</li>
+    <li><strong>Apple</strong> recibe el origen y el destino cuando planificas un viaje en coche, en bici o a pie, y dibuja el mapa. Se aplican las condiciones de Apple.</li>
+    <li><strong>Las fuentes de datos</strong>, por ejemplo SL y SMHI, reciben solicitudes sobre la zona que estás mirando, sin información sobre quién eres.</li>
+    <li>A <strong>nuestro servidor</strong> se le piden, durante la guía en coche, los límites de velocidad del cuadrado de un kilómetro en el que conduces. El servidor solo recibe de qué cuadrado se trata, no dónde estás dentro de él ni quién eres, y no lo almacena.</li>
+    <li><strong>Las fotos de los lugares de interés</strong> proceden de Wikimedia Commons. Nuestro servidor obtiene la foto de Wikimedia para la app, de modo que Wikimedia nunca te ve. El servidor recibe qué foto se muestra, lo usa para responder y no lo almacena.</li>
+    <li><strong>Temperatura del agua y auroras boreales:</strong> la app obtiene la previsión del día de temperatura del agua de todas las zonas de baño de la Agencia Sueca de Gestión Marina y del Agua, y la previsión de auroras boreales de todo el mundo de la NOAA en Estados Unidos. Ninguna de las dos recibe dónde estás.</li>
+    <li><strong>Look Around:</strong> cuando abres un lugar de interés, la app pide a Apple imágenes a nivel de calle en la posición del lugar, no en la tuya. Se aplican las condiciones de Apple.</li>
+  </ul>
+
+  <h2>Compartir tu ubicación</h2>
+  <p>“Enviar ubicación” pone tu dirección y un enlace con indicaciones para llegar hasta ti en un mensaje, y tú eliges a quién se envía. No pasa por nosotros.</p>
+  <p>“Compartir en directo” muestra dónde estás a cualquiera que tenga el enlace, hasta que llegue, se agote el tiempo que elegiste o toques Detener. Mientras compartes, la app envía tu ubicación a nuestro servidor cuando te has movido unos 25 metros, y una vez por minuto cuando estás parado, también cuando la app está en segundo plano. La ubicación y la dirección, y tu nombre si has escrito uno, se cifran en tu teléfono con una clave que solo existe en el enlace. Por lo demás, el nombre se guarda únicamente en tu teléfono; no hay cuenta. Los navegadores nunca envían esa parte de un enlace, así que nuestro servidor no puede leer dónde estás. El servidor solo conserva la última ubicación cifrada y cuándo termina el uso compartido, y lo borra todo como máximo diez minutos después de que haya terminado. Cualquiera que tenga el enlace puede ver dónde estás mientras dure el uso compartido, así que envíaselo solo a las personas que quieras que lo vean.</p>
+  <p>La persona que abre el enlace puede elegir ver a qué distancia estás. La distancia se calcula entonces en su navegador y no se envía a ninguna parte.</p>
+
+  <h2>Restaurantes, cafés y reserva de mesa</h2>
+  <p>Los restaurantes, cafés y centros comerciales vienen incluidos en la app, así que explorarlos en el mapa y en las listas no envía nada. Cuando tocas “Valoraciones y fotos”, la app consulta a Apple Maps sobre ese lugar y se aplican las condiciones de Apple. Una página de reserva pertenece al proveedor de reservas del restaurante, y allí se aplica su política de privacidad. 360Maps no envía ninguna información sobre los lugares que consultas.</p>
+
+  <h2>Qué se guarda en tu teléfono</h2>
+  <p>La app recuerda tus elecciones, como qué capas del mapa están activadas y qué avisos has descartado, tus destinos recientes, los lugares que has guardado como Casa y Trabajo, y dónde estuvo el teléfono por última vez (para que el mapa se abra sobre la zona correcta). Permanecen solo en tu teléfono, nunca se nos envían y desaparecen si eliminas la app. Eliminas un destino manteniéndolo pulsado en la lista. En los lugares donde has abierto “Valoraciones y fotos”, el teléfono recuerda el identificador de Apple Maps de ese lugar, de modo que la consulta se hace una sola vez. Permanece en tu teléfono y nunca se nos envía. El historial de los lugares cuya ficha abriste y de los viajes que seguiste, los lugares que marcaste como visitados y los días que planificas se guardan en el teléfono de la misma manera; borras el historial en Historial → Borrar historial.</p>
+
+  <h2>Compras</h2>
+  <p>360Maps Plus se compra a través de Apple. La app y nuestro servidor nunca reciben tu tarjeta ni otros datos de pago, y no llevamos ningún registro de lo que has comprado. El teléfono pregunta a Apple si tienes Plus. Cuántos de tus tres viajes gratuitos en coche has usado se guarda solo en el teléfono, en su llavero, de modo que el número sigue ahí si reinstalas la app. Nunca se nos envía.</p>
+
+  <h2>Registros técnicos</h2>
+  <p>Nuestro servidor conserva registros técnicos durante poco tiempo para que podamos corregir errores. Contienen qué partes del servicio se solicitaron, no quién eres, y se borran automáticamente.</p>
+
+  <h2>Este sitio web</h2>
+  <p>El sitio web no usa cookies ni ningún servicio de analítica. Las fuentes se alojan en el propio sitio web. El mapa en directo de la página principal obtiene las posiciones de los vehículos del mismo servidor que la app. Una copia del sitio web se aloja en GitHub Pages (tintronix-lab.github.io/360Maps), donde GitHub conserva registros técnicos según sus propias condiciones.</p>
+
+  <h2>Preguntas</h2>
+  <p>Si tienes preguntas sobre la privacidad o sobre cómo trata la app tus datos, escribe a <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a>.</p>
+</main>
+<footer><a href="./">Volver a la página de inicio</a> · <a href="terms.html">Condiciones de uso</a></footer>
+</body>
+</html>

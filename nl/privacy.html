@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacybeleid – 360Maps</title>
+<meta name="description" content="Hoe 360Maps omgaat met je locatie en andere gegevens.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../integritet.html" lang="sv">Svenska</option><option value="../en/privacy.html" lang="en">English</option><option value="../de/privacy.html" lang="de">Deutsch</option><option value="../nb/privacy.html" lang="nb">Norsk</option><option value="../da/privacy.html" lang="da">Dansk</option><option value="../fi/privacy.html" lang="fi">Suomi</option><option value="../nl/privacy.html" lang="nl" selected>Nederlands</option><option value="../fr/privacy.html" lang="fr">Français</option><option value="../es/privacy.html" lang="es">Español</option><option value="../it/privacy.html" lang="it">Italiano</option></select></label></header>
+<main>
+  <h1>Privacybeleid</h1>
+  <p class="updated">Geldig vanaf 25 november 2026.</p>
+
+  <p>360Maps toont verkeer, openbaar vervoer, weer en verstoringen op een kaart en helpt je bezienswaardigheden, parkeerplekken en je weg in Zweden te vinden. De app heeft geen advertenties, geen account en geen tracking. Dit is wat er met je gegevens gebeurt.</p>
+
+  <h2>Je locatie</h2>
+  <p>Als je de app toegang geeft tot je locatie, wordt deze gebruikt terwijl de app geopend is, om te tonen wat er in de buurt is en om reizen vanaf daar te plannen. Tijdens de navigatie wordt hij ook gebruikt wanneer de app op de achtergrond draait of het scherm vergrendeld is, zodat je de volgende afslag hoort. Dat stopt wanneer je aankomt of de rit beëindigt. Hetzelfde geldt terwijl je een reis opneemt of je locatie live deelt, totdat je stopt. Je locatie wordt nooit aan jou gekoppeld en we slaan hem niet op. De enige uitzondering is live delen, waarbij hij versleuteld bij ons wordt bewaard zolang het delen duurt (zie hieronder).</p>
+
+  <h2>Wat wordt verstuurd, en waarheen</h2>
+  <ul>
+    <li><strong>Onze server</strong> ontvangt het zichtbare gebied van de kaart wanneer je voertuigen en andere dichte lagen bekijkt, welke halte je opent, en het begin- en eindpunt wanneer je een reis met het openbaar vervoer plant. Hij gebruikt dit om te antwoorden en slaat het niet op.</li>
+    <li><strong>Apple</strong> ontvangt het begin- en eindpunt wanneer je een reis met de auto, de fiets of te voet plant, en tekent de kaart. De voorwaarden van Apple zijn daarop van toepassing.</li>
+    <li><strong>De gegevensbronnen</strong>, bijvoorbeeld SL en SMHI, ontvangen verzoeken over het gebied waar je naar kijkt, zonder informatie over wie je bent.</li>
+    <li><strong>Onze server</strong> wordt tijdens de navigatie met de auto gevraagd naar de maximumsnelheden in het kilometervak waarin je rijdt. De server ontvangt alleen om welk vak het gaat, niet waar in dat vak je bent of wie je bent, en slaat het niet op.</li>
+    <li><strong>Foto’s van bezienswaardigheden</strong> komen van Wikimedia Commons. Onze server haalt de foto voor de app bij Wikimedia op, zodat Wikimedia jou nooit ziet. De server ontvangt welke foto wordt getoond, gebruikt dit om te antwoorden en slaat het niet op.</li>
+    <li><strong>Watertemperatuur en noorderlicht:</strong> de app haalt de watertemperatuurvoorspelling van de dag voor alle zwemplekken op bij de Zweedse Autoriteit voor Zee- en Waterbeheer, en de noorderlichtvoorspelling voor de hele wereld bij NOAA in de VS. Geen van beide ontvangt waar je bent.</li>
+    <li><strong>Look Around:</strong> wanneer je een bezienswaardigheid opent, vraagt de app Apple om beelden op straatniveau op de positie van de bezienswaardigheid, niet op de jouwe. De voorwaarden van Apple zijn daarop van toepassing.</li>
+  </ul>
+
+  <h2>Je locatie delen</h2>
+  <p>“Locatie sturen” zet je adres en een link met een routebeschrijving naar jou in een bericht, en jij kiest naar wie het gaat. Het loopt niet via ons.</p>
+  <p>“Live delen” toont aan iedereen met de link waar je bent, totdat ze aankomen, de door jou gekozen tijd verloopt of je op Stop tikt. Tijdens het delen stuurt de app je locatie naar onze server wanneer je ongeveer 25 meter hebt verplaatst, en één keer per minuut wanneer je stilstaat, ook wanneer de app op de achtergrond draait. De locatie en het adres, en je naam als je die hebt ingevoerd, worden op je telefoon versleuteld met een sleutel die alleen in de link bestaat. De naam wordt verder alleen op je telefoon bewaard; er is geen account. Browsers sturen dat deel van een link nooit mee, dus onze server kan niet lezen waar je bent. De server bewaart alleen de laatste versleutelde locatie en het moment waarop het delen eindigt, en verwijdert alles uiterlijk tien minuten nadat het delen is beëindigd. Iedereen met de link kan zien waar je bent zolang het delen duurt, dus stuur hem alleen naar mensen van wie je dat wilt.</p>
+  <p>De persoon die de link opent, kan ervoor kiezen te zien hoe ver je weg bent. De afstand wordt dan in zijn of haar browser berekend en nergens naartoe gestuurd.</p>
+
+  <h2>Restaurants, cafés en tafelreservering</h2>
+  <p>De restaurants, cafés en winkelcentra worden met de app meegeleverd, dus ze op de kaart en in de lijsten bekijken verstuurt niets. Wanneer je op “Beoordelingen en foto’s” tikt, vraagt de app Apple Maps naar die plek en gelden de voorwaarden van Apple. Een reserveringspagina hoort bij de reserveringsaanbieder van het restaurant, en daar geldt hun privacybeleid. 360Maps stuurt geen informatie over welke plekken je bekijkt.</p>
+
+  <h2>Wat er op je telefoon wordt opgeslagen</h2>
+  <p>De app onthoudt je keuzes, zoals welke kaartlagen aanstaan en welke meldingen je hebt weggeklikt, je recente bestemmingen, de plekken die je hebt opgeslagen als Thuis en Werk, en waar de telefoon het laatst was (zodat de kaart opent boven het juiste gebied). Ze blijven alleen op je telefoon, worden nooit naar ons gestuurd en verdwijnen als je de app verwijdert. Je verwijdert een bestemming door deze in de lijst ingedrukt te houden. Voor plekken waar je “Beoordelingen en foto’s” hebt geopend, onthoudt de telefoon de identificatie van Apple Maps voor die plek, zodat het opzoeken maar één keer gebeurt. Die blijft op je telefoon en wordt nooit naar ons gestuurd. De geschiedenis van plekken waarvan je de kaart hebt geopend en reizen die je hebt gevolgd, de plekken die je als bezocht hebt gemarkeerd en de dagen die je plant, worden op dezelfde manier op de telefoon bewaard; je wist de geschiedenis onder Geschiedenis → Geschiedenis wissen.</p>
+
+  <h2>Aankopen</h2>
+  <p>360Maps Plus wordt via Apple gekocht. De app en onze server ontvangen nooit je kaart- of andere betaalgegevens, en we houden niet bij wat je hebt gekocht. De telefoon vraagt Apple of je Plus hebt. Hoeveel van je drie gratis autoritten je hebt gebruikt, wordt alleen op de telefoon opgeslagen, in de sleutelhanger, zodat het aantal er nog is als je de app opnieuw installeert. Het wordt nooit naar ons gestuurd.</p>
+
+  <h2>Technische logs</h2>
+  <p>Onze server bewaart korte tijd technische logs, zodat we fouten kunnen herstellen. Ze bevatten welke onderdelen van de dienst zijn opgevraagd, niet wie je bent, en worden automatisch gewist.</p>
+
+  <h2>Deze website</h2>
+  <p>De website gebruikt geen cookies en geen analysedienst. De lettertypen worden op de website zelf gehost. De live kaart op de voorpagina haalt voertuigposities op bij dezelfde server als de app. Een kopie van de website wordt gehost op GitHub Pages (tintronix-lab.github.io/360Maps), waar GitHub technische logs bewaart volgens zijn eigen voorwaarden.</p>
+
+  <h2>Vragen</h2>
+  <p>Heb je vragen over privacy of over hoe de app met je gegevens omgaat, mail dan naar <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a>.</p>
+</main>
+<footer><a href="./">Terug naar de startpagina</a> · <a href="terms.html">Gebruiksvoorwaarden</a></footer>
+</body>
+</html>

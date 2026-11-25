@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support – 360Maps</title>
+<meta name="description" content="Hulp en contact voor 360Maps.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .contact { font-size: 1.35rem; margin: 0.5rem 0 0; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../support.html" lang="sv">Svenska</option><option value="../en/support.html" lang="en">English</option><option value="../de/support.html" lang="de">Deutsch</option><option value="../nb/support.html" lang="nb">Norsk</option><option value="../da/support.html" lang="da">Dansk</option><option value="../fi/support.html" lang="fi">Suomi</option><option value="../nl/support.html" lang="nl" selected>Nederlands</option><option value="../fr/support.html" lang="fr">Français</option><option value="../es/support.html" lang="es">Español</option><option value="../it/support.html" lang="it">Italiano</option></select></label></header>
+<main>
+  <h1>Support</h1>
+  <p class="contact">Mail naar <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a></p>
+  <p>Vermeld alsjeblieft welke iPhone en iOS-versie je hebt, waar op de kaart het gebeurde en ongeveer wanneer. We antwoorden zo snel we kunnen.</p>
+
+  <h2>De kaart is leeg waar ik ben</h2>
+  <p>360Maps toont gegevens voor Zweden. Voertuigen in beweging verschijnen waar de vervoerder zijn posities openlijk deelt, vandaag in 15 provincies.</p>
+
+  <h2>Een laag ontbreekt of toont niets</h2>
+  <p>Tik rechtsboven op de lagenknop en zet aan wat je wilt zien. Als een bron op dat moment niet antwoordt, probeert de app het zo opnieuw.</p>
+
+  <h2>Bezienswaardigheden</h2>
+  <p>De laag Bezienswaardigheden toont meer dan 300 bezienswaardige plekken in Zweden. De foto’s komen van Wikimedia Commons en de beschrijvingen van Wikipedia, elk met vermelding van de bron op de kaart. Tik op een bezienswaardigheid om meer te lezen of een reis ernaartoe te plannen.</p>
+
+  <h2>Gesproken navigatie</h2>
+  <p>Bij een reis met de auto, de fiets of te voet wordt de volgende afslag voorgelezen, ook met vergrendeld scherm. De luidsprekerknop in de banner bovenaan zet de stem uit en aan.</p>
+
+  <h2>Parkeren op je bestemming</h2>
+  <p>Het aantal plekken en de prijs komen van OpenStreetMap, en vrije plekken van de steden die ze openlijk delen. Als er iets ontbreekt, ontbreekt het meestal ook in de bron.</p>
+
+  <h2>Thuis, Werk en recente bestemmingen</h2>
+  <p>Houd een bestemming in de lijst ingedrukt om hem op te slaan als Thuis of Werk, of om hem te verwijderen. Je bestemmingen worden alleen op je telefoon opgeslagen.</p>
+
+  <h2>Taal</h2>
+  <p>De app spreekt Nederlands, Engels, Zweeds, Duits, Noors, Deens, Fins, Frans, Spaans en Italiaans en volgt de taal waarop je iPhone is ingesteld. Je kunt die alleen voor 360Maps wijzigen via Instellingen, 360Maps, Taal.</p>
+
+  <h2>Locatievoorzieningen</h2>
+  <p>De app heeft je locatie nodig om te tonen wat er in de buurt is en om reizen vanaf daar te plannen. Je wijzigt dit onder Instellingen, Privacy en beveiliging, Locatievoorzieningen, 360Maps. Lees meer in het <a href="privacy.html">privacybeleid</a>.</p>
+</main>
+<footer><a href="./">Terug naar de startpagina</a> · <a href="privacy.html">Privacybeleid</a></footer>
+</body>
+</html>

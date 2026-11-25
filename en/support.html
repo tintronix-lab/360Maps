@@ -29,10 +29,11 @@
   .lang:hover { color: var(--ink); text-decoration: underline; }
   header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
   footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
 </style>
 </head>
 <body>
-<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><a class="lang" href="../support.html" hreflang="sv" lang="sv">Svenska</a></header>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../support.html" lang="sv">Svenska</option><option value="../en/support.html" lang="en" selected>English</option><option value="../de/support.html" lang="de">Deutsch</option><option value="../nb/support.html" lang="nb">Norsk</option><option value="../da/support.html" lang="da">Dansk</option><option value="../fi/support.html" lang="fi">Suomi</option><option value="../nl/support.html" lang="nl">Nederlands</option><option value="../fr/support.html" lang="fr">Français</option><option value="../es/support.html" lang="es">Español</option><option value="../it/support.html" lang="it">Italiano</option></select></label></header>
 <main>
   <h1>Support</h1>
   <p class="contact">Email <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a></p>
@@ -57,7 +58,7 @@
   <p>Press and hold a destination in the list to save it as Home or Work, or to remove it. Your destinations are saved only on your phone.</p>
 
   <h2>Language</h2>
-  <p>The app speaks English and Swedish and follows the language your iPhone is set to. You can change it for 360Maps alone under Settings, 360Maps, Language.</p>
+  <p>The app speaks English, Swedish, German, Norwegian, Danish, Finnish, Dutch, French, Spanish and Italian, and follows the language your iPhone is set to. You can change it for 360Maps alone under Settings, 360Maps, Language.</p>
 
   <h2>Location services</h2>
   <p>The app needs your location to show what is near you and to plan journeys from there. You change it under Settings, Privacy &amp; Security, Location Services, 360Maps. Read more in the <a href="privacy.html">privacy policy</a>.</p>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personvernerklæring – 360Maps</title>
+<meta name="description" content="Hvordan 360Maps behandler posisjonen din og andre data.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../integritet.html" lang="sv">Svenska</option><option value="../en/privacy.html" lang="en">English</option><option value="../de/privacy.html" lang="de">Deutsch</option><option value="../nb/privacy.html" lang="nb" selected>Norsk</option><option value="../da/privacy.html" lang="da">Dansk</option><option value="../fi/privacy.html" lang="fi">Suomi</option><option value="../nl/privacy.html" lang="nl">Nederlands</option><option value="../fr/privacy.html" lang="fr">Français</option><option value="../es/privacy.html" lang="es">Español</option><option value="../it/privacy.html" lang="it">Italiano</option></select></label></header>
+<main>
+  <h1>Personvernerklæring</h1>
+  <p class="updated">Gjelder fra 25. november 2026.</p>
+
+  <p>360Maps viser trafikk, kollektivtransport, vær og avvik på et kart, og hjelper deg å finne severdigheter, parkering og veien rundt i Sverige. Appen har ingen reklame, ingen konto og ingen sporing. Dette skjer med dataene dine.</p>
+
+  <h2>Posisjonen din</h2>
+  <p>Hvis du gir appen tilgang til posisjonen din, brukes den mens appen er åpen, for å vise hva som er i nærheten av deg og for å planlegge turer derfra. Under navigasjon brukes den også når appen er i bakgrunnen eller skjermen er låst, slik at du hører neste sving. Det stopper når du kommer fram eller avslutter turen. Det samme gjelder mens du tar opp en tur eller deler posisjonen din live, helt til du stopper. Posisjonen din knyttes aldri til deg, og vi lagrer den ikke. Det eneste unntaket er live-deling, der den lagres hos oss i kryptert form så lenge delingen varer (se nedenfor).</p>
+
+  <h2>Hva som sendes, og hvor</h2>
+  <ul>
+    <li><strong>Serveren vår</strong> mottar det synlige kartutsnittet når du ser på kjøretøy og andre tette lag, hvilket stopp du åpner, og start og mål når du planlegger en tur med kollektivtransport. Den bruker dette for å svare og lagrer det ikke.</li>
+    <li><strong>Apple</strong> mottar start og mål når du planlegger en tur med bil, sykkel eller til fots, og tegner kartet. Apples vilkår gjelder for dette.</li>
+    <li><strong>Datakildene</strong>, for eksempel SL og SMHI, mottar forespørsler om området du ser på, uten opplysninger om hvem du er.</li>
+    <li><strong>Serveren vår</strong> blir under bilnavigasjon spurt om fartsgrensene i kilometerruten du kjører i. Serveren mottar bare hvilken rute det er, ikke hvor i den du er eller hvem du er, og lagrer det ikke.</li>
+    <li><strong>Bilder av severdigheter</strong> kommer fra Wikimedia Commons. Serveren vår henter bildet fra Wikimedia for appen, slik at Wikimedia aldri ser deg. Serveren mottar hvilket bilde som vises, bruker dette for å svare og lagrer det ikke.</li>
+    <li><strong>Vanntemperatur og nordlys:</strong> appen henter dagens vanntemperaturvarsel for alle badeplasser fra den svenske havs- og vannforvaltningsmyndigheten, og nordlysvarselet for hele verden fra NOAA i USA. Ingen av dem får vite hvor du er.</li>
+    <li><strong>Look Around:</strong> når du åpner en severdighet, ber appen Apple om bilder på gatenivå ved severdighetens posisjon, ikke din. Apples vilkår gjelder for dette.</li>
+  </ul>
+
+  <h2>Deling av posisjonen din</h2>
+  <p>«Send posisjon» legger adressen din og en lenke med veibeskrivelse til deg i en melding, og du velger hvem den går til. Den går ikke via oss.</p>
+  <p>«Del live» viser hvor du er for alle som har lenken, helt til de kommer fram, tiden du valgte går ut eller du trykker på Stopp. Under delingen sender appen posisjonen din til serveren vår når du har flyttet deg omtrent 25 meter, og én gang i minuttet når du står stille, også når appen er i bakgrunnen. Posisjonen og adressen, og navnet ditt hvis du har skrevet inn et, krypteres på telefonen din med en nøkkel som bare finnes i lenken. Navnet lagres ellers bare på telefonen din; det finnes ingen konto. Nettlesere sender aldri den delen av en lenke, så serveren vår kan ikke lese hvor du er. Serveren lagrer bare den siste krypterte posisjonen og når delingen slutter, og sletter alt senest ti minutter etter at delingen er avsluttet. Alle som har lenken kan se hvor du er mens delingen varer, så send den bare til folk du vil skal se det.</p>
+  <p>Personen som åpner lenken kan velge å se hvor langt unna du er. Avstanden regnes da ut i vedkommendes nettleser og sendes ingen steder.</p>
+
+  <h2>Restauranter, kafeer og bordbestilling</h2>
+  <p>Restaurantene, kafeene og kjøpesentrene følger med appen, så det sendes ingenting når du blar i dem på kartet og i listene. Når du trykker på «Vurderinger &amp; bilder», spør appen Apple Maps om det stedet, og Apples vilkår gjelder. En bestillingsside tilhører restaurantens bestillingsleverandør, og der gjelder deres personvernerklæring. 360Maps sender ingen opplysninger om hvilke steder du ser på.</p>
+
+  <h2>Hva som lagres på telefonen din</h2>
+  <p>Appen husker valgene dine, for eksempel hvilke kartlag som er på og hvilke meldinger du har lukket, nylige reisemål, stedene du har lagret som Hjem og Jobb, og hvor telefonen sist var (slik at kartet åpner over riktig område). De blir bare på telefonen din, sendes aldri til oss og forsvinner hvis du sletter appen. Du fjerner et reisemål ved å trykke og holde på det i listen. For steder der du har åpnet «Vurderinger &amp; bilder», husker telefonen Apple Maps’ identifikator for det stedet, slik at oppslaget bare gjøres én gang. Den blir på telefonen din og sendes aldri til oss. Historikken over steder du åpnet kortet til og turer du fulgte, stedene du markerte som besøkt og dagene du planlegger lagres på telefonen på samme måte; du tømmer historikken under Historikk → Tøm historikk.</p>
+
+  <h2>Kjøp</h2>
+  <p>360Maps Plus kjøpes via Apple. Appen og serveren vår mottar aldri kort- eller andre betalingsopplysninger, og vi fører ingen oversikt over hva du har kjøpt. Telefonen spør Apple om du har Plus. Hvor mange av de tre gratis bilturene dine du har brukt, lagres bare på telefonen, i nøkkelringen, slik at tallet fortsatt er der hvis du installerer appen på nytt. Det sendes aldri til oss.</p>
+
+  <h2>Tekniske logger</h2>
+  <p>Serveren vår lagrer tekniske logger en kort tid slik at vi kan rette feil. De inneholder hvilke deler av tjenesten som ble etterspurt, ikke hvem du er, og slettes automatisk.</p>
+
+  <h2>Dette nettstedet</h2>
+  <p>Nettstedet bruker ingen informasjonskapsler og ingen analysetjeneste. Skriftene ligger på selve nettstedet. Live-kartet på forsiden henter kjøretøyposisjoner fra den samme serveren som appen. En kopi av nettstedet ligger på GitHub Pages (tintronix-lab.github.io/360Maps), der GitHub fører tekniske logger etter sine egne vilkår.</p>
+
+  <h2>Spørsmål</h2>
+  <p>Hvis du har spørsmål om personvern eller om hvordan appen behandler dataene dine, send e-post til <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a>.</p>
+</main>
+<footer><a href="./">Tilbake til forsiden</a> · <a href="terms.html">Vilkår for bruk</a></footer>
+</body>
+</html>

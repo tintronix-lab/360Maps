@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Politique de confidentialité – 360Maps</title>
+<meta name="description" content="La manière dont 360Maps traite votre position et vos autres données.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../integritet.html" lang="sv">Svenska</option><option value="../en/privacy.html" lang="en">English</option><option value="../de/privacy.html" lang="de">Deutsch</option><option value="../nb/privacy.html" lang="nb">Norsk</option><option value="../da/privacy.html" lang="da">Dansk</option><option value="../fi/privacy.html" lang="fi">Suomi</option><option value="../nl/privacy.html" lang="nl">Nederlands</option><option value="../fr/privacy.html" lang="fr" selected>Français</option><option value="../es/privacy.html" lang="es">Español</option><option value="../it/privacy.html" lang="it">Italiano</option></select></label></header>
+<main>
+  <h1>Politique de confidentialité</h1>
+  <p class="updated">En vigueur à partir du 25 novembre 2026.</p>
+
+  <p>360Maps affiche sur une carte la circulation, les transports en commun, la météo et les perturbations, et vous aide à trouver des sites à visiter, du stationnement et votre chemin en Suède. L’app n’a ni publicité, ni compte, ni suivi. Voici ce qu’il advient de vos données.</p>
+
+  <h2>Votre position</h2>
+  <p>Si vous donnez à l’app l’accès à votre position, celle-ci est utilisée lorsque l’app est ouverte, pour afficher ce qui se trouve près de vous et planifier des trajets à partir de là. Pendant le guidage, elle est aussi utilisée lorsque l’app est en arrière-plan ou que l’écran est verrouillé, afin que vous entendiez le prochain virage. Cela s’arrête lorsque vous arrivez ou mettez fin au trajet. Il en va de même pendant que vous enregistrez un trajet ou partagez votre position en direct, jusqu’à ce que vous arrêtiez. Votre position n’est jamais liée à vous, et nous ne la conservons pas. La seule exception est le partage en direct, pour lequel elle est conservée chez nous sous forme chiffrée pendant la durée du partage (voir ci-dessous).</p>
+
+  <h2>Ce qui est envoyé, et où</h2>
+  <ul>
+    <li><strong>Notre serveur</strong> reçoit la zone visible de la carte lorsque vous regardez les véhicules et d’autres couches denses, l’arrêt que vous ouvrez, et le départ et la destination lorsque vous planifiez un trajet en transports en commun. Il s’en sert pour répondre et ne le conserve pas.</li>
+    <li><strong>Apple</strong> reçoit le départ et la destination lorsque vous planifiez un trajet en voiture, à vélo ou à pied, et dessine la carte. Les conditions d’Apple s’appliquent à cela.</li>
+    <li><strong>Les sources de données</strong>, par exemple SL et le SMHI, reçoivent des requêtes portant sur la zone que vous regardez, sans aucune information sur qui vous êtes.</li>
+    <li><strong>Notre serveur</strong> est interrogé, pendant le guidage en voiture, sur les limitations de vitesse du carré d’un kilomètre dans lequel vous roulez. Le serveur reçoit uniquement de quel carré il s’agit, et non l’endroit où vous vous trouvez dans ce carré ni qui vous êtes, et ne le conserve pas.</li>
+    <li><strong>Les photos des sites</strong> viennent de Wikimedia Commons. Notre serveur récupère la photo auprès de Wikimedia pour l’app, de sorte que Wikimedia ne vous voit jamais. Le serveur reçoit quelle photo est affichée, s’en sert pour répondre et ne le conserve pas.</li>
+    <li><strong>Température de l’eau et aurores boréales :</strong> l’app récupère les prévisions du jour de température de l’eau pour tous les lieux de baignade auprès de l’Agence suédoise de gestion de la mer et de l’eau, et les prévisions d’aurores boréales pour le monde entier auprès de la NOAA aux États-Unis. Aucune des deux ne reçoit l’endroit où vous êtes.</li>
+    <li><strong>Look Around :</strong> lorsque vous ouvrez un site, l’app demande à Apple des images au niveau de la rue à la position du site, et non à la vôtre. Les conditions d’Apple s’appliquent à cela.</li>
+  </ul>
+
+  <h2>Partager votre position</h2>
+  <p>« Envoyer la position » place votre adresse et un lien avec l’itinéraire pour vous rejoindre dans un message, et c’est vous qui choisissez à qui il est envoyé. Cela ne passe pas par nous.</p>
+  <p>« Partager en direct » montre où vous êtes à toute personne disposant du lien, jusqu’à ce qu’elle arrive, que la durée choisie expire ou que vous touchiez Arrêter. Pendant le partage, l’app envoie votre position à notre serveur lorsque vous vous êtes déplacé d’environ 25 mètres, et une fois par minute lorsque vous restez immobile, y compris lorsque l’app est en arrière-plan. La position et l’adresse, ainsi que votre nom si vous en avez saisi un, sont chiffrés sur votre téléphone avec une clé qui n’existe que dans le lien. Le nom n’est par ailleurs conservé que sur votre téléphone ; il n’y a pas de compte. Les navigateurs n’envoient jamais cette partie d’un lien, donc notre serveur ne peut pas lire où vous êtes. Le serveur ne conserve que la dernière position chiffrée et le moment où le partage se termine, et supprime tout au plus tard dix minutes après la fin du partage. Toute personne disposant du lien peut voir où vous êtes tant que le partage dure ; ne l’envoyez donc qu’aux personnes que vous voulez voir cette information.</p>
+  <p>La personne qui ouvre le lien peut choisir de voir à quelle distance vous vous trouvez. La distance est alors calculée dans son navigateur et n’est envoyée nulle part.</p>
+
+  <h2>Restaurants, cafés et réservation de table</h2>
+  <p>Les restaurants, cafés et centres commerciaux sont fournis avec l’app ; les parcourir sur la carte et dans les listes n’envoie donc rien. Lorsque vous touchez « Avis et photos », l’app interroge Apple Plans au sujet de ce lieu, et les conditions d’Apple s’appliquent. Une page de réservation appartient au prestataire de réservation du restaurant, et c’est sa politique de confidentialité qui s’y applique. 360Maps n’envoie aucune information sur les lieux que vous consultez.</p>
+
+  <h2>Ce qui est enregistré sur votre téléphone</h2>
+  <p>L’app mémorise vos choix, comme les couches de carte activées et les notices que vous avez fermées, vos destinations récentes, les lieux que vous avez enregistrés comme Domicile et Travail, et le dernier endroit où se trouvait le téléphone (pour que la carte s’ouvre sur la bonne zone). Ces informations restent uniquement sur votre téléphone, ne nous sont jamais envoyées et disparaissent si vous supprimez l’app. Vous supprimez une destination en la maintenant appuyée dans la liste. Pour les lieux où vous avez ouvert « Avis et photos », le téléphone mémorise l’identifiant d’Apple Plans pour ce lieu, de sorte que la recherche n’a lieu qu’une seule fois. Il reste sur votre téléphone et ne nous est jamais envoyé. L’historique des lieux dont vous avez ouvert la fiche et des trajets que vous avez suivis, les lieux que vous avez marqués comme visités et les journées que vous planifiez sont conservés sur le téléphone de la même manière ; vous effacez l’historique dans Historique → Effacer l’historique.</p>
+
+  <h2>Achats</h2>
+  <p>360Maps Plus s’achète via Apple. L’app et notre serveur ne reçoivent jamais votre carte ni d’autres données de paiement, et nous ne gardons aucune trace de ce que vous avez acheté. Le téléphone demande à Apple si vous avez Plus. Le nombre de vos trois trajets gratuits en voiture que vous avez utilisés est enregistré uniquement sur le téléphone, dans son trousseau, de sorte que ce nombre est toujours là si vous réinstallez l’app. Il ne nous est jamais envoyé.</p>
+
+  <h2>Journaux techniques</h2>
+  <p>Notre serveur conserve des journaux techniques pendant une courte durée afin que nous puissions corriger les erreurs. Ils indiquent quelles parties du service ont été demandées, et non qui vous êtes, et sont effacés automatiquement.</p>
+
+  <h2>Ce site web</h2>
+  <p>Le site web n’utilise ni cookies ni service d’analyse. Les polices sont hébergées sur le site lui-même. La carte en direct de la page d’accueil récupère les positions des véhicules auprès du même serveur que l’app. Une copie du site web est hébergée sur GitHub Pages (tintronix-lab.github.io/360Maps), où GitHub conserve des journaux techniques selon ses propres conditions.</p>
+
+  <h2>Questions</h2>
+  <p>Si vous avez des questions sur la confidentialité ou sur la manière dont l’app traite vos données, écrivez à <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a>.</p>
+</main>
+<footer><a href="./">Retour à l’accueil</a> · <a href="terms.html">Conditions d’utilisation</a></footer>
+</body>
+</html>

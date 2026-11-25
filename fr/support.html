@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assistance – 360Maps</title>
+<meta name="description" content="Aide et contact pour 360Maps.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --paper: #F3F6F9; --ink: #0E2240; --ink-soft: #46586F; --rule: #D5DEE8; --brand: #1F4FFF; --teal: #10C7B4;
+          --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --text: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0F1B2D; --ink: #EAF0F7; --ink-soft: #A9B8CB; --rule: #2A3C56; --brand: #8FA9FF; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.65; }
+  a { color: var(--brand); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  main, header, footer { width: min(42rem, 100% - 2rem); margin-inline: auto; }
+  header { padding: 1rem 0; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; }
+  .brand img { width: 2.25rem; height: 2.25rem; border-radius: 0.55rem; }
+  .brand span { font-family: var(--display); font-weight: 700; font-size: 1.6rem; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; margin: 2rem 0 0.5rem; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; margin: 2.5rem 0 0.5rem; }
+  p, li { max-width: 40rem; }
+  .updated { color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .contact { font-size: 1.35rem; margin: 0.5rem 0 0; }
+  .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+  .lang:hover { color: var(--ink); text-decoration: underline; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><img src="../img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="../support.html" lang="sv">Svenska</option><option value="../en/support.html" lang="en">English</option><option value="../de/support.html" lang="de">Deutsch</option><option value="../nb/support.html" lang="nb">Norsk</option><option value="../da/support.html" lang="da">Dansk</option><option value="../fi/support.html" lang="fi">Suomi</option><option value="../nl/support.html" lang="nl">Nederlands</option><option value="../fr/support.html" lang="fr" selected>Français</option><option value="../es/support.html" lang="es">Español</option><option value="../it/support.html" lang="it">Italiano</option></select></label></header>
+<main>
+  <h1>Assistance</h1>
+  <p class="contact">Écrivez à <a href="mailto:raztechsupport@icloud.com">raztechsupport@icloud.com</a></p>
+  <p>Indiquez s’il vous plaît quel iPhone et quelle version d’iOS vous avez, à quel endroit de la carte cela s’est produit et à peu près quand. Nous répondons dès que possible.</p>
+
+  <h2>La carte est vide là où je suis</h2>
+  <p>360Maps affiche des données pour la Suède. Les véhicules en mouvement apparaissent là où l’exploitant de transport partage ses positions de manière ouverte, aujourd’hui dans 15 comtés.</p>
+
+  <h2>Une couche manque ou n’affiche rien</h2>
+  <p>Touchez le bouton des couches en haut à droite et activez ce que vous voulez voir. Si une source ne répond pas à ce moment-là, l’app réessaie dans un instant.</p>
+
+  <h2>Sites à voir</h2>
+  <p>La couche Sites à voir affiche plus de 300 lieux à ne pas manquer en Suède. Les photos viennent de Wikimedia Commons et les descriptions de Wikipedia, chacune avec sa mention de source sur la fiche. Touchez un site pour en lire plus ou pour planifier un trajet jusque-là.</p>
+
+  <h2>Guidage vocal</h2>
+  <p>Lors d’un trajet en voiture, à vélo ou à pied, le prochain virage est annoncé à voix haute, même avec l’écran verrouillé. Le bouton haut-parleur dans la bannière en haut coupe et réactive la voix.</p>
+
+  <h2>Stationnement à destination</h2>
+  <p>Le nombre de places et le prix viennent d’OpenStreetMap, et les places libres des villes qui les partagent de manière ouverte. Si quelque chose manque, cela manque généralement aussi dans la source.</p>
+
+  <h2>Domicile, Travail et destinations récentes</h2>
+  <p>Maintenez le doigt sur une destination dans la liste pour l’enregistrer comme Domicile ou Travail, ou pour la supprimer. Vos destinations sont enregistrées uniquement sur votre téléphone.</p>
+
+  <h2>Langue</h2>
+  <p>L'app parle français, anglais, suédois, allemand, norvégien, danois, finnois, néerlandais, espagnol et italien, et suit la langue de votre iPhone. Vous pouvez la changer pour 360Maps seulement dans Réglages, 360Maps, Langue.</p>
+
+  <h2>Service de localisation</h2>
+  <p>L’app a besoin de votre position pour afficher ce qui se trouve près de vous et pour planifier des trajets à partir de là. Vous la modifiez dans Réglages, Confidentialité et sécurité, Service de localisation, 360Maps. Pour en savoir plus, consultez la <a href="privacy.html">politique de confidentialité</a>.</p>
+</main>
+<footer><a href="./">Retour à l’accueil</a> · <a href="privacy.html">Politique de confidentialité</a></footer>
+</body>
+</html>

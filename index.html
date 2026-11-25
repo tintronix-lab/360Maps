@@ -179,6 +179,7 @@
     td:first-child { font-weight: 700; }
     td:last-child { white-space: normal; font-size: 0.95rem; }
   }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
 </style>
 </head>
 <body>
@@ -192,7 +193,7 @@
     <a href="#support">Support</a>
     <a href="integritet.html">Integritet</a>
   </nav>
-  <a class="lang" href="en/" hreflang="en" lang="en">English</a>
+  <label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="./" lang="sv" selected>Svenska</option><option value="en/" lang="en">English</option><option value="de/" lang="de">Deutsch</option><option value="nb/" lang="nb">Norsk</option><option value="da/" lang="da">Dansk</option><option value="fi/" lang="fi">Suomi</option><option value="nl/" lang="nl">Nederlands</option><option value="fr/" lang="fr">Français</option><option value="es/" lang="es">Español</option><option value="it/" lang="it">Italiano</option></select></label>
 </header>
 
 <main>
@@ -204,7 +205,7 @@
       <p>360Maps samlar bussar, tåg, köer, väglag, regn och störningar på en karta för iPhone. Kartan här ovanför är Stockholm just nu, ritad med samma data som appen.</p>
       <div class="actions">
         <a class="button" href="#kartan">Se vad appen visar</a>
-        <span class="soon">Kommer till App Store för iPhone</span>
+        <a class="button" href="https://apps.apple.com/app/360maps/id6837692108">Hämta i App Store</a>
       </div>
     </div>
   </div>
@@ -213,6 +214,22 @@
     <h2>Det här ser du på kartan</h2>
     <p class="lede">Slå på det du behöver. Allt hämtas från myndigheternas och trafikbolagens öppna data och uppdateras medan du tittar.</p>
     <ul class="legend">
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#F5C000"/><path d="M24 14 L27 21 H34 L28.5 25.5 L30.5 33 L24 28.5 L17.5 33 L19.5 25.5 L14 21 H21 Z" fill="#1C1C1E"/></svg></div>
+        <div><h3>Utvalda ställen</h3><p>Ställen vi väljer ut åt besökare, till exempel de italienska espressobarer som italienare i Stockholm tipsar om. De syns alltid, oavsett zoom.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="16" cy="24" r="10" fill="#B20D5C"/><circle cx="34" cy="24" r="10" fill="#A94A1F"/><circle cx="52" cy="24" r="10" fill="#5B3A99"/></svg></div>
+        <div><h3>Restauranger, kaféer och barer</h3><p>Var och en i sin färg, med öppettider, och en lista när du trycker på en grupp av dem. Omkring 20 000 ställen i hela Sverige.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#B0202A"/><path d="M24 15 V33 M15 24 H33" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg></div>
+        <div><h3>Apotek och akutmottagningar</h3><p>Apotek och sjukhusens akutmottagningar i hela Sverige, med öppettider. Vid livsfara: ring 112.</p></div>
+      </li>
+      <li>
+        <div class="key" aria-hidden="true"><svg viewBox="0 0 68 48"><circle cx="24" cy="24" r="15" fill="#0B6A9E"/><text x="24" y="29" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="15" fill="#fff">18°</text></svg></div>
+        <div><h3>Badplatser, natur och norrsken</h3><p>Badplatser med dagens vattentemperatur, nationalparker, naturreservat och isbanor, och chansen att se norrsken.</p></div>
+      </li>
       <li>
         <div class="key" aria-hidden="true"><span class="pin" style="background:var(--bus)">4</span><span class="pin" style="background:var(--metro)">14</span><span class="pin" style="background:var(--train)">41</span></div>
         <div><h3>Bussar, tunnelbana, tåg och båtar</h3><p>Fordonen rör sig på kartan med sitt linjenummer, i 15 län. Rött är buss, blått tunnelbana, lila tåg och turkos båt.</p></div>

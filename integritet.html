@@ -28,13 +28,14 @@
   .lang:hover { color: var(--ink); text-decoration: underline; }
   header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
   footer { margin-top: 3.5rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 1rem; }
+/* language menu */ .lang select { font: inherit; font-size: 1rem; color: var(--ink-soft); background: transparent; border: 1px solid currentColor; border-radius: 8px; padding: 4px 8px; }
 </style>
 </head>
 <body>
-<header><a class="brand" href="./"><img src="img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><a class="lang" href="en/privacy.html" hreflang="en" lang="en">English</a></header>
+<header><a class="brand" href="./"><img src="img/apple-touch-icon.png" alt="" width="36" height="36"><span>360Maps</span></a><label class="lang"><select aria-label="Language · Språk" onchange="if(this.value)location.href=this.value"><option value="integritet.html" lang="sv" selected>Svenska</option><option value="en/privacy.html" lang="en">English</option><option value="de/privacy.html" lang="de">Deutsch</option><option value="nb/privacy.html" lang="nb">Norsk</option><option value="da/privacy.html" lang="da">Dansk</option><option value="fi/privacy.html" lang="fi">Suomi</option><option value="nl/privacy.html" lang="nl">Nederlands</option><option value="fr/privacy.html" lang="fr">Français</option><option value="es/privacy.html" lang="es">Español</option><option value="it/privacy.html" lang="it">Italiano</option></select></label></header>
 <main>
   <h1>Integritetspolicy</h1>
-  <p class="updated">Gäller från 24 november 2026.</p>
+  <p class="updated">Gäller från 25 november 2026.</p>
 
   <p>360Maps visar trafik, kollektivtrafik, väder och störningar på en karta. Appen har ingen reklam, inget konto och ingen spårning. Här står vad som händer med dina uppgifter.</p>
 
@@ -48,6 +49,8 @@
     <li><strong>Datakällorna</strong>, till exempel SL och SMHI, får frågor om det område du tittar på, utan uppgifter om vem du är.</li>
     <li><strong>Vår server</strong> får under vägvisning med bil frågan om hastighetsgränserna i den kilometerruta du kör i. Servern får bara vilken ruta det är, inte var i den du är eller vem du är, och sparar det inte.</li>
     <li><strong>Foton på sevärdheter</strong> kommer från Wikimedia Commons. Vår server hämtar fotot från Wikimedia åt appen, så Wikimedia ser aldrig dig. Servern får vilket foto som visas, använder det för att svara och sparar det inte.</li>
+    <li><strong>Vattentemperatur och norrsken:</strong> appen hämtar dagens prognos för vattentemperaturen vid alla badplatser från Havs- och vattenmyndigheten, och norrskensprognosen för hela världen från NOAA i USA. Ingen av dem får veta var du är.</li>
+    <li><strong>Look Around:</strong> när du öppnar en sevärdhet frågar appen Apple efter gatubilder vid sevärdhetens position, inte din. Apples villkor gäller för det.</li>
   </ul>
 
   <h2>Dela din position</h2>
@@ -59,7 +62,7 @@
   <p>Restaurangerna, kaféerna och köpcentrumen följer med appen, så att bläddra bland dem på kartan och i listorna skickar ingenting. Trycker du på ”Betyg och foton” frågar appen Apple Kartor om just det stället, och Apples villkor gäller. En bokningssida tillhör restaurangens bokningstjänst, och där gäller deras integritetspolicy. 360Maps skickar ingen uppgift om vilka ställen du tittar på.</p>
 
   <h2>Det som sparas på telefonen</h2>
-  <p>Appen kommer ihåg dina val, till exempel vilka kartlager som är påslagna och vilka meddelanden du har stängt, dina senaste resmål, de platser du sparat som Hem och Jobb och var telefonen var senast (så att kartan öppnas över rätt område). De ligger bara i telefonen, skickas aldrig till oss och försvinner om du tar bort appen. Ett resmål tar du bort genom att hålla in det i listan. För ställen där du har öppnat ”Betyg och foton” kommer telefonen ihåg Apple Kartors id för stället, så att uppslaget bara görs en gång. Det stannar i telefonen och skickas aldrig till oss.</p>
+  <p>Appen kommer ihåg dina val, till exempel vilka kartlager som är påslagna och vilka meddelanden du har stängt, dina senaste resmål, de platser du sparat som Hem och Jobb och var telefonen var senast (så att kartan öppnas över rätt område). De ligger bara i telefonen, skickas aldrig till oss och försvinner om du tar bort appen. Ett resmål tar du bort genom att hålla in det i listan. För ställen där du har öppnat ”Betyg och foton” kommer telefonen ihåg Apple Kartors id för stället, så att uppslaget bara görs en gång. Det stannar i telefonen och skickas aldrig till oss. Historiken över ställen vars kort du öppnat och resor du följt, de ställen du markerat att du varit på och de dagar du planerar sparas på samma sätt i telefonen; du rensar historiken under Historik → Rensa historik.</p>
 
   <h2>Köp</h2>
   <p>360Maps Plus köps genom Apple. Appen och vår server får aldrig ditt kort eller andra betalningsuppgifter, och vi sparar ingen uppgift om vad du har köpt. Telefonen frågar Apple om du har Plus. Hur många av dina tre fria bilresor du har använt sparas bara i telefonen, i dess nyckelring, så siffran finns kvar om du installerar om appen. Den skickas aldrig till oss.</p>
