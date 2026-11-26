@@ -74,9 +74,10 @@
 
   .lang { font-size: 1rem; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
   .lang:hover { color: var(--ink); text-decoration: underline; }
-  /* Hero: the live map is the picture */
+  /* Hero: the map is the picture (a made-up moment in Stockholm, scripts/hero-video) */
   .hero { position: relative; height: min(86vh, 48rem); min-height: 34rem; overflow: hidden; border-block: 1px solid var(--rule); }
-  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero__map { position: absolute; inset: 0; }
+  .hero__map video { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--paper); }
   .hero__text {
     position: absolute; left: max(1rem, calc((100% - 72rem) / 2)); bottom: 1.5rem;
     width: min(34rem, calc(100% - 2rem));
@@ -99,15 +100,6 @@
   }
   .button:hover { background: #1640D9; }
   .soon { font-size: 1rem; color: var(--ink-soft); }
-  .live {
-    position: absolute; right: max(1rem, calc((100% - 72rem) / 2)); top: 1rem;
-    max-width: min(22rem, calc(100% - 2rem));
-    font-size: 0.95rem; line-height: 1.4; color: var(--ink-soft);
-    background: color-mix(in srgb, var(--paper) 90%, transparent);
-    padding: 0.45rem 0.75rem; border-radius: 0.4rem; border: 1px solid var(--rule);
-  }
-  .live strong { color: var(--ink); font-weight: 700; }
-  .live__dot { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #E0352B; margin-right: 0.35rem; vertical-align: 0.05em; }
 
   /* Sections */
   section { padding: 4.5rem 0 1rem; }
@@ -168,9 +160,8 @@
 
   @media (max-width: 40rem) {
     .hero { height: auto; min-height: 0; }
-    .hero canvas { position: relative; height: 62vh; }
+    .hero__map { position: relative; height: 62vh; }
     .hero__text { position: relative; left: 0; bottom: 0; width: 100%; border: 0; border-radius: 0; padding: 1.5rem 1rem 1.75rem; background: var(--paper); }
-    .live { top: 0.75rem; right: 0.75rem; }
     .masthead nav { display: none; }
     /* Sources: one block per source instead of three narrow columns */
     thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
@@ -198,11 +189,10 @@
 
 <main>
   <div class="hero">
-    <canvas id="live-map" role="img" aria-label="Tukholman livekartta: jokainen piste on bussi, metrojuna tai vene, joka liikkuu juuri nyt, ja pääteiden jonot on merkitty keltaisella."></canvas>
-    <p class="live" id="live-status" aria-live="polite"><span class="live__dot" aria-hidden="true"></span>Haetaan Tukholman ajoneuvoja…</p>
+    <div class="hero__map" role="img" aria-label="Animoitu Tukholman kartta sovelluksen tyyliin: liikkuvia busseja, metroja, junia, raitiovaunuja ja laivoja sekä ruuhkat pääväylillä keltaisella."><video id="live-map" muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
     <div class="hero__text">
       <h1>Ruotsi yhdellä kartalla, reaaliajassa.</h1>
-      <p>360Maps on tehty Ruotsissa vierailua varten. Löydä nähtävyydet, matkusta busseilla, junilla ja veneillä, katso liikenne, sää ja pysäköinti ja saa ääniohjeet, 28 kielellä iPhonella. Yllä oleva kartta näyttää Tukholman juuri nyt, piirrettynä samalla datalla kuin sovellus.</p>
+      <p>360Maps on tehty Ruotsissa vierailua varten. Löydä nähtävyydet, matkusta busseilla, junilla ja veneillä, katso liikenne, sää ja pysäköinti ja saa ääniohjeet, 28 kielellä iPhonella.</p>
       <div class="actions">
         <a class="button" href="#map">Katso, mitä sovellus näyttää</a>
         <a class="button" href="https://apps.apple.com/app/360maps/id6837692108">Lataa App Storesta</a>
@@ -372,135 +362,22 @@
 
 <script>
 (() => {
-  // The live map: Stockholm drawn only with live data from the same API the app uses.
-  const canvas = document.getElementById('live-map');
-  const status = document.getElementById('live-status');
-  const ctx = canvas.getContext('2d');
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-
-  const view = { lat: 59.333, lon: 18.045, spanLat: 0.105, spanLon: 0.30 };
-  const box = { minLon: 17.86, minLat: 59.27, maxLon: 18.22, maxLat: 59.40 };
-  // The copy on GitHub Pages reads the same server; on the server itself the API is same-origin.
-  const API = location.hostname.endsWith('github.io') ? 'https://myvehicles.duckdns.org:8444' : '';
-  const kLon = Math.cos(view.lat * Math.PI / 180);
-  const places = [
-    ['Kungsholmen', 59.332, 18.030], ['Södermalm', 59.313, 18.068], ['Östermalm', 59.340, 18.088],
-    ['Vasastan', 59.346, 18.046], ['Gamla stan', 59.3245, 18.071], ['Djurgården', 59.326, 18.112],
-    ['Solna', 59.361, 18.000], ['Hammarby Sjöstad', 59.302, 18.098], ['Liljeholmen', 59.309, 18.022],
-  ];
-  const modeColor = symbol => {
-    if (!symbol) return css('--bus');
-    if (symbol.includes('tunnel')) return css('--metro');
-    if (symbol.startsWith('train')) return css('--train');
-    if (symbol.startsWith('tram')) return css('--tram');
-    if (symbol.startsWith('ferry')) return css('--boat');
-    return css('--bus');
-  };
-
-  let w = 0, h = 0, scale = 1;
-  function resize() {
-    const r = canvas.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = r.width; h = r.height;
-    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    scale = Math.max(w / (view.spanLon * kLon), h / view.spanLat);  // cover the canvas
+  // The hero: a made-up moment in Stockholm drawn like the app's live map (scripts/hero-video), so the
+  // page needs no live data. Wide or narrow, light or dark, as the page is; a still frame for reduced motion.
+  const video = document.getElementById('live-map');
+  const queries = ['(prefers-color-scheme: dark)', '(max-width: 40rem)'].map(q => matchMedia(q));
+  const still = matchMedia('(prefers-reduced-motion: reduce)');
+  function pick() {
+    const name = `../img/hero-${queries[1].matches ? 'narrow' : 'wide'}-${queries[0].matches ? 'dark' : 'light'}`;
+    if (video.dataset.name === name) return;
+    video.dataset.name = name;
+    video.poster = name + '.jpg';
+    if (still.matches) { video.removeAttribute('src'); video.load(); return; }
+    video.src = name + '.mp4';
+    video.play().catch(() => {});
   }
-  const project = (lat, lon) => [w / 2 + (lon - view.lon) * kLon * scale, h / 2 - (lat - view.lat) * scale];
-
-  let stretches = [];           // travel-time stretches: the motorway skeleton, queues in colour
-  const vehicles = new Map();    // id -> {from, to, start, duration, color, badge}
-
-  async function loadStretches() {
-    try {
-      const r = await fetch(API + '/v1/layers/travelTimes');
-      if (!r.ok) return;
-      const data = await r.json();
-      stretches = data.items.filter(i => i.path && i.path.length > 1);
-    } catch (_) {}
-  }
-
-  async function loadVehicles() {
-    try {
-      const r = await fetch(`${API}/v1/layers/transitVehicles?bbox=${box.minLon},${box.minLat},${box.maxLon},${box.maxLat}`);
-      if (!r.ok) throw new Error(r.status);
-      const data = await r.json();
-      const now = performance.now(), seen = new Set();
-      for (const item of data.items) {
-        seen.add(item.id);
-        const to = [item.coordinate.lat, item.coordinate.lon];
-        const old = vehicles.get(item.id);
-        const from = old ? position(old, now) : to;
-        vehicles.set(item.id, { from, to, start: now, duration: reduceMotion || !old ? 0 : 20000,
-                                color: modeColor(item.symbol), badge: item.badge || '' });
-      }
-      for (const id of [...vehicles.keys()]) if (!seen.has(id)) vehicles.delete(id);
-      const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-      status.innerHTML = `<span class="live__dot" aria-hidden="true"></span><strong>${data.items.length}</strong> bussia, junaa ja venettä Tukholmassa juuri nyt. Päivitetty ${time}.`;
-    } catch (_) {
-      status.textContent = 'Livekartta ei saanut juuri nyt tietoja. Se yrittää pian uudelleen.';
-    }
-  }
-
-  function position(v, now) {
-    if (!v.duration) return v.to;
-    const t = Math.min(1, (now - v.start) / v.duration);
-    return [v.from[0] + (v.to[0] - v.from[0]) * t, v.from[1] + (v.to[1] - v.from[1]) * t];
-  }
-
-  function draw(now) {
-    ctx.fillStyle = css('--paper');
-    ctx.fillRect(0, 0, w, h);
-
-    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    for (const s of stretches) {
-      const queue = s.severity >= 2;
-      ctx.strokeStyle = queue ? (s.severity >= 3 ? css('--queue-heavy') : css('--queue')) : css('--road');
-      ctx.lineWidth = queue ? 6 : 3;
-      ctx.beginPath();
-      s.path.forEach((p, i) => { const [x, y] = project(p.lat, p.lon); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
-      ctx.stroke();
-    }
-
-    const r = w < 640 ? 6 : 9;
-    const ring = css('--paper-raised');
-    for (const v of vehicles.values()) {
-      const [lat, lon] = position(v, now);
-      const [x, y] = project(lat, lon);
-      if (x < -20 || y < -20 || x > w + 20 || y > h + 20) continue;
-      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fillStyle = v.color; ctx.fill();
-      ctx.lineWidth = 1.5; ctx.strokeStyle = ring; ctx.stroke();
-      if (v.badge && r >= 9) {
-        ctx.fillStyle = '#fff';
-        ctx.font = `700 ${v.badge.length > 2 ? 9 : 11}px "Barlow Condensed", sans-serif`;
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText(v.badge, x, y + 0.5);
-        ctx.textBaseline = 'alphabetic';
-      }
-    }
-
-    // District names on top, with a paper halo so they stay readable among the vehicles.
-    ctx.font = `700 ${w < 640 ? 14 : 18}px "Barlow Condensed", sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = css('--paper');
-    ctx.fillStyle = css('--ink-soft');
-    for (const [name, lat, lon] of places) {
-      const [x, y] = project(lat, lon);
-      ctx.strokeText(name, x, y);
-      ctx.fillText(name, x, y);
-    }
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  addEventListener('resize', resize);
-  loadStretches();
-  loadVehicles();
-  setInterval(() => { if (!document.hidden) loadVehicles(); }, 20000);
-  setInterval(() => { if (!document.hidden) loadStretches(); }, 60000);
-  requestAnimationFrame(draw);
+  queries.concat(still).forEach(q => q.addEventListener('change', pick));
+  pick();
 })();
 </script>
 </body>
